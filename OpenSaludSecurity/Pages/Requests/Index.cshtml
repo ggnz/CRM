@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Afiliacion";
+
 }
 
 <!DOCTYPE html>
@@ -19,7 +20,7 @@
 
 <body>
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Solicitar Afiliacion</a>
 </p>
 <table class="table">
     <thead>
@@ -54,25 +55,25 @@
                    User, item,
                    ContactOperations.Update)).Succeeded)
                 {
-                    <a asp-page="./Edit" asp-route-id="@item.RequestId">Edit</a>
+                    <a asp-page="./Edit" asp-route-id="@item.RequestId">Modificar</a>
                     <text> | </text>
                 } |
-                <a asp-page="./Details" asp-route-id="@item.RequestId">Details</a> |
+                <a asp-page="./Details" asp-route-id="@item.RequestId">Detalles</a> |
                 @if ((await AuthorizationService.AuthorizeAsync(
                     User, item,
                     ContactOperations.Delete)).Succeeded)
                 {
                     <text> | </text>
-                    <a asp-page="./Delete" asp-route-id="@item.RequestId">Delete</a>
+                    <a asp-page="./Delete" asp-route-id="@item.RequestId">Eliminar</a>
                 }
             </td>
         </tr>
 }
     </tbody>
 </table>
-
-
 </body>
+
+
 
 <div>
     <a asp-page="/Index">Volver</a>
