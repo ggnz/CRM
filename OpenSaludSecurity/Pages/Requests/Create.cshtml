@@ -10,30 +10,35 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
+    <title>Afiliacion</title>
 </head>
 <body>
 
-<h4>Request</h4>
+<h4>Afiliacion de Clinica</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Request.Name" class="control-label"></label>
+                <label asp-for="Request.Name" class="control-label">Nombre Clinica</label>
                 <input asp-for="Request.Name" class="form-control" />
                 <span asp-validation-for="Request.Name" class="text-danger"></span>
             </div>
+             <div class="form-group">
+                <label asp-for="Request.OwnerID" class="control-label">ID Representante</label>
+                <input asp-for="Request.OwnerID" class="form-control" />
+                <span asp-validation-for="Request.OwnerID" class="text-danger"></span>
+            </div>
             <div class="form-group">
-                <label asp-for="Request.Email" class="control-label"></label>
+                <label asp-for="Request.Email" class="control-label">Correo Electronico</label>
                 <input asp-for="Request.Email" class="form-control" />
                 <span asp-validation-for="Request.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Request.Status" class="control-label"></label>
+                <label asp-for="Request.Status" class="control-label">Estado</label>
                 <select asp-for="Request.Status" class="form-control"></select>
-                <span asp-validation-for="Request.Status" class="text-danger"></span>
+                <span asp-validation-for="Request.Status" class="text-danger" ></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -43,7 +48,7 @@
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="/Index">Volver</a>
 </div>
 
 @section Scripts {
