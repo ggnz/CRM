@@ -108,7 +108,7 @@ namespace OpenSaludSecurity
 
                 var testUserPw = Configuration.GetValue<string>("SeedUserPW");
 
-                SeedData.Initialize(services, testUserPw);
+                SeedData.Initialize(services, testUserPw).GetAwaiter().GetResult();
             }
             if (env.IsDevelopment())
             {
