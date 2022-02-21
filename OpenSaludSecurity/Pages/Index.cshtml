@@ -1,10 +1,35 @@
 ﻿@page
-@model IndexModel
+@model OpenSaludSecurity.Pages.Requests.IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">OpenSalud</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<br />
+<hr />
+<br />
+
+@foreach (var item in Model.Request) {
+<div class="row row-cols-2 row-cols-md-2 g-2" >
+  <div class="col">
+        <div class="card" style="width: 52rem;">
+          <img src="https://dummyimage.com/900x400" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+            <p class="card-text">@Html.DisplayFor(modelItem => item.Email)</p>
+            <a href="Requests/Details" class="btn btn-primary"> Seleccionar Clinica</a>
+            
+                <a asp-page="./Details" asp-route-id="@item.RequestId">Details</a> 
+         </div>
+        </div>
+  </div>  
+</div>
+<br />
+<br />
+        
+        
+}
