@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OpenSaludSecurity.Authorization;
 using OpenSaludSecurity.Data;
 using OpenSaludSecurity.Services;
 using System;
@@ -34,8 +36,26 @@ namespace OpenSaludSecurity
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
+
+            services.AddAuthorization(options =>
+            {
+                options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+            });
+
+            // Authorization handlers.
+            services.AddScoped<IAuthorizationHandler,
+                                  ContactIsOwnerAuthorizationHandler>();
+
+            services.AddSingleton<IAuthorizationHandler,
+                                  ContactAdministratorsAuthorizationHandler>();
+
+            services.AddSingleton<IAuthorizationHandler,
+                                  ContactManagerAuthorizationHandler>();
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
@@ -71,11 +91,25 @@ namespace OpenSaludSecurity
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<ApplicationDbContext>();
+                context.Database.Migrate();
+                // requires using Microsoft.Extensions.Configuration;
+                // Set password with the Secret Manager tool.
+                // dotnet user-secrets set SeedUserPW <pw>
+
+                var testUserPw = Configuration.GetValue<string>("SeedUserPW");
+
+                SeedData.Initialize(services, testUserPw);
+            }
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

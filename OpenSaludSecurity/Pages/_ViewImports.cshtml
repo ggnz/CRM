@@ -3,3 +3,7 @@
 @using OpenSaludSecurity.Data
 @namespace OpenSaludSecurity.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using OpenSaludSecurity.Authorization;
+@using Microsoft.AspNetCore.Authorization
+@using OpenSaludSecurity.Models
+@inject IAuthorizationService AuthorizationService

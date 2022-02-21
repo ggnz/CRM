@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenSaludSecurity.Pages
 {
-    [Authorize]
+    [AllowAnonymous]
     public class PrivacyModel : PageModel
     {
         private readonly ILogger<PrivacyModel> _logger;

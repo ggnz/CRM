@@ -1,0 +1,72 @@
+@page
+@model OpenSaludSecurity.Pages.Requests.IndexModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Request[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Request[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Request[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Request[0].Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Request) {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @if ((await AuthorizationService.AuthorizeAsync(
+                   User, item,
+                   ContactOperations.Update)).Succeeded)
+                {
+                    <a asp-page="./Edit" asp-route-id="@item.RequestId">Edit</a>
+                    <text> | </text>
+                } |
+                <a asp-page="./Details" asp-route-id="@item.RequestId">Details</a> |
+                @if ((await AuthorizationService.AuthorizeAsync(
+                    User, item,
+                    ContactOperations.Delete)).Succeeded)
+                {
+                    <text> | </text>
+                    <a asp-page="./Delete" asp-route-id="@item.RequestId">Delete</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>
