@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSaludSecurity", "OpenSaludSecurity\OpenSaludSecurity.csproj", "{B6F49DB2-8E33-443E-AC21-3E129E75EEA0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6F49DB2-8E33-443E-AC21-3E129E75EEA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6F49DB2-8E33-443E-AC21-3E129E75EEA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6F49DB2-8E33-443E-AC21-3E129E75EEA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6F49DB2-8E33-443E-AC21-3E129E75EEA0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {08783F39-0ABE-483D-BA8B-7AF6D0827421}
+	EndGlobalSection
+EndGlobal
