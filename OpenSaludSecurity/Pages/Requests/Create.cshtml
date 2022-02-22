@@ -24,25 +24,25 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Request.Name" class="control-label">Nombre Clinica</label>
+                <label asp-for="Request.Name" class="control-label">Nombre Clinica</label>*
                 <input asp-for="Request.Name" class="form-control" />
                 <span asp-validation-for="Request.Name" class="text-danger"></span>
             </div>
              <div class="form-group">
-                <label asp-for="Request.OwnerID" class="control-label">ID Representante</label>
+                <label asp-for="Request.OwnerID" class="control-label">ID Representante</label>*
                 <input asp-for="Request.OwnerID" class="form-control" />
                 <span asp-validation-for="Request.OwnerID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Request.Email" class="control-label">Correo Electronico</label>
+                <label asp-for="Request.Email" class="control-label">Correo Electronico</label>*
                 <input asp-for="Request.Email" class="form-control" />
                 <span asp-validation-for="Request.Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Request.Status" class="control-label">Estado</label>
                 <select asp-for="Request.Status" class="form-control"></select>
                 <span asp-validation-for="Request.Status" class="text-danger" ></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Enviar" class="btn btn-primary" />
             </div>
