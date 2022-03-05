@@ -22,7 +22,7 @@ namespace OpenSaludSecurity.Authorization
             }
 
             // Administrators can do anything.
-            if (context.User.IsInRole(Constants.ContactAdministratorsRole))
+            if (context.User.IsInRole(Constants.RequestAdministratorsRole))
             {
                 context.Succeed(requirement);
             }

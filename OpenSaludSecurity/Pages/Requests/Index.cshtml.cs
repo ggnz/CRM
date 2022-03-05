@@ -31,8 +31,8 @@ namespace OpenSaludSecurity.Pages.Requests
             var requests = from c in Context.Request
                            select c;
 
-            var isAuthorized = User.IsInRole(Constants.ContactManagersRole) ||
-                               User.IsInRole(Constants.ContactAdministratorsRole);
+            var isAuthorized = User.IsInRole(Constants.RequestManagersRole) ||
+                               User.IsInRole(Constants.RequestAdministratorsRole);
 
             var currentUserId = UserManager.GetUserId(User);
 
