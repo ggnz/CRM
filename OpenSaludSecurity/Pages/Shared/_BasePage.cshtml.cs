@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpenSaludSecurity.Data;
 
-namespace OpenSaludSecurity.Pages.Clinicas
+namespace OpenSaludSecurity.Pages.Shared
 {
     public class _BasePageModel : PageModel
     {

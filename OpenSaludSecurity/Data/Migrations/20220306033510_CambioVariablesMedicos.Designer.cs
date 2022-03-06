@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OpenSaludSecurity.Data;
 
 namespace OpenSaludSecurity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220306033510_CambioVariablesMedicos")]
+    partial class CambioVariablesMedicos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -347,10 +349,10 @@ namespace OpenSaludSecurity.Data.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
-                    b.Property<int?>("ClinicaIdClinica")
+                    b.Property<int>("Categoria")
                         .HasColumnType("int");
 
-                    b.Property<int>("Especialidad")
+                    b.Property<int?>("ClinicaIdClinica")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")

@@ -11,29 +11,35 @@ namespace OpenSaludSecurity.Models
 
         [Required]
         [MaxLength(60)]
-        public string NombreMedico { get; set; }
+        public string Nombre { get; set; }
 
         [Required]
         [MaxLength(60)]
-        public string Ap1Medico { get; set; }
+        public string Apellido1 { get; set; }
         
         [MaxLength(60)]
-        public string Ap2Medico { get; set; }
+        public string Apellido2 { get; set; }
 
-        public RequestEspecialidad Categoria { get; set; }
+        public EspecialidadMedica Especialidad { get; set; }
     
         public Clinica Clinica { get; set; }
     }
 
-    public enum RequestEspecialidad
+    public enum EspecialidadMedica
     {
         Pediatria,
-        Farmacia,
         Odontología,
         Psiquiatría,
         Dermatología,
         Oftalmología,
-        Ginecología
+        Ginecología,
+        Cardiología,
+        Endicronología,
+        Psicología,
+        Otorrinolaringología,
+        Urología,
+        Vascular_Periferíco,
+        Geriartría
     }
     
    

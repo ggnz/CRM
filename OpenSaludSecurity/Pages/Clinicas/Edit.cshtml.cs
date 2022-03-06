@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OpenSaludSecurity.Data;
 using OpenSaludSecurity.Models;
+using OpenSaludSecurity.Pages.Shared;
 
 namespace OpenSaludSecurity.Pages.Clinicas
 {

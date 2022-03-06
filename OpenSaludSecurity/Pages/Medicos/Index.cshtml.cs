@@ -11,12 +11,12 @@ using OpenSaludSecurity.Data;
 using OpenSaludSecurity.Models;
 using OpenSaludSecurity.Pages.Shared;
 
-namespace OpenSaludSecurity.Pages.Clinicas
+namespace OpenSaludSecurity.Pages.Medicos
 {
     [AllowAnonymous]
     public class IndexModel : _BasePageModel
-    {
 
+    {
         public IndexModel(
               ApplicationDbContext context,
               IAuthorizationService authorizationService,
@@ -25,27 +25,14 @@ namespace OpenSaludSecurity.Pages.Clinicas
         {
         }
 
-        public IList<Clinica> Clinicas { get;set; }
+        public IList<Medico> Medicos { get;set; }
 
         public async Task OnGetAsync()
         {
-            var clinicas = from c in Context.Clinica
+            var medicos = from c in Context.Medico
                            select c;
 
-            var isAuthorized = User.IsInRole(Constants.RequestManagersRole) ||
-                               User.IsInRole(Constants.RequestAdministratorsRole);
-
-            var currentUserId = UserManager.GetUserId(User);
-
-            // Only approved contacts are shown UNLESS you're authorized to see them
-            // or you are the owner.
-            if (!isAuthorized)
-            {
-                clinicas = clinicas.Where(c => c.Status == Constants.RequestStatus.Approved
-                                            || c.IdRepresentante == currentUserId);
-            }
-
-            Clinicas = await clinicas.ToListAsync();
+            Medicos = await medicos.ToListAsync();
         }
     }
 }

@@ -9,12 +9,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OpenSaludSecurity.Data;
 using OpenSaludSecurity.Models;
+using OpenSaludSecurity.Pages.Shared;
 
 namespace OpenSaludSecurity.Pages.Clinicas
 {
     public class CreateModel : _BasePageModel
     {
-        private readonly OpenSaludSecurity.Data.ApplicationDbContext _context;
 
         public CreateModel(ApplicationDbContext context,
             IAuthorizationService authorizationService,
@@ -48,8 +48,8 @@ namespace OpenSaludSecurity.Pages.Clinicas
                 return Forbid();
             }
 
-            _context.Clinica.Add(Clinica);
-            await _context.SaveChangesAsync();
+            Context.Clinica.Add(Clinica);
+            await Context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }

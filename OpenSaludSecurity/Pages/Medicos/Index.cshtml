@@ -1,0 +1,64 @@
+@page
+@model OpenSaludSecurity.Pages.Medicos.IndexModel
+
+@{
+	ViewData["Title"] = "Medicos";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Medicos</title>
+</head>
+<body>
+	@foreach (var item in Model.Medicos)
+	{
+		<div class="row row-cols-2 row-cols-md-2 g-2">
+			<div class="col">
+				<div class="card" style="width: 26rem;">
+					<img src="https://dummyimage.com/250x250" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+						<p class="card-text">@Html.DisplayFor(modelItem => item.Especialidad)</p>
+						<div>
+							@if ((await AuthorizationService.AuthorizeAsync(
+						  User, item,
+						  ContactOperations.Update)).Succeeded)
+							{
+								<a class="btn btn-info" asp-page="./Edit" asp-route-id="@item.IdMedico">Modificar</a>
+							}
+							<a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdMedico">Seleccionar Clinica</a>
+							@if ((await AuthorizationService.AuthorizeAsync(
+						   User, item,
+						   ContactOperations.Delete)).Succeeded)
+							{
+								<a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.IdMedico">Eliminar</a>
+							}
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<br />
+		<br />
+	}
+
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<li class="page-item disabled">
+				<a class="page-link">Previous</a>
+			</li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item">
+				<a class="page-link" href="#">Next</a>
+			</li>
+		</ul>
+	</nav>
+</body>
+</html>

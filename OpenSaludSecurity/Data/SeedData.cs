@@ -150,59 +150,144 @@ namespace OpenSaludSecurity.Data
 				}
 				);
 			}
-			if (!context.Clinica.Any())
+			Clinica clinica1, clinica2, clinica3, clinica4;
+			clinica1 = new Clinica
 			{
+				Nombre = "Clinica Alajuela",
+				Descripcion = "30 años de brindarle los mejores servicios medicos",
+
+				IdRepresentante = clinicaManager1,
+				Direccion = "25 m norte del Super los Jardines",
+				Categoria = ServicioMedico.Pediatria | ServicioMedico.Farmacia | ServicioMedico.Odontología,
+				Ciudad = "Alajueal Centro",
+				Telefono = "24432424",
+				Email = "clinicalajuela@gmail.com",
+
+
+			};
+			clinica2 = new Clinica
+			{
+				Nombre = "Clinica Heredia",
+				Descripcion = "10 años de brindarle los mejores servicios pediatricos",
+
+				IdRepresentante = clinicaManager1,
+				Direccion = "100 metros norte de la Universidad Nacional",
+				Categoria = ServicioMedico.Pediatria,
+				Ciudad = "Heredia Centro",
+				Telefono = "23542261",
+				Email = "clinicaheredia@gmail.com",
+			};
+			clinica3 = new Clinica
+			{
+				Nombre = "Clinica San Jose",
+				Descripcion = "Clinica Familiar",
+
+				IdRepresentante = clinicaManager2,
+				Direccion = "250 metros norte del Museo Nacional",
+				Categoria = ServicioMedico.Pediatria | ServicioMedico.Farmacia | ServicioMedico.Odontología | ServicioMedico.Dermatología,
+				Ciudad = "San Jose Centro",
+				Telefono = "21546399",
+				Email = "clinicasanjose@gmail.com",
+			};
+			clinica4 = new Clinica
+			{
+				Nombre = "Clinica Cartago",
+				Descripcion = "Estamos para mejorar su salud",
+
+				IdRepresentante = clinicaManager2,
+				Direccion = "150 metros este del Tecnologico",
+				Categoria = ServicioMedico.Pediatria | ServicioMedico.Farmacia | ServicioMedico.Odontología | ServicioMedico.Psiquiatría,
+				Ciudad = "Cartago Centro",
+				Telefono = "28674563",
+				Email = "clinicacartago@gmail.com",
+			};
+
+			if (!context.Clinica.Any())
+			{				
 				// Agregar Clinicas de ejemplo
 				context.Clinica.AddRange(
-				new Clinica
+					clinica1,
+					clinica2,
+					clinica3,
+					clinica4
+				);
+			}
+
+			if (!context.Medico.Any())
+			{
+				// Agregar Medicos de ejemplo
+				context.Medico.AddRange(
+				new Medico
+
 				{
-					Nombre = "Clinica Alajuela",
-					Descripcion = "30 años de brindarle los mejores servicios medicos",
-
-					IdRepresentante =clinicaManager1,
-					Direccion = "25 m norte del Super los Jardines",
-					Categoria = ServicioMedico.Pediatria | ServicioMedico.Farmacia | ServicioMedico.Odontología,
-					Ciudad = "Alajueal Centro",
-					Telefono = "24432424",
-					Email = "clinicalajuela@gmail.com",
-
-
+					Nombre = "Nathalia",
+					Apellido1 = "Hernandez",
+					Apellido2 = "Oreamuno",
+					Especialidad = EspecialidadMedica.Dermatología,
+					Clinica = clinica1
 				},
-				new Clinica
-				{
-					Nombre = "Clinica Heredia",
-					Descripcion = "10 años de brindarle los mejores servicios pediatricos",
+				new Medico
 
-					IdRepresentante = clinicaManager1,
-					Direccion = "100 metros norte de la Universidad Nacional",
-					Categoria = ServicioMedico.Pediatria,
-					Ciudad = "Heredia Centro",
-					Telefono = "23542261",
-					Email = "clinicaheredia@gmail.com",
+				{
+					Nombre = "Maria",
+					Apellido1 = "Perez",
+					Apellido2 = "Garzona",
+					Especialidad = EspecialidadMedica.Cardiología,
+					Clinica = clinica2
 				},
-				new Clinica
-				{
-					Nombre = "Clinica San Jose",
-					Descripcion = "Clinica Familiar",
+				new Medico
 
-					IdRepresentante = clinicaManager2,
-					Direccion = "250 metros norte del Museo Nacional",
-					Categoria = ServicioMedico.Pediatria | ServicioMedico.Farmacia | ServicioMedico.Odontología | ServicioMedico.Dermatología,
-					Ciudad = "San Jose Centro",
-					Telefono = "21546399",
-					Email = "clinicasanjose@gmail.com",
+				{
+					Nombre = "Javier",
+					Apellido1 = "Fernandez",
+					Apellido2 = "Lopez",
+					Especialidad = EspecialidadMedica.Endicronología,
+					Clinica = clinica3
 				},
-				new Clinica
-				{
-					Nombre = "Clinica Cartago",
-					Descripcion = "Estamos para mejorar su salud",
+				new Medico
 
-					IdRepresentante = clinicaManager2,
-					Direccion = "150 metros este del Tecnologico",
-					Categoria = ServicioMedico.Pediatria | ServicioMedico.Farmacia | ServicioMedico.Odontología | ServicioMedico.Psiquiatría,
-					Ciudad = "Cartago Centro",
-					Telefono = "28674563",
-					Email = "clinicacartago@gmail.com",
+				{
+					Nombre = "Luis",
+					Apellido1 = "Carlos",
+					Apellido2 = "Soto",
+					Especialidad = EspecialidadMedica.Ginecología,
+					Clinica = clinica4
+				},
+				new Medico
+
+				{
+					Nombre = "Carlos",
+					Apellido1 = "Perez",
+					Apellido2 = "Solis",
+					Especialidad = EspecialidadMedica.Pediatria,
+					Clinica = clinica1
+				},
+				new Medico
+
+				{
+					Nombre = "Francisco",
+					Apellido1 = "Oduber",
+					Apellido2 = "Cruz",
+					Especialidad = EspecialidadMedica.Urología,
+					Clinica = clinica2
+				},
+				new Medico
+
+				{
+					Nombre = "David",
+					Apellido1 = "Jimenez",
+					Apellido2 = "Jimenez",
+					Especialidad = EspecialidadMedica.Vascular_Periferíco,
+					Clinica = clinica3
+				},
+				new Medico
+
+				{
+					Nombre = "Olga",
+					Apellido1 = "Martinez",
+					Apellido2 = "Del Carmen",
+					Especialidad = EspecialidadMedica.Oftalmología,
+					Clinica = clinica4
 				}
 				);
 			}
