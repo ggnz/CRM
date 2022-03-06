@@ -6,15 +6,15 @@ namespace OpenSaludSecurity.Models
         
 
         [Key]
-        //ForeignKey from Usuario
+        
         public int IdCalificacion { get; set; }
-        [Key]
-        //ForeignKey from Usuario
-        public int IdUsuario { get; set; }
+        //[Key]
+        ////ForeignKey from Usuario
+        //public int IdUsuario { get; set; }
 
-        [Key]
-        //ForeignKey from Clinica
-        public int IdClinica { get; set; }
+        //[Key]
+        ////ForeignKey from Clinica
+        //public int IdClinica { get; set; }
 
 
         [Required]
@@ -29,6 +29,11 @@ namespace OpenSaludSecurity.Models
 
         [Required]
         public RequestEstrellas Estrellas { get; set; }
+
+
+        public Clinica Clinica { get; set; }
+
+        public Usuario Usuario { get; set; }
     }
 
     public enum RequestEstrellas

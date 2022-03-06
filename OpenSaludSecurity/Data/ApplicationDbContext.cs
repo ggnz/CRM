@@ -15,5 +15,21 @@ namespace OpenSaludSecurity.Data
         }
 
         public DbSet<Request> Request { get; set; }
+        public DbSet<Clinica> Clinicas { get; set; }
+        public DbSet<Cita> Citas { get; set; }
+        public DbSet<Medico> Medicos { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Calificacion> Calificaciones { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Calificacion>().ToTable("Calificacion");
+            modelBuilder.Entity<Clinica>().ToTable("Clinica");
+            modelBuilder.Entity<Usuario>().ToTable("Usuario");
+            modelBuilder.Entity<Medico>().ToTable("Medico");
+            modelBuilder.Entity<Cita>().ToTable("Cita");
+            base.OnModelCreating(modelBuilder);
+
+        }
     }
 }
