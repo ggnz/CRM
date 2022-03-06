@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using OpenSaludSecurity.Data;
 using OpenSaludSecurity.Models;
+using static OpenSaludSecurity.Models.Constants;
 
 namespace OpenSaludSecurity.Pages.Requests
 {

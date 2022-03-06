@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,15 +13,15 @@ using OpenSaludSecurity.Models;
 
 namespace OpenSaludSecurity.Pages.Clinicas
 {
-    public class EditModel : PageModel
+    public class EditModel : _BasePageModel
     {
-        private readonly OpenSaludSecurity.Data.ApplicationDbContext _context;
-
-        public EditModel(OpenSaludSecurity.Data.ApplicationDbContext context)
+        public EditModel(
+            ApplicationDbContext context,
+            IAuthorizationService authorizationService,
+            UserManager<IdentityUser> userManager)
+            : base(context, authorizationService, userManager)
         {
-            _context = context;
         }
-
         [BindProperty]
         public Clinica Clinica { get; set; }
 
@@ -30,29 +32,58 @@ namespace OpenSaludSecurity.Pages.Clinicas
                 return NotFound();
             }
 
-            Clinica = await _context.Clinica.FirstOrDefaultAsync(m => m.IdClinica == id);
+            Clinica? clinica = await Context.Clinica.FirstOrDefaultAsync(m => m.IdClinica == id);
 
-            if (Clinica == null)
+            if (clinica == null)
             {
                 return NotFound();
             }
+
+            Clinica = clinica;
+
+            var isAuthorized = await AuthorizationService.AuthorizeAsync(
+                                                      User, Clinica,
+                                                      ContactOperations.Update);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
+
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Clinica).State = EntityState.Modified;
+            // Fetch Clinica from DB to get IdRepresentante.
+            var clinica = await Context
+                .Clinica.AsNoTracking()
+                .FirstOrDefaultAsync(m => m.IdClinica == id);
+
+            if (clinica == null)
+            {
+                return NotFound();
+            }
+
+            var isAuthorized = await AuthorizationService.AuthorizeAsync(
+                                                     User, clinica,
+                                                     ContactOperations.Update);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
+
+            Context.Attach(Clinica).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -71,7 +102,7 @@ namespace OpenSaludSecurity.Pages.Clinicas
 
         private bool ClinicaExists(int id)
         {
-            return _context.Clinica.Any(e => e.IdClinica == id);
+            return Context.Clinica.Any(e => e.IdClinica == id);
         }
     }
 }

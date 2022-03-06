@@ -51,11 +51,18 @@ namespace OpenSaludSecurity
             services.AddScoped<IAuthorizationHandler,
                                   ContactIsOwnerAuthorizationHandler>();
 
+            services.AddScoped<IAuthorizationHandler,
+                                  ClinicaIsOwnerAuthorizationHandler>();
+
             services.AddSingleton<IAuthorizationHandler,
                                   ContactAdministratorsAuthorizationHandler>();
 
             services.AddSingleton<IAuthorizationHandler,
+                                  ClinicaAdministratorsAuthorizationHandler>();
+
+            services.AddSingleton<IAuthorizationHandler,
                                   ContactManagerAuthorizationHandler>();
+
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);

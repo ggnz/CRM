@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using static OpenSaludSecurity.Models.Constants;
 
 namespace OpenSaludSecurity.Models
 {
@@ -18,10 +19,5 @@ namespace OpenSaludSecurity.Models
         public RequestStatus Status { get; set; }
     }
 
-    public enum RequestStatus
-    {
-        Submitted,
-        Approved,
-        Rejected
-    }
+
 }

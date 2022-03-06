@@ -18,7 +18,7 @@
 	<br />
 
 
-	@foreach (var item in Model.Clinica)
+	@foreach (var item in Model.Clinicas)
 	{
 		<div class="row row-cols-2 row-cols-md-2 g-2">
 			<div class="col">
@@ -27,7 +27,22 @@
 					<div class="card-body">
 						<h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
 						<p class="card-text">@Html.DisplayFor(modelItem => item.Telefono)</p>
-						<a href="Requests/Details" class="btn btn-primary"> Seleccionar Clinica</a>
+						<div>
+							@if ((await AuthorizationService.AuthorizeAsync(
+							User, item,
+							ContactOperations.Update)).Succeeded)
+							{
+								<a class="btn btn-info" asp-page="./Edit" asp-route-id="@item.IdClinica">Modificar</a>
+							} 
+							<a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdClinica">Seleccionar Clinica</a>
+							@if ((await AuthorizationService.AuthorizeAsync(
+							 User, item,
+							 ContactOperations.Delete)).Succeeded)
+							{
+								<a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.IdClinica">Eliminar</a>
+							}
+						</div>
+						
 
 					</div>
 				</div>

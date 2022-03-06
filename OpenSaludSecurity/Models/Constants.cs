@@ -17,5 +17,12 @@ namespace OpenSaludSecurity.Models
         public static readonly string RequestAdministratorsRole ="RequestAdministrators";
         public static readonly string RequestManagersRole = "RequestManagers";
         public static readonly string ClinicasManagersRole = "ClinicaManagers";
+
+        public enum RequestStatus
+        {
+            Submitted,
+            Approved,
+            Rejected
+        }
     }
 }

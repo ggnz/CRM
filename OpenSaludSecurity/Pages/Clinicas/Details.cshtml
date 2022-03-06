@@ -2,75 +2,108 @@
 @model OpenSaludSecurity.Pages.Clinicas.DetailsModel
 
 @{
-    Layout = null;
+	ViewData["Title"] = "Afiliacion";
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - Detalles</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
 
-<div>
-    <h4>Clinica</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clinica.Nombre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Clinica.Nombre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clinica.Descripcion)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Clinica.Descripcion)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clinica.IdRepresentante)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Clinica.IdRepresentante)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clinica.Direccion)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Clinica.Direccion)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clinica.Categoria)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Clinica.Categoria)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clinica.Ciudad)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Clinica.Ciudad)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clinica.Telefono)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Clinica.Telefono)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clinica.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Clinica.Email)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Clinica.IdClinica">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
+	<div>
+		<h4>Clinica</h4>
+		<hr />
+		<dl class="row">
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Clinica.Nombre)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Clinica.Nombre)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Clinica.Descripcion)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Clinica.Descripcion)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Clinica.IdRepresentante)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Clinica.IdRepresentante)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Clinica.Direccion)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Clinica.Direccion)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Clinica.Categoria)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Clinica.Categoria)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Clinica.Ciudad)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Clinica.Ciudad)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Clinica.Telefono)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Clinica.Telefono)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Clinica.Email)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Clinica.Email)
+			</dd>
+		</dl>
+	</div>
+	@if (Model.Clinica.Status != Constants.RequestStatus.Approved)
+	{
+		@if ((await AuthorizationService.AuthorizeAsync(
+	User, Model.Clinica, ContactOperations.Approve)).Succeeded)
+		{
+			<form style="display:inline;" method="post">
+				<input type="hidden" name="id" value="@Model.Clinica.IdClinica" />
+				<input type="hidden" name="status" value="@Constants.RequestStatus.Approved" />
+				<button type="submit" class="btn btn-xs btn-success">Approve</button>
+			</form>
+		}
+	}
+	@if (Model.Clinica.Status != Constants.RequestStatus.Rejected)
+	{
+		@if ((await AuthorizationService.AuthorizeAsync(
+	  User, Model.Clinica, ContactOperations.Reject)).Succeeded)
+		{
+			<form style="display:inline;" method="post">
+				<input type="hidden" name="id" value="@Model.Clinica.IdClinica" />
+				<input type="hidden" name="status" value="@Constants.RequestStatus.Rejected" />
+				<button type="submit" class="btn btn-xs btn-danger">Reject</button>
+			</form>
+		}
+	}
+	<div>
+		@if ((await AuthorizationService.AuthorizeAsync(
+		   User, Model.Clinica,
+		   ContactOperations.Update)).Succeeded)
+		{
+			<a asp-page="./Edit" asp-route-id="@Model.Clinica.IdClinica">Modificar</a>
+			<text> | </text>
+		}
+		<a asp-page="./Index">Volver</a>
+	</div>
 </body>
 </html>

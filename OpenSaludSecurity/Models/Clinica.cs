@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using static OpenSaludSecurity.Models.Constants;
 
 namespace OpenSaludSecurity.Models
 {
@@ -23,6 +24,8 @@ namespace OpenSaludSecurity.Models
         public string Telefono { get; set; }
         [DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
+
+        public RequestStatus Status { get; set; }
     }
 
     [Flags]

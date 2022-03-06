@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -10,13 +12,14 @@ using OpenSaludSecurity.Models;
 
 namespace OpenSaludSecurity.Pages.Clinicas
 {
-    public class DeleteModel : PageModel
+    public class DeleteModel : _BasePageModel
     {
-        private readonly OpenSaludSecurity.Data.ApplicationDbContext _context;
-
-        public DeleteModel(OpenSaludSecurity.Data.ApplicationDbContext context)
+        public DeleteModel(
+            ApplicationDbContext context,
+            IAuthorizationService authorizationService,
+            UserManager<IdentityUser> userManager)
+            : base(context, authorizationService, userManager)
         {
-            _context = context;
         }
 
         [BindProperty]
@@ -29,12 +32,24 @@ namespace OpenSaludSecurity.Pages.Clinicas
                 return NotFound();
             }
 
-            Clinica = await _context.Clinica.FirstOrDefaultAsync(m => m.IdClinica == id);
+            Clinica? clinica = await Context.Clinica.FirstOrDefaultAsync(
+                                             m => m.IdClinica == id);
 
-            if (Clinica == null)
+            if (clinica == null)
             {
                 return NotFound();
             }
+
+            Clinica = clinica;
+
+            var isAuthorized = await AuthorizationService.AuthorizeAsync(
+                                                     User, Clinica,
+                                                     ContactOperations.Delete);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
+
             return Page();
         }
 
@@ -45,13 +60,25 @@ namespace OpenSaludSecurity.Pages.Clinicas
                 return NotFound();
             }
 
-            Clinica = await _context.Clinica.FindAsync(id);
+            var clinica = await Context
+            .Clinica.AsNoTracking()
+            .FirstOrDefaultAsync(m => m.IdClinica == id);
 
-            if (Clinica != null)
+            if (clinica == null)
             {
-                _context.Clinica.Remove(Clinica);
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
+
+            var isAuthorized = await AuthorizationService.AuthorizeAsync(
+                                                     User, clinica,
+                                                     ContactOperations.Delete);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
+
+            Context.Clinica.Remove(clinica);
+            await Context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }

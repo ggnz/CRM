@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -12,20 +13,38 @@ using OpenSaludSecurity.Models;
 namespace OpenSaludSecurity.Pages.Clinicas
 {
     [AllowAnonymous]
-    public class IndexModel : PageModel
+    public class IndexModel : _BasePageModel
     {
-        private readonly OpenSaludSecurity.Data.ApplicationDbContext _context;
 
-        public IndexModel(OpenSaludSecurity.Data.ApplicationDbContext context)
+        public IndexModel(
+              ApplicationDbContext context,
+              IAuthorizationService authorizationService,
+              UserManager<IdentityUser> userManager)
+              : base(context, authorizationService, userManager)
         {
-            _context = context;
         }
 
-        public IList<Clinica> Clinica { get;set; }
+        public IList<Clinica> Clinicas { get;set; }
 
         public async Task OnGetAsync()
         {
-            Clinica = await _context.Clinica.ToListAsync();
+            var clinicas = from c in Context.Clinica
+                           select c;
+
+            var isAuthorized = User.IsInRole(Constants.RequestManagersRole) ||
+                               User.IsInRole(Constants.RequestAdministratorsRole);
+
+            var currentUserId = UserManager.GetUserId(User);
+
+            // Only approved contacts are shown UNLESS you're authorized to see them
+            // or you are the owner.
+            if (!isAuthorized)
+            {
+                clinicas = clinicas.Where(c => c.Status == Constants.RequestStatus.Approved
+                                            || c.IdRepresentante == currentUserId);
+            }
+
+            Clinicas = await clinicas.ToListAsync();
         }
     }
 }
