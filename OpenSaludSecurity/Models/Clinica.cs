@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations; 
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OpenSaludSecurity.Models
 {
@@ -18,6 +20,12 @@ namespace OpenSaludSecurity.Models
         public int IdRepresentante { get; set; }
         public string Direccion { get; set; }
         public RequestCategoria Categoria { get; set; }
+
+
+
+        public ICollection<Medico> Medicos { get; set; }
+        public ICollection<Calificacion> Calificaciones { get; set; }
+        public ICollection<Cita> Citas { get; set; }
     }
 
     public enum RequestCategoria
@@ -30,6 +38,8 @@ namespace OpenSaludSecurity.Models
         Oftalmología,
         Ginecología
     }
+
+    
 
 
 }

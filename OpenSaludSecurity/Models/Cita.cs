@@ -7,17 +7,17 @@ namespace OpenSaludSecurity.Models
         [Key]
         public int IdCita { get; set; }
 
-        [Key]
-        //ForeignKey from Clinica
-        public int IdClinica { get; set; }
+        //[Key]
+        ////ForeignKey from Clinica
+        //public int IdClinica { get; set; }
 
-        [Key]
-        //ForeignKey from Medico
-        public int IdMedico { get; set; }
+        //[Key]
+        ////ForeignKey from Medico
+        //public int IdMedico { get; set; }
 
-        [Key]
-        //ForeignKey from Usuario
-        public int IdUsuario { get; set; }
+        //[Key]
+        ////ForeignKey from Usuario
+        //public int IdUsuario { get; set; }
 
 
         [Required]
@@ -29,6 +29,15 @@ namespace OpenSaludSecurity.Models
         public string FechaCita { get; set; }
 
         public RequestEstado Estado { get; set; }
+
+
+
+
+        public Clinica Clinica { get; set; }
+
+        public Usuario Usuario { get; set; }
+
+        public Medico Medico { get; set; }
     }
 
     public enum RequestEstado

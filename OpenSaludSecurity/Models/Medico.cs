@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OpenSaludSecurity.Models
 {
@@ -6,10 +7,7 @@ namespace OpenSaludSecurity.Models
     {
         [Key]
         public int IdMedico { get; set; }
-
-        [Key]
-        //ForeignKey from Clinica
-        public int IdClinica { get; set; }
+             
 
         [Required]
         [MaxLength(60)]
@@ -23,6 +21,8 @@ namespace OpenSaludSecurity.Models
         public string Ap2Medico { get; set; }
 
         public RequestEspecialidad Categoria { get; set; }
+    
+        public Clinica Clinica { get; set; }
     }
 
     public enum RequestEspecialidad
@@ -35,5 +35,8 @@ namespace OpenSaludSecurity.Models
         Oftalmología,
         Ginecología
     }
+    
+   
+
 }
 
