@@ -37,7 +37,7 @@ namespace OpenSaludSecurity.Pages.Clinicas
 
             var currentUserId = UserManager.GetUserId(User);
 
-            // Only approved contacts are shown UNLESS you're authorized to see them
+            // Only approved clinicas are shown UNLESS you're authorized to see them
             // or you are the owner.
             if (!isAuthorized)
             {
