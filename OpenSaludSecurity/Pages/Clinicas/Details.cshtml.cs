@@ -13,6 +13,7 @@ using OpenSaludSecurity.Pages.Shared;
 
 namespace OpenSaludSecurity.Pages.Clinicas
 {
+    [AllowAnonymous]
     public class DetailsModel : _BasePageModel
     {
         public DetailsModel(

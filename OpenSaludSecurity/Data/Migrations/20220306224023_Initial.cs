@@ -2,7 +2,7 @@
 
 namespace OpenSaludSecurity.Data.Migrations
 {
-    public partial class TablesToDb : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,15 +12,35 @@ namespace OpenSaludSecurity.Data.Migrations
                 {
                     IdClinica = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreClinica = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
-                    IdRepresentante = table.Column<int>(type: "int", nullable: false),
+                    IdRepresentante = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Direccion = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Categoria = table.Column<int>(type: "int", nullable: false)
+                    Categoria = table.Column<int>(type: "int", nullable: false),
+                    Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Clinica", x => x.IdClinica);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Request",
+                columns: table => new
+                {
+                    RequestId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OwnerID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Request", x => x.RequestId);
                 });
 
             migrationBuilder.CreateTable(
@@ -48,21 +68,21 @@ namespace OpenSaludSecurity.Data.Migrations
                 {
                     IdMedico = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreMedico = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    Ap1Medico = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    Ap2Medico = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
-                    Categoria = table.Column<int>(type: "int", nullable: false),
-                    ClinicaIdClinica = table.Column<int>(type: "int", nullable: true)
+                    Nombre = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    Apellido1 = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    Apellido2 = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    Especialidad = table.Column<int>(type: "int", nullable: false),
+                    ClinicaRefId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Medico", x => x.IdMedico);
                     table.ForeignKey(
-                        name: "FK_Medico_Clinica_ClinicaIdClinica",
-                        column: x => x.ClinicaIdClinica,
+                        name: "FK_Medico_Clinica_ClinicaRefId",
+                        column: x => x.ClinicaRefId,
                         principalTable: "Clinica",
                         principalColumn: "IdClinica",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -155,9 +175,9 @@ namespace OpenSaludSecurity.Data.Migrations
                 column: "UsuarioIdUsuario");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Medico_ClinicaIdClinica",
+                name: "IX_Medico_ClinicaRefId",
                 table: "Medico",
-                column: "ClinicaIdClinica");
+                column: "ClinicaRefId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -167,6 +187,9 @@ namespace OpenSaludSecurity.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cita");
+
+            migrationBuilder.DropTable(
+                name: "Request");
 
             migrationBuilder.DropTable(
                 name: "Medico");

@@ -21,8 +21,11 @@ namespace OpenSaludSecurity.Models
         public string Apellido2 { get; set; }
 
         public EspecialidadMedica Especialidad { get; set; }
-    
+
+        [ForeignKey("Clinica")]
+        public int ClinicaRefId { get; set; }
         public Clinica Clinica { get; set; }
+
     }
 
     public enum EspecialidadMedica

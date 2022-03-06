@@ -27,12 +27,14 @@ namespace OpenSaludSecurity.Pages.Medicos
 
         public IList<Medico> Medicos { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? id)
         {
             var medicos = from c in Context.Medico
                            select c;
 
             Medicos = await medicos.ToListAsync();
+
+            //Medicos = Medicos.Where(m => m. == id).ToList();
         }
     }
 }

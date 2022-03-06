@@ -347,7 +347,7 @@ namespace OpenSaludSecurity.Data.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
-                    b.Property<int?>("ClinicaIdClinica")
+                    b.Property<int>("ClinicaRefId")
                         .HasColumnType("int");
 
                     b.Property<int>("Especialidad")
@@ -360,7 +360,7 @@ namespace OpenSaludSecurity.Data.Migrations
 
                     b.HasKey("IdMedico");
 
-                    b.HasIndex("ClinicaIdClinica");
+                    b.HasIndex("ClinicaRefId");
 
                     b.ToTable("Medico");
                 });
@@ -520,7 +520,9 @@ namespace OpenSaludSecurity.Data.Migrations
                 {
                     b.HasOne("OpenSaludSecurity.Models.Clinica", "Clinica")
                         .WithMany()
-                        .HasForeignKey("ClinicaIdClinica");
+                        .HasForeignKey("ClinicaRefId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Clinica");
                 });

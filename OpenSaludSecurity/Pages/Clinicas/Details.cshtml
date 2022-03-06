@@ -71,10 +71,11 @@
 			</dd>
 		</dl>
 	</div>
+	<a asp-page="../Medicos/Index" asp-route-id="@Model.Clinica.IdClinica">Nuestros Medicos</a>
 	@if (Model.Clinica.Status != Constants.RequestStatus.Approved)
 	{
 		@if ((await AuthorizationService.AuthorizeAsync(
-	User, Model.Clinica, ContactOperations.Approve)).Succeeded)
+   User, Model.Clinica, ContactOperations.Approve)).Succeeded)
 		{
 			<form style="display:inline;" method="post">
 				<input type="hidden" name="id" value="@Model.Clinica.IdClinica" />
@@ -86,7 +87,7 @@
 	@if (Model.Clinica.Status != Constants.RequestStatus.Rejected)
 	{
 		@if ((await AuthorizationService.AuthorizeAsync(
-	  User, Model.Clinica, ContactOperations.Reject)).Succeeded)
+	 User, Model.Clinica, ContactOperations.Reject)).Succeeded)
 		{
 			<form style="display:inline;" method="post">
 				<input type="hidden" name="id" value="@Model.Clinica.IdClinica" />
@@ -97,11 +98,10 @@
 	}
 	<div>
 		@if ((await AuthorizationService.AuthorizeAsync(
-		   User, Model.Clinica,
-		   ContactOperations.Update)).Succeeded)
+		  User, Model.Clinica,
+		  ContactOperations.Update)).Succeeded)
 		{
 			<a asp-page="./Edit" asp-route-id="@Model.Clinica.IdClinica">Modificar</a>
-			<text> | </text>
 		}
 		<a asp-page="./Index">Volver</a>
 	</div>
