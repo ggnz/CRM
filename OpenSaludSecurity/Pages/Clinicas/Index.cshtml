@@ -1,0 +1,52 @@
+@page
+@model OpenSaludSecurity.Pages.Clinicas.IndexModel
+@{
+	ViewData["Title"] = "Clinicas";
+}
+
+
+<!DOCTYPE html>
+
+
+	<div class="text-center">
+		<h1 class="display-4">OpenSalud</h1>
+		<p>CATALOGO DE CLINICAS AFILIADAS</a>.</p>
+	</div>
+
+	<br />
+	<hr />
+	<br />
+
+
+	@foreach (var item in Model.Clinica)
+	{
+		<div class="row row-cols-2 row-cols-md-2 g-2">
+			<div class="col">
+				<div class="card" style="width: 52rem;">
+					<img src="https://dummyimage.com/900x400" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+						<p class="card-text">@Html.DisplayFor(modelItem => item.Telefono)</p>
+						<a href="Requests/Details" class="btn btn-primary"> Seleccionar Clinica</a>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<br />
+		<br />
+	}
+
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<li class="page-item disabled">
+				<a class="page-link">Previous</a>
+			</li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item">
+				<a class="page-link" href="#">Next</a>
+			</li>
+		</ul>
+	</nav>

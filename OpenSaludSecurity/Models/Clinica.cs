@@ -1,34 +1,41 @@
-﻿using System.ComponentModel.DataAnnotations; 
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace OpenSaludSecurity.Models
 {
-    public class Clinica    {
-        
+    public class Clinica {
+
         [Key]
         public int IdClinica { get; set; }
 
         [Required]
         [MaxLength(60)]
-        public string NombreClinica { get; set; }
+        public string Nombre { get; set; }
 
         [MaxLength(300)]
         public string Descripcion { get; set; }
 
         [Required]
-        public int IdRepresentante { get; set; }
+        public string IdRepresentante { get; set; }
         public string Direccion { get; set; }
-        public RequestCategoria Categoria { get; set; }
+        public ServicioMedico Categoria { get; set; }
+        public string Ciudad { get; set; }
+        public string Telefono { get; set; }
+        [DataType(DataType.EmailAddress)]
+        public string? Email { get; set; }
     }
 
-    public enum RequestCategoria
+    [Flags]
+    public enum ServicioMedico
     {
-        Pediatria,
-        Farmacia,
-        Odontología,
-        Psiquiatría,
-        Dermatología,
-        Oftalmología,
-        Ginecología
+        NoDisponible = 0,
+        Pediatria = 1,
+        Farmacia = 2,
+        Odontología = 4,
+        Psiquiatría = 8,
+        Dermatología = 16,
+        Oftalmología = 32,
+        Ginecología = 64
     }
 
 

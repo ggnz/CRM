@@ -14,8 +14,8 @@ namespace OpenSaludSecurity.Models
         public static readonly string ApproveOperationName = "Approve";
         public static readonly string RejectOperationName = "Reject";
 
-        public static readonly string RequestAdministratorsRole =
-                                                              "RequestAdministrators";
+        public static readonly string RequestAdministratorsRole ="RequestAdministrators";
         public static readonly string RequestManagersRole = "RequestManagers";
+        public static readonly string ClinicasManagersRole = "ClinicaManagers";
     }
 }
