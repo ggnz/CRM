@@ -15,7 +15,7 @@ namespace OpenSaludSecurity.Data
         }
 
         public DbSet<Request> Request { get; set; }
-        public DbSet<Clinica> Clinicas { get; set; }
+        public DbSet<Clinica> Clinica { get; set; }
         public DbSet<Cita> Citas { get; set; }
         public DbSet<Medico> Medicos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
