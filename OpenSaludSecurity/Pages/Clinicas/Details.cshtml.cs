@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using OpenSaludSecurity.Data;
 using OpenSaludSecurity.Models;
 using OpenSaludSecurity.Pages.Shared;
@@ -16,12 +18,19 @@ namespace OpenSaludSecurity.Pages.Clinicas
     [AllowAnonymous]
     public class DetailsModel : _BasePageModel
     {
+        private readonly IEmailSender _emailSender;
+        private readonly ILogger<DetailsModel> _logger;
+
         public DetailsModel(
         ApplicationDbContext context,
         IAuthorizationService authorizationService,
-        UserManager<IdentityUser> userManager)
+        UserManager<IdentityUser> userManager,
+        ILogger<DetailsModel> logger,
+        IEmailSender emailSender)
         : base(context, authorizationService, userManager)
         {
+            this._logger = logger;
+            this._emailSender = emailSender;
         }
 
         public Clinica Clinica { get; set; }
@@ -77,6 +86,25 @@ namespace OpenSaludSecurity.Pages.Clinicas
             clinica.Status = status;
             Context.Clinica.Update(clinica);
             await Context.SaveChangesAsync();
+
+            if (status == Constants.RequestStatus.Approved)
+            {
+                _logger.LogInformation("El usuario ha aprobado una clinica.");
+
+                await _emailSender.SendEmailAsync(Clinica.Email, "Nueva Clinica ha sido aprobada",
+                    $"Su clinica ha sido aprobada.");
+            }
+            else
+            {
+                _logger.LogInformation("El usuario ha denegado una clinica.");
+
+                
+                await _emailSender.SendEmailAsync(Clinica.Email, "Nueva Clinica ha sido denegada",
+                    $"Su clinica ha sido denegada.");
+            }
+
+
+            // If we got this far, something failed, redisplay form
 
             return RedirectToPage("./Index");
         }

@@ -21,14 +21,28 @@ namespace OpenSaludSecurity.Pages.Clinicas
             UserManager<IdentityUser> userManager)
             : base(context, authorizationService, userManager)
         {
+            ServiciosMedicos = new List<SelectListItem>();
+            foreach (ServicioMedico s in Enum.GetValues(typeof(ServicioMedico)))
+            {
+                if (s != ServicioMedico.NoDisponible)
+                {
+                    ServiciosMedicos.Add(new SelectListItem { Value = s.ToString(), Text = s.ToString() });
+                }
+            }
         }
         public IActionResult OnGet()
         {
+            IdRepresentante = UserManager.GetUserId(User);
+
             return Page();
         }
 
         [BindProperty]
         public Clinica Clinica { get; set; }
+
+        public string IdRepresentante { get; set; }
+
+        public List<SelectListItem> ServiciosMedicos { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
