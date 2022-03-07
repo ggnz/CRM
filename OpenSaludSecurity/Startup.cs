@@ -54,11 +54,17 @@ namespace OpenSaludSecurity
             services.AddScoped<IAuthorizationHandler,
                                   ClinicaIsOwnerAuthorizationHandler>();
 
+            services.AddScoped<IAuthorizationHandler,
+                                  MedicoIsOwnerAuthorizationHandler>();
+
             services.AddSingleton<IAuthorizationHandler,
                                   ContactAdministratorsAuthorizationHandler>();
 
             services.AddSingleton<IAuthorizationHandler,
                                   ClinicaAdministratorsAuthorizationHandler>();
+
+            services.AddSingleton<IAuthorizationHandler,
+                                  MedicoAdministratorsAuthorizationHandler>();
 
             services.AddSingleton<IAuthorizationHandler,
                                   ContactManagerAuthorizationHandler>();

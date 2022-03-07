@@ -23,6 +23,8 @@ namespace OpenSaludSecurity.Pages.Medicos
 
         public Medico Medico { get; set; }
 
+        public Clinica Clinica { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -31,11 +33,14 @@ namespace OpenSaludSecurity.Pages.Medicos
             }
 
             Medico = await _context.Medico.FirstOrDefaultAsync(m => m.IdMedico == id);
-
+            
             if (Medico == null)
             {
                 return NotFound();
             }
+
+            Clinica = await _context.Clinica.FirstOrDefaultAsync(c => c.IdClinica == Medico.ClinicaRefId);
+
             return Page();
         }
     }

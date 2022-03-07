@@ -47,8 +47,13 @@
 		</dl>
 	</div>
 	<div>
-		<a asp-page="./Edit" asp-route-id="@Model.Medico.IdMedico">Edit</a> |
-		<a asp-page="./Index">Back to List</a>
+		@if ((await AuthorizationService.AuthorizeAsync(
+		 User, Model.Medico,
+		 MedicoOperations.Update)).Succeeded)
+		{
+			<a asp-page="./Edit" asp-route-id="@Model.Medico.IdMedico">Modificar</a>
+		}
+		<a asp-page="./Index">Volver</a>
 	</div>
 </body>
 </html>

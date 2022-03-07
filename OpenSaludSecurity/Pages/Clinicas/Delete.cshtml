@@ -2,78 +2,81 @@
 @model OpenSaludSecurity.Pages.Clinicas.DeleteModel
 
 @{
-    Layout = null;
+	ViewData["Title"] = "Clinica";
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - Eliminar</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Clinica</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clinica.Nombre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Clinica.Nombre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clinica.Descripcion)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Clinica.Descripcion)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clinica.IdRepresentante)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Clinica.IdRepresentante)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clinica.Direccion)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Clinica.Direccion)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clinica.Categoria)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Clinica.Categoria)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clinica.Ciudad)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Clinica.Ciudad)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clinica.Telefono)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Clinica.Telefono)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clinica.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Clinica.Email)
-        </dd>
-    </dl>
-    
-    <form method="post">
-        <input type="hidden" asp-for="Clinica.IdClinica" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
-    </form>
-</div>
+	<h3>Are you sure you want to delete this?</h3>
+	<div>
+		<h4>Clinica</h4>
+		<hr />
+		<dl class="row">
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Clinica.Nombre)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Clinica.Nombre)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Clinica.Descripcion)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Clinica.Descripcion)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Clinica.IdRepresentante)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Clinica.IdRepresentante)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Clinica.Direccion)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Clinica.Direccion)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Clinica.Categoria)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Clinica.Categoria)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Clinica.Ciudad)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Clinica.Ciudad)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Clinica.Telefono)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Clinica.Telefono)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Clinica.Email)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Clinica.Email)
+			</dd>
+		</dl>
+
+		<form method="post">
+			<input type="hidden" asp-for="Clinica.IdClinica" />
+			<input type="submit" value="Delete" class="btn btn-danger" /> |
+			<a asp-page="./Index">Back to List</a>
+		</form>
+	</div>
 </body>
 </html>

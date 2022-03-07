@@ -39,6 +39,17 @@ namespace OpenSaludSecurity.Pages.Medicos
                 Medicos = Medicos.Where(m => m.ClinicaRefId == idClinica).ToList();
             }
 
+            if (Medicos.Any())
+            {
+                foreach (Medico m in Medicos)
+                {
+                    m.Clinica = await Context.Clinica.FirstOrDefaultAsync(c => c.IdClinica == m.ClinicaRefId);
+                }
+            }
+
+
+
+
 
             
 
