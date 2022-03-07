@@ -1,0 +1,49 @@
+﻿@page
+@model OpenSaludSecurity.Pages.Citas.DetailsModel
+
+@{
+	ViewData["Title"] = "Citas";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - Detalles</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <div>
+        <h4>Cita</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cita.DescripcionCita)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cita.DescripcionCita)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cita.FechaCita)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cita.FechaCita)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cita.Estado)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cita.Estado)
+            </dd>
+        </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Cita.IdCita">Modificar</a> |
+    <a asp-page="./Index">Volver</a>
+</div>
+</body>
+</html>

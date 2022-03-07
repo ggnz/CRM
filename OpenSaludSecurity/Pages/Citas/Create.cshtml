@@ -1,0 +1,55 @@
+﻿@page
+@model OpenSaludSecurity.Pages.Citas.CreateModel
+
+@{
+	ViewData["Title"] = "Citas";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - Agendar Cita</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    	<h4>Agendar Cita</h4>
+	<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Cita.DescripcionCita" class="control-label"></label>
+                <input asp-for="Cita.DescripcionCita" class="form-control" />
+                <span asp-validation-for="Cita.DescripcionCita" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cita.FechaCita" class="control-label"></label>
+                <input asp-for="Cita.FechaCita" class="form-control" />
+                <span asp-validation-for="Cita.FechaCita" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cita.Estado" class="control-label"></label>
+                <select asp-for="Cita.Estado" class="form-control"></select>
+                <span asp-validation-for="Cita.Estado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Agendar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Volver</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	}
+</body>
+</html>
