@@ -30,7 +30,6 @@ namespace OpenSaludSecurity.Models
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd/mm/yyyy}")]
         public string FecNacUsuario { get; set; }
-
         
     }
 
