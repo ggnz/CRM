@@ -71,7 +71,7 @@
 			</dd>
 		</dl>
 	</div>
-	<a asp-page="../Medicos/Index" asp-route-id="@Model.Clinica.IdClinica">Nuestros Medicos</a>
+	<a asp-page="../Medicos/Index" asp-route-idClinica="@Model.Clinica.IdClinica">Nuestros Medicos</a>
 	@if (Model.Clinica.Status != Constants.RequestStatus.Approved)
 	{
 		@if ((await AuthorizationService.AuthorizeAsync(

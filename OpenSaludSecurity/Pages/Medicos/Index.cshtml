@@ -29,7 +29,7 @@
 							{
 								<a class="btn btn-info" asp-page="./Edit" asp-route-id="@item.IdMedico">Modificar</a>
 							}
-							<a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdMedico">Seleccionar Clinica</a>
+							<a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdMedico">Seleccionar Medico</a>
 							@if ((await AuthorizationService.AuthorizeAsync(
 						   User, item,
 						   ContactOperations.Delete)).Succeeded)
