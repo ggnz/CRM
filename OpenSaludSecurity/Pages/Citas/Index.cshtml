@@ -13,54 +13,58 @@
 	<title>Citas</title>
 </head>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Cita[0].DescripcionCita)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cita[0].FechaCita)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cita[0].Estado)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Cita) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescripcionCita)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaCita)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.IdCita">Modificar</a> |
-                <a asp-page="./Details" asp-route-id="@item.IdCita">Ver mas</a> |
-                <a asp-page="./Delete" asp-route-id="@item.IdCita">Eliminar</a>
-            </td>
-        </tr>
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cita[0].DescripcionCita)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cita[0].FechaCita)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cita[0].Estado)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Cita)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescripcionCita)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaCita)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estado)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.IdCita">Modificar</a> |
+                        <a asp-page="./Details" asp-route-id="@item.IdCita">Ver mas</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.IdCita">Eliminar</a>
+                    </td>
+                </tr>
 
-}
-    </tbody>
-</table>
+            }
+        </tbody>
+    </table>
 
-	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-center">
-			<li class="page-item disabled">
-				<a class="page-link">Anterior</a>
-			</li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item">
-				<a class="page-link" href="#">Siguiente</a>
-			</li>
-		</ul>
-	</nav>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link">Anterior</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
+</body>
+</html>

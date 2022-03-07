@@ -1,0 +1,55 @@
+﻿@page
+@model OpenSaludSecurity.Pages.Calificaciones.IndexModel
+
+@{
+    ViewData["Title"] = "Calificaciones";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Calificaciones</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Calificacion[0].Comentario)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Calificacion[0].Estrellas)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Calificacion)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comentario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estrellas)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.IdCalificacion">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.IdCalificacion">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.IdCalificacion">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
