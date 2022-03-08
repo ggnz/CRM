@@ -23,6 +23,8 @@ namespace OpenSaludSecurity.Pages.Medicos
         [BindProperty]
         public Medico Medico { get; set; }
 
+        public int ClinicaRefId { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -36,6 +38,9 @@ namespace OpenSaludSecurity.Pages.Medicos
             {
                 return NotFound();
             }
+
+            ClinicaRefId = Medico.ClinicaRefId;
+
             return Page();
         }
 
@@ -47,7 +52,7 @@ namespace OpenSaludSecurity.Pages.Medicos
             {
                 return Page();
             }
-
+            
             _context.Attach(Medico).State = EntityState.Modified;
 
             try

@@ -27,6 +27,8 @@ namespace OpenSaludSecurity.Pages.Medicos
         [BindProperty]
         public Medico Medico { get; set; }
 
+        public int ClinicaRefId { get; set; }
+
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
