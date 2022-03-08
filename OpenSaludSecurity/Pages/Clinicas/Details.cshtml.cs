@@ -91,7 +91,7 @@ namespace OpenSaludSecurity.Pages.Clinicas
             {
                 _logger.LogInformation("El usuario ha aprobado una clinica.");
 
-                await _emailSender.SendEmailAsync(Clinica.Email, "Nueva Clinica ha sido aprobada",
+                await _emailSender.SendEmailAsync(clinica.Email, "Nueva Clinica ha sido aprobada",
                     $"Su clinica ha sido aprobada.");
             }
             else
@@ -99,7 +99,7 @@ namespace OpenSaludSecurity.Pages.Clinicas
                 _logger.LogInformation("El usuario ha denegado una clinica.");
 
                 
-                await _emailSender.SendEmailAsync(Clinica.Email, "Nueva Clinica ha sido denegada",
+                await _emailSender.SendEmailAsync(clinica.Email, "Nueva Clinica ha sido denegada",
                     $"Su clinica ha sido denegada.");
             }
 
