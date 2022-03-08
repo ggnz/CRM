@@ -18,7 +18,7 @@
 <body>
 
     <p>
-        <a asp-page="Create">Create New</a>
+        <a asp-page="Create">Agreagr calificacion</a>
     </p>
     <table class="table">
         <thead>
@@ -43,9 +43,9 @@
                         @Html.DisplayFor(modelItem => item.Estrellas)
                     </td>
                     <td>
-                        <a asp-page="./Edit" asp-route-id="@item.IdCalificacion">Edit</a> |
-                        <a asp-page="./Details" asp-route-id="@item.IdCalificacion">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.IdCalificacion">Delete</a>
+                        <a asp-page="./Edit" asp-route-id="@item.IdCalificacion">Modificar</a> |
+                        <a asp-page="./Details" asp-route-id="@item.IdCalificacion">Ver más</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.IdCalificacion">Elimianr</a>
                     </td>
                 </tr>
             }

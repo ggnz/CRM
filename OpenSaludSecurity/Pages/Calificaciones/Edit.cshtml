@@ -26,14 +26,17 @@
                     <label asp-for="Calificacion.Comentario" class="control-label"></label>
                     <input asp-for="Calificacion.Comentario" class="form-control" />
                     <span asp-validation-for="Calificacion.Comentario" class="text-danger"></span>
-                </div>
+                </div>                
                 <div class="form-group">
                     <label asp-for="Calificacion.Estrellas" class="control-label"></label>
-                    <select asp-for="Calificacion.Estrellas" class="form-control"></select>
+
+                    <select asp-for="Calificacion.Estrellas" asp-items="Html.GetEnumSelectList<RequestEstrellas>()" class="form-control">
+                        <option selected="selected" value="">Seleccionar...</option>
+                    </select>
                     <span asp-validation-for="Calificacion.Estrellas" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
                 </div>
             </form>
         </div>

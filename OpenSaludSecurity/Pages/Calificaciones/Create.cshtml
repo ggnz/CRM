@@ -29,7 +29,7 @@
                     <label asp-for="Calificacion.Estrellas" class="control-label"></label>
 
                     <select asp-for="Calificacion.Estrellas" asp-items="Html.GetEnumSelectList<RequestEstrellas>()" class="form-control">
-                        <option selected="selected" value="">Please select</option>
+                        <option selected="selected" value="">Seleccionar...</option>
                     </select>
                     <span asp-validation-for="Calificacion.Estrellas" class="text-danger"></span>
                 </div>
