@@ -45,7 +45,7 @@
 				<div class="form-group">
 					<label asp-for="Clinica.Categoria" class="control-label"></label>
 					<select asp-for="Clinica.Categoria" asp-items="@Model.ServiciosMedicos" class="form-control">
-						<option selected="selected" value="">Please select</option>
+						<option selected="selected" value="">Seleccionar...</option>
 					</select>
 					<span asp-validation-for="Clinica.Categoria" class="text-danger"></span>
 				</div>
@@ -65,7 +65,7 @@
 					<span asp-validation-for="Clinica.Email" class="text-danger"></span>
 				</div>
 				<div class="form-group">
-					<input type="submit" value="Create" class="btn btn-primary" />
+					<input type="submit" value="Agregar" class="btn btn-primary" />
 				</div>
 			</form>
 		</div>

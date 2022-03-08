@@ -26,7 +26,7 @@
                 <label asp-for="Cita.DescripcionCita" class="control-label"></label>
                 <input asp-for="Cita.DescripcionCita" class="form-control" />
                 <span asp-validation-for="Cita.DescripcionCita" class="text-danger"></span>
-            </div>
+            </div>     
             <div class="form-group">
                 <label asp-for="Cita.FechaCita" class="control-label"></label>
                 <input asp-for="Cita.FechaCita" class="form-control" />
@@ -34,9 +34,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Cita.Estado" class="control-label"></label>
-                <select asp-for="Cita.Estado" class="form-control"></select>
+                <select asp-for="Cita.Estado" asp-items="Html.GetEnumSelectList<RequestEstado>()" class="form-control">
+						<option selected="selected" value="">Seleccionar...</option>
+			    </select>
                 <span asp-validation-for="Cita.Estado" class="text-danger"></span>
             </div>
+            <
             <div class="form-group">
                 <input type="submit" value="Agendar" class="btn btn-primary" />
             </div>
