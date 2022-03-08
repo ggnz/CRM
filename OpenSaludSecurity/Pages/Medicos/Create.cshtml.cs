@@ -38,7 +38,7 @@ namespace OpenSaludSecurity.Pages.Medicos
             IdClinicasDisponibles = new List<SelectListItem>();
             foreach (Clinica c in Clinicas)
             {
-                if (c.IdRepresentante == UserId)
+                if (c.IdRepresentante == UserId || User.IsInRole(Constants.RequestAdministratorsRole))
                 {
                     IdClinicasDisponibles.Add(new SelectListItem { Value = c.IdClinica.ToString(), Text = c.Nombre});
                 }
