@@ -32,9 +32,9 @@
 					<input asp-for="Clinica.Descripcion" class="form-control" />
 					<span asp-validation-for="Clinica.Descripcion" class="text-danger"></span>
 				</div>
-				<div class="form-group">
-					<label asp-for="Clinica.IdRepresentante" class="control-label"></label>
-					<input asp-for="Clinica.IdRepresentante" value="@Model.IdRepresentante" class="form-control" readonly/>
+				<div class="form-group" hidden>
+					<label asp-for="Clinica.IdRepresentante" class="control-label" hidden></label>
+					<input asp-for="Clinica.IdRepresentante" type="hidden" value="@Model.IdRepresentante" class="form-control" readonly/>
 					<span asp-validation-for="Clinica.IdRepresentante" class="text-danger"></span>
 				</div>
 				<div class="form-group">

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace OpenSaludSecurity.Models
 {
@@ -20,14 +22,23 @@ namespace OpenSaludSecurity.Models
         //public int IdUsuario { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Por favor describa brevemente su cita")]
         [MaxLength(600)]
+        [Display(Name = "Descripción de Cita")]
         public string DescripcionCita { get; set; }
 
+        /*
         [Required]
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Fecha de la Cita")] 
+        public DateTime FechaCita { get; set; } // dato string */
+
+        [Required(ErrorMessage = "Por favor digite la fecha para la cita")]
+        [Display(Name = "Fecha de la cita")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public string FechaCita { get; set; }
 
+        [Required(ErrorMessage = "Debe digitar el estado de su cita")]
         public RequestEstado Estado { get; set; }
 
 

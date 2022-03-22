@@ -17,6 +17,7 @@ namespace OpenSaludSecurity.Models
         public string Descripcion { get; set; }
 
         [Required]
+        //[Display(Name = "Descripción")]
         public string IdRepresentante { get; set; }
         public string Direccion { get; set; }
         public ServicioMedico Categoria { get; set; }

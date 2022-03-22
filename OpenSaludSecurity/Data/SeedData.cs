@@ -67,7 +67,7 @@ namespace OpenSaludSecurity.Data
 
 			if (user == null)
 			{
-				throw new Exception("The testUserPw password was probably not strong enough!");
+				throw new Exception("La contraseña no es suficientemente segura");
 			}
 
 			IR = await userManager.AddToRoleAsync(user, role);
@@ -93,7 +93,7 @@ namespace OpenSaludSecurity.Data
 
 			if (user == null)
 			{
-				throw new Exception("The password is probably not strong enough!");
+				throw new Exception("La contraseña no es suficientemente segura!");
 			}
 
 			return user.Id;
