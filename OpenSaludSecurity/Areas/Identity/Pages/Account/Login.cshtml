@@ -1,8 +1,13 @@
-@page
+﻿@page
 @model LoginModel
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		
+		<meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
+	</head>
 
 @{
-    ViewData["Title"] = "Inicio de Sesion";
+    ViewData["Title"] = "Inicio de Sesión";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -10,7 +15,7 @@
     <div class="col-md-4">
         <section>
             <form id="account" method="post">
-                <h4>Utilice una cuenta para iniciar sesion.</h4>
+                <h4>Utilice una cuenta para iniciar sesión.</h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
@@ -32,17 +37,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Iniciar Sesi�n</button>
+                    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
                 </div>
                 <div class="form-group">
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Olvidaste tu contrase&ntilde;a</a>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Olvidaste tu contraseña</a>
                     </p>
                     <p>
                         <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registrarse como nuevo usuario</a>
                     </p>
                     <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Reenviar correo electronico de confirmaci�n</a>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Reenviar correo electronico de confirmación</a>
                     </p>
                 </div>
             </form>
