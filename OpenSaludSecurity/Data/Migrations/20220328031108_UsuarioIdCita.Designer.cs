@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OpenSaludSecurity.Data;
 
 namespace OpenSaludSecurity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220328031108_UsuarioIdCita")]
+    partial class UsuarioIdCita
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -256,7 +258,7 @@ namespace OpenSaludSecurity.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ClinicaRefId")
+                    b.Property<int?>("ClinicaIdClinica")
                         .HasColumnType("int");
 
                     b.Property<string>("DescripcionCita")
@@ -274,7 +276,7 @@ namespace OpenSaludSecurity.Data.Migrations
                     b.Property<string>("IdUsuario")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MedicoRefId")
+                    b.Property<int?>("MedicoIdMedico")
                         .HasColumnType("int");
 
                     b.Property<int?>("UsuarioIdUsuario")
@@ -282,9 +284,9 @@ namespace OpenSaludSecurity.Data.Migrations
 
                     b.HasKey("IdCita");
 
-                    b.HasIndex("ClinicaRefId");
+                    b.HasIndex("ClinicaIdClinica");
 
-                    b.HasIndex("MedicoRefId");
+                    b.HasIndex("MedicoIdMedico");
 
                     b.HasIndex("UsuarioIdUsuario");
 
@@ -502,15 +504,11 @@ namespace OpenSaludSecurity.Data.Migrations
                 {
                     b.HasOne("OpenSaludSecurity.Models.Clinica", "Clinica")
                         .WithMany()
-                        .HasForeignKey("ClinicaRefId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClinicaIdClinica");
 
                     b.HasOne("OpenSaludSecurity.Models.Medico", "Medico")
                         .WithMany()
-                        .HasForeignKey("MedicoRefId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MedicoIdMedico");
 
                     b.HasOne("OpenSaludSecurity.Models.Usuario", "Usuario")
                         .WithMany()
