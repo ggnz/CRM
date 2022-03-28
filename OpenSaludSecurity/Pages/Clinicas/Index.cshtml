@@ -1,68 +1,78 @@
 @page
 @model OpenSaludSecurity.Pages.Clinicas.IndexModel
 @{
-	ViewData["Title"] = "Clinicas";
+    ViewData["Title"] = "Clinicas";
 }
 
 
 <!DOCTYPE html>
 
 
-	<div class="text-center">
-		<h1 class="display-4">OpenSalud</h1>
-		<p>CATALOGO DE CLINICAS AFILIADAS</a>.</p>
-	</div>
+<div class="text-center">
+    <h1 class="display-4">OpenSalud</h1>
+    <p>CATALOGO DE CLINICAS AFILIADAS.</p>
+</div>
 
-	<br />
-	<hr />
-	<br />
+<br />
+<hr />
+<br />
+
+<form>
+    <p>
+        <select class="selectpicker" multiple data-live-search="true" asp-for="ServicioMedicoSeleccionado" asp-items="Model.ServiciosMedicos">
+            <option value="">Todas</option>
+        </select>
+
+        Buscar por nombre: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+@foreach (var item in Model.Clinicas)
+{
+    <div class="row row-cols-2 row-cols-md-2 g-2">
+        <div class="col">
+            <div class="card" style="width: 52rem;">
+                <img src="https://dummyimage.com/900x400" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Telefono)</p>
+                    <div>
+                        @if ((await AuthorizationService.AuthorizeAsync(
+                       User, item,
+                       ContactOperations.Update)).Succeeded)
+                        {
+                            <a class="btn btn-info" asp-page="./Edit" asp-route-id="@item.IdClinica">Modificar</a>
+                        }
+                        <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdClinica">Seleccionar Clinica</a>
+                        @if ((await AuthorizationService.AuthorizeAsync(
+                        User, item,
+                        ContactOperations.Delete)).Succeeded)
+                        {
+                            <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.IdClinica">Eliminar</a>
+                        }
+                        <a class="btn btn-info" asp-area="" asp-page="/Calificaciones/Index">Calificaciones</a>
+                    </div>
 
 
-	@foreach (var item in Model.Clinicas)
-	{
-		<div class="row row-cols-2 row-cols-md-2 g-2">
-			<div class="col">
-				<div class="card" style="width: 52rem;">
-					<img src="https://dummyimage.com/900x400" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
-						<p class="card-text">@Html.DisplayFor(modelItem => item.Telefono)</p>
-						<div>
-							@if ((await AuthorizationService.AuthorizeAsync(
-							User, item,
-							ContactOperations.Update)).Succeeded)
-							{
-								<a class="btn btn-info" asp-page="./Edit" asp-route-id="@item.IdClinica">Modificar</a>
-							} 
-							<a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdClinica">Seleccionar Clinica</a>
-							@if ((await AuthorizationService.AuthorizeAsync(
-							 User, item,
-							 ContactOperations.Delete)).Succeeded)
-							{
-								<a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.IdClinica">Eliminar</a>
-							}
-							<a class="btn btn-info" asp-area="" asp-page="/Calificaciones/Index">Calificaciones</a>
-						</div>
-						
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+}
 
-					</div>
-				</div>
-			</div>
-		</div>
-		<br />
-		<br />
-	}
-
-	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-center">
-			<li class="page-item disabled">
-				<a class="page-link">Anterior</a>
-			</li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item">
-				<a class="page-link" href="#">Siguiente</a>
-			</li>
-		</ul>
-	</nav>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+            <a class="page-link">Anterior</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Siguiente</a>
+        </li>
+    </ul>
+</nav>
