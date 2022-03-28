@@ -5,15 +5,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
     <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - OpenSaludSecurity</title>
+    <title>@ViewData["Title"] - CR Medical Trip</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+
+ 
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Clinicas/Index">CostaRica MedicalTrip</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Clinicas/Index"><img src="~/LogoG.png" alt="" width="145" height="45"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -21,17 +23,17 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <!--<li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-page="/Index">Inicio</a>
-    </li>-->
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Inicio</a>
+                        </li>-->
                         @*<li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-        </li>*@
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            </li>*@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Clinicas/Index">Clínicas</a>
                         </li>
                         <!--<li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-page="/Requests/Index">Solicitudes</a>
-    </li>-->
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Requests/Index">Solicitudes</a>
+                        </li>-->
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Clinicas/Create">Afiliación</a>
                         </li>
@@ -42,30 +44,41 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Citas/Create">Agendar Cita</a>
                         </li>
                         <!--<li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-page="/Citas/Index">Ver Citas</a>
-    </li> -->
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Citas/Index">Ver Citas</a>
+                        </li> -->
                     </ul>
-                        <partial name="_LoginPartial" />
-                    </div>
+                    <partial name="_LoginPartial" />
                 </div>
-            </nav>
-        </header>
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
 
-        <footer class="border-top footer text-muted">
-            @*<div class="container">
+    <footer class="border-top footer text-muted">
+        @*<div class="container">
                 &copy; 2022 - OpenSaludSecurity - <a asp-area="" asp-page="/Privacy">Sobre Nosotros</a>
             </div>*@
-        </footer>
+    </footer>
 
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
-        @await RenderSectionAsync("Scripts", required: false)
-    </body>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
     </html>
+
+

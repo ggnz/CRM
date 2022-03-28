@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OpenSaludSecurity.Models
 {
@@ -41,13 +41,18 @@ namespace OpenSaludSecurity.Models
         [Required(ErrorMessage = "Debe digitar el estado de su cita")]
         public RequestEstado Estado { get; set; }
 
+        public string IdUsuario { get; set; }
 
-
-
+        [Display(Name = "Clinica")]
+        [ForeignKey("Clinica")]
+        public int ClinicaRefId { get; set; }
         public Clinica Clinica { get; set; }
 
         public Usuario Usuario { get; set; }
 
+        [Display(Name = "Medico")]
+        [ForeignKey("Medico")]
+        public int MedicoRefId { get; set; }
         public Medico Medico { get; set; }
     }
 

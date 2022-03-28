@@ -1,4 +1,4 @@
-@page
+﻿@page
 @model OpenSaludSecurity.Pages.Medicos.IndexModel
 
 @{
@@ -10,19 +10,23 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width" />
+	<meta charset="utf-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
 	<title>Medicos</title>
 </head>
 <body>
 
 
-	@foreach (var item in Model.Medicos)
+	@*@foreach (var item in Model.Medicos)
 	{
-		<div class="row row-cols-2 row-cols-md-2 g-2">
-			<div class="col">
+		<div class="card-columns">
+
 				<div class="card" style="width: 26rem;">
-					<img src="https://dummyimage.com/250x250" class="card-img-top" alt="...">
-					<div class="card-body">
+					<img src="~/medico.png" height="250" width="250" class="card-img-top" alt="...">
+					<div class="card h-100">
 						<h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+						<h5 class="card-title">@Html.DisplayFor(modelItem => item.Apellido1)</h5>
 						<p class="card-text">@Html.DisplayFor(modelItem => item.Especialidad)</p>
 						<div>
 							@if ((await AuthorizationService.AuthorizeAsync(
@@ -45,13 +49,53 @@
 
 					</div>
 				</div>
+				</div>
+		<br />
+		<br />
+	}*@
+
+		<br />	
+		<br />
+		<h3 align="right">Catálogo de Médicos Afiliados</h3>
+
+	<hr />
+	<br />
+
+<div class="container-fluid padding">
+    <div class="card-columns">
+		@foreach (var item in Model.Medicos)
+        {
+            <div class="card">					
+				<img class="card-img-top"  src="~/Medico.jpg">
+				<div class="card-body">
+					<h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)
+					@Html.DisplayFor(modelItem => item.Apellido1)</h5>
+					<p class="card-text">@Html.DisplayFor(modelItem => item.Especialidad)</p>
+					<div>
+						@if ((await AuthorizationService.AuthorizeAsync(
+						User, item,
+						MedicoOperations.Update)).Succeeded)
+							{
+								<a class="btn btn-info" asp-page="./Edit" asp-route-id="@item.IdMedico">Modificar</a>
+							}
+							<a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdMedico">Seleccionar Médico</a>
+							@if ((await AuthorizationService.AuthorizeAsync(
+						User, item,
+						MedicoOperations.Delete)).Succeeded)
+							{
+								<a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.IdMedico">Eliminar</a>
+							}
+					</div>					
+				</div>
+				<div class="card-footer">
+						<small class="text-muted">Calificación: 5 estrellas</small>
+				</div>
 			</div>
-		</div>
-		<br />
-		<br />
-	}
-
-
+			<br />
+			<br />
+        }
+    </div>
+</div>
 
 
 	<nav aria-label="Page navigation example">
