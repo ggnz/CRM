@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace OpenSaludSecurity.Models
 {
     public class Calificacion{
@@ -8,16 +10,9 @@ namespace OpenSaludSecurity.Models
         [Key]
         
         public int IdCalificacion { get; set; }
-        //[Key]
-        ////ForeignKey from Usuario
-        //public int IdUsuario { get; set; }
 
-        //[Key]
-        ////ForeignKey from Clinica
-        //public int IdClinica { get; set; }
-
-
-        [Required]
+        [Required(ErrorMessage = "Por favor describa brevemente su comentario")]
+        [Display(Name = "Comentario acerca del servicio")]
         [MaxLength(600)]
         public string Comentario { get; set; }
 
@@ -27,10 +22,11 @@ namespace OpenSaludSecurity.Models
 
         public static DateTime FecCalificacion { get; }
 
-        [Required]
+        [Required(ErrorMessage = "Por favor puntúa el servicio")]
+        [Display(Name = "Calificación")]
         public RequestEstrellas Estrellas { get; set; }
 
-
+        
         public Clinica Clinica { get; set; }
 
         public Usuario Usuario { get; set; }

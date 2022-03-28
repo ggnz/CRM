@@ -44,6 +44,7 @@ namespace OpenSaludSecurity.Models
         public string IdUsuario { get; set; }
 
         [Display(Name = "Clinica")]
+        [Required(ErrorMessage = "Debe seleccionar una clínica para su cita")]
         [ForeignKey("Clinica")]
         public int ClinicaRefId { get; set; }
         public Clinica Clinica { get; set; }
@@ -51,6 +52,7 @@ namespace OpenSaludSecurity.Models
         public Usuario Usuario { get; set; }
 
         [Display(Name = "Medico")]
+        [Required(ErrorMessage = "Debe seleccionar un médico para su cita")]
         [ForeignKey("Medico")]
         public int MedicoRefId { get; set; }
         public Medico Medico { get; set; }

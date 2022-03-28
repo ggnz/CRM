@@ -21,8 +21,25 @@ namespace OpenSaludSecurity.Pages.Calificaciones
 
         public IList<Calificacion> Calificacion { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? idClinica)
         {
+            //var calificaciones = from c in _context.Calificaciones select c;
+
+            //Calificacion = await calificaciones.ToListAsync();
+
+            //if (idClinica != null)
+            //{
+            //    Calificacion = Calificacion.Where(m => m.Clinica == idClinica).ToList();
+            //}
+
+            //if (Calificacion.Any())
+            //{
+            //    foreach (Calificacion m in Calificacion)
+            //    {
+            //        m.Clinica = await _context.Clinica.FirstOrDefaultAsync(c => c.IdClinica == m.Clinica);
+            //    }
+            //}
+
             Calificacion = await _context.Calificaciones.ToListAsync();
         }
     }

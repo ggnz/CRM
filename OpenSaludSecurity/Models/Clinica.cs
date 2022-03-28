@@ -9,20 +9,38 @@ namespace OpenSaludSecurity.Models
         [Key]
         public int IdClinica { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Por favor digite el nombre de la clínica")]
+        [Display(Name = "Nombre de la Clínica")]
         [MaxLength(60)]
         public string Nombre { get; set; }
 
+        [Required(ErrorMessage = "Por favor digite la descripción sobre la clínica")]
         [MaxLength(300)]
+        [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
 
         [Required]
-        //[Display(Name = "Descripción")]
+        [Display(Name = "ID del Representante")]
         public string IdRepresentante { get; set; }
+
+        [Required(ErrorMessage = "Por favor digite la dirección física de la clínica")]
+        [Display(Name = "Dirección")]
         public string Direccion { get; set; }
+
+        [Required(ErrorMessage = "Por favor digite la categoría de la clínica")]
+        [Display(Name = "Categoría")]
         public ServicioMedico Categoria { get; set; }
+
+        [Required(ErrorMessage = "Por favor digite la ciudad donde se encuentra la clínica")]
+        [Display(Name = "Ciudad")]
         public string Ciudad { get; set; }
+
+        [Required(ErrorMessage = "Por favor digite el número telefónico de la clínica")]
+        [Display(Name = "Teléfono")]
         public string Telefono { get; set; }
+
+        [Required(ErrorMessage = "Por favor digite la dirección de correo electrónico de la clínica")]
+        [Display(Name = "Correo")]
         [DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
 
