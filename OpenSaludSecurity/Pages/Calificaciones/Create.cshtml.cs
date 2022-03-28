@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using OpenSaludSecurity.Data;
 using OpenSaludSecurity.Models;
 
@@ -19,6 +22,7 @@ namespace OpenSaludSecurity.Pages.Calificaciones
             _context = context;
         }
 
+        public string UserId { get; set; }
         public IActionResult OnGet()
         {
             return Page();
