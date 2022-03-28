@@ -30,9 +30,9 @@
         <div class="col-md-4">
             <form method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
+                <div class="mb-3">
                     <label asp-for="Cita.DescripcionCita" class="control-label"></label>
-                    <input asp-for="Cita.DescripcionCita" class="form-control" />
+                    <textarea asp-for="Cita.DescripcionCita" class="form-control" rows="3" id="exampleFormControlTextarea1"></textarea>
                     <span asp-validation-for="Cita.DescripcionCita" class="text-danger"></span>
                 </div>
                 <!--<div class="form-group">
@@ -41,10 +41,11 @@
                     <span asp-validation-for="Cita.FechaCita" class="text-danger"></span>
                 </div> -->
 
-                <div class='input-group date' class="form-group">
-                    <label asp-for="Cita.FechaCita" class="control-label"></label>
+                <div class='input-group date'>
+                    <label asp-for="Cita.FechaCita" class="control-label"></label><br />
                     <input type='text' class="form-control" id='datetimepicker1' asp-for="Cita.FechaCita" />
                     <span asp-validation-for="Cita.FechaCita" class="text-danger"></span>
+
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -56,16 +57,16 @@
                         });
                     });
                 </script>
-
+                <br />
                 <div class="form-group">
-                    <label asp-for="IdClinicaSeleccion" class="control-label"></label>
+                    <label asp-for="IdClinicaSeleccion" class="control-label"> Clinica</label>
                     <select asp-for="IdClinicaSeleccion" asp-items="@Model.ClinicasDisponibles" class="form-control" id="clinicaSelect">
                         <option selected="selected" value="">Seleccionar...</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="IdMedicoSeleccion" class="control-label"></label>
+                    <label asp-for="IdMedicoSeleccion" class="control-label"> Medico</label>
                     <select asp-for="IdMedicoSeleccion" asp-items="@Model.MedicosDisponibles" class="form-control" id="medicoSelect">
                         <option selected="selected" value="">Seleccionar...</option>
                     </select>

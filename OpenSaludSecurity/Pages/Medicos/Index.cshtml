@@ -1,4 +1,4 @@
-@page
+﻿@page
 @model OpenSaludSecurity.Pages.Medicos.IndexModel
 
 @{
@@ -10,6 +10,9 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width" />
+	<meta charset="utf-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
 	<title>Medicos</title>
 </head>
 <body>
@@ -51,7 +54,12 @@
 		<br />
 	}*@
 
+		<br />	
+		<br />
+		<h3 align="right">Catálogo de Médicos Afiliados</h3>
 
+	<hr />
+	<br />
 
 <div class="container-fluid padding">
     <div class="card-columns">
@@ -70,7 +78,7 @@
 							{
 								<a class="btn btn-info" asp-page="./Edit" asp-route-id="@item.IdMedico">Modificar</a>
 							}
-							<a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdMedico">Seleccionar Medico</a>
+							<a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdMedico">Seleccionar Médico</a>
 							@if ((await AuthorizationService.AuthorizeAsync(
 						User, item,
 						MedicoOperations.Delete)).Succeeded)
@@ -80,7 +88,7 @@
 					</div>					
 				</div>
 				<div class="card-footer">
-						<small class="text-muted">Calificacion: 5 estrellas</small>
+						<small class="text-muted">Calificación: 5 estrellas</small>
 				</div>
 			</div>
 			<br />
