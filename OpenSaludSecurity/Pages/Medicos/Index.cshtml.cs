@@ -27,6 +27,8 @@ namespace OpenSaludSecurity.Pages.Medicos
 
         public IList<Medico> Medicos { get;set; }
 
+        public Clinica Clinica { get; set; }
+
         public async Task OnGetAsync(int? idClinica)
         {
             var medicos = from c in Context.Medico
@@ -44,6 +46,10 @@ namespace OpenSaludSecurity.Pages.Medicos
                 foreach (Medico m in Medicos)
                 {
                     m.Clinica = await Context.Clinica.FirstOrDefaultAsync(c => c.IdClinica == m.ClinicaRefId);
+                    if (Clinica == null && idClinica != null)
+                    {
+                        Clinica = m.Clinica;
+                    }
                 }
             }
 
