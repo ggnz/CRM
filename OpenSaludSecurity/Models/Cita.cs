@@ -51,7 +51,7 @@ namespace OpenSaludSecurity.Models
 
         public Usuario Usuario { get; set; }
 
-        [Display(Name = "Medico")]
+        [Display(Name = "Médico")]
         [Required(ErrorMessage = "Debe seleccionar un médico para su cita")]
         [ForeignKey("Medico")]
         public int MedicoRefId { get; set; }
