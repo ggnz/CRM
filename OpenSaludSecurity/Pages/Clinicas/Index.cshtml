@@ -21,38 +21,39 @@
 	</div>
 
 	<hr />
-	<br />
-
-	<nav class="navbar navbar-light bg-light">
+	<br />	
+@*	<nav class="navbar navbar-light bg-light">
 	  <div class="container-fluid">		 
 			<a class="navbar-brand">
 				<label asp-for="ServicioMedicoSeleccionado" class="control-label">Categorias: </label>
 				<select class="selectpicker" multiple data-live-search="true" asp-for="ServicioMedicoSeleccionado" asp-items="Model.ServiciosMedicos" >
 					<option selected="selected" value="">Todas</option>			 
 				</select>
+
 			</a>
 		<form class="d-flex">
 		  <input type="text" asp-for="SearchString" class="form-control me-2" type="search" placeholder="Buscar clínica" aria-label="Search">
 		  <button class="btn btn-outline-success" type="submit"> Buscar</button>
 		</form>		
+		
 	  </div>
-	</nav>
+	</nav>*@
 	<br />
-@*<form>
-	
+<form>
+	<nav class="navbar navbar-light bg-light">
     <p>
 		<label asp-for="ServicioMedicoSeleccionado" class="control-label">Categorias: </label>
 		<select class="selectpicker" multiple data-live-search="true" asp-for="ServicioMedicoSeleccionado" asp-items="Model.ServiciosMedicos" >
 			<option selected="selected" value="">Todas</option>			 
 		</select>
-		<input type="text" align="right" asp-for="SearchString" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-		<button class="btn btn-outline-success" type="submit">Buscar</button>
-        
-		@*<h6 align="right"> Buscar por nombre: <input type="text" asp-for="SearchString" />    <input type="submit" value="Buscar" /></h6>*@
+		<input type="text" align="right" asp-for="SearchString" class="form-control me-2" type="search" placeholder="Buscar nombre" aria-label="Search">
+		<button class="btn btn-outline-success" type="submit">Buscar</button>       
+		
 
         
-@*    </p>
-</form>*@
+    </p>
+	</nav>
+</form>
 
 @foreach (var item in Model.Clinicas)
 	{
