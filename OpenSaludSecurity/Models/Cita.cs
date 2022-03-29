@@ -43,7 +43,7 @@ namespace OpenSaludSecurity.Models
 
         public string IdUsuario { get; set; }
 
-        [Display(Name = "Clinica")]
+        [Display(Name = "Clínica")]
         [Required(ErrorMessage = "Debe seleccionar una clínica para su cita")]
         [ForeignKey("Clinica")]
         public int ClinicaRefId { get; set; }

@@ -18,7 +18,7 @@
 <body>
 
 	<div>
-		<h4>Clinica</h4>
+		<h4>Clínica</h4>
 		<hr />
 		<dl class="row">
 			<dt class="col-sm-2">
@@ -71,7 +71,7 @@
 			</dd>
 		</dl>
 	</div>
-	<a asp-page="../Medicos/Index" asp-route-idClinica="@Model.Clinica.IdClinica">Nuestros Medicos</a>
+	<a asp-page="../Medicos/Index" asp-route-idClinica="@Model.Clinica.IdClinica">Nuestros Médicos</a>
 	@if (Model.Clinica.Status != Constants.RequestStatus.Approved)
 	{
 		@if ((await AuthorizationService.AuthorizeAsync(
@@ -80,7 +80,7 @@
 			<form style="display:inline;" method="post">
 				<input type="hidden" name="id" value="@Model.Clinica.IdClinica" />
 				<input type="hidden" name="status" value="@Constants.RequestStatus.Approved" />
-				<button type="submit" class="btn btn-xs btn-success">Approve</button>
+				<button type="submit" class="btn btn-xs btn-success">Aprobar</button>
 			</form>
 		}
 	}
@@ -92,7 +92,7 @@
 			<form style="display:inline;" method="post">
 				<input type="hidden" name="id" value="@Model.Clinica.IdClinica" />
 				<input type="hidden" name="status" value="@Constants.RequestStatus.Rejected" />
-				<button type="submit" class="btn btn-xs btn-danger">Reject</button>
+				<button type="submit" class="btn btn-xs btn-danger">Rechazar</button>
 			</form>
 		}
 	}
