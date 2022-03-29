@@ -51,7 +51,7 @@ namespace OpenSaludSecurity.Pages.Citas
             MedicosDisponibles = new List<SelectListItem>();
             foreach (Medico m in Medicos)
             {
-                MedicosDisponibles.Add(new SelectListItem { Value = m.IdMedico.ToString(), Text = m.Nombre });
+                MedicosDisponibles.Add(new SelectListItem { Value = m.IdMedico.ToString(), Text = m.Nombre + " " + m.Apellido1 });
             }
 
             ViewData["Medicos"] = Medicos;
