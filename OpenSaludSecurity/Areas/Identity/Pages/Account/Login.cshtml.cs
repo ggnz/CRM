@@ -42,11 +42,11 @@ namespace OpenSaludSecurity.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Porfavor ingrese su correo")]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Porfavor ingrese su contraseña")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
