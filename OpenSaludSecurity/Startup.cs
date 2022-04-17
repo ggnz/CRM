@@ -111,6 +111,7 @@ namespace OpenSaludSecurity
             {
                 var services = scope.ServiceProvider;
                 var context = services.GetRequiredService<ApplicationDbContext>();
+                // Quitando la llamada a Database.Migrate porque da problemas si varios corren el app al mismo tiempo y se intenta aplicar migrate al mismo tiempo
                 context.Database.Migrate();
                 // requires using Microsoft.Extensions.Configuration;
                 // Set password with the Secret Manager tool.

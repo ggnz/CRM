@@ -18,36 +18,58 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Cita[0].DescripcionCita)
+                    @Html.DisplayNameFor(model => model.Citas[0].FechaCita)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Cita[0].FechaCita)
+                    @Html.DisplayNameFor(model => model.Citas[0].DescripcionCita)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Cita[0].Estado)
+                    @Html.DisplayNameFor(model => model.Citas[0].Usuario.CorreoUsuario)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Citas[0].Clinica.Nombre)
+                </th>
+                <th>
+                    Nombre Medico
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Citas[0].Estado)
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Cita)
+            @foreach (var item in Model.Citas)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DescripcionCita)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaCita)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Estado)
-                    </td>
-                    <td>
-                        <a asp-page="./Edit" asp-route-id="@item.IdCita">Modificar</a> |
-                        <a asp-page="./Details" asp-route-id="@item.IdCita">Ver más</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.IdCita">Eliminar</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaCita)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescripcionCita)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.CorreoUsuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clinica.Nombre)
+                </td>
+                <td>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Medico.Nombre)
+                        @Html.DisplayFor(modelItem => item.Medico.Apellido1)
+                        @Html.DisplayFor(modelItem => item.Medico.Apellido2)
+                    </p>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.IdCita">Modificar</a> |
+                    <a asp-page="./Details" asp-route-id="@item.IdCita">Ver más</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.IdCita">Eliminar</a>
+                </td>
+            </tr>
 
             }
         </tbody>
