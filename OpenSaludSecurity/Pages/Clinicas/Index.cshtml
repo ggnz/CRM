@@ -1,126 +1,127 @@
 ﻿@page
 @model OpenSaludSecurity.Pages.Clinicas.IndexModel
+
 @{
     ViewData["Title"] = "Clinicas";
 }
 
 
 <!DOCTYPE html>
-	<head>
-		<meta charset="utf-8" />
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
-	</head>
-	<br />
-	<div class="text-center">
-		<img src="~/LogoGB2.png" class="img-fluid" alt="...">		
-		<br />	
-		<br />
-		<br />
-		<h3 align="right">Catálogo de Clínicas Afiliadas</h3>
-	</div>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
+</head>
+<br />
+<div class="text-center">
+    <img src="~/LogoGB2.png" class="img-fluid" alt="...">
+    <br />
+    <br />
+    <br />
+    <h3 align="right">Catálogo de Clínicas Afiliadas</h3>
+</div>
 
-	<hr />
-	<br />	
+<hr />
+<br />
 @*	<nav class="navbar navbar-light bg-light">
-	  <div class="container-fluid">		 
-			<a class="navbar-brand">
-				<label asp-for="ServicioMedicoSeleccionado" class="control-label">Categorias: </label>
-				<select class="selectpicker" multiple data-live-search="true" asp-for="ServicioMedicoSeleccionado" asp-items="Model.ServiciosMedicos" >
-					<option selected="selected" value="">Todas</option>			 
-				</select>
+      <div class="container-fluid">
+            <a class="navbar-brand">
+                <label asp-for="ServicioMedicoSeleccionado" class="control-label">Categorias: </label>
+                <select class="selectpicker" multiple data-live-search="true" asp-for="ServicioMedicoSeleccionado" asp-items="Model.ServiciosMedicos" >
+                    <option selected="selected" value="">Todas</option>
+                </select>
 
-			</a>
-		<form class="d-flex">
-		  <input type="text" asp-for="SearchString" class="form-control me-2" type="search" placeholder="Buscar clínica" aria-label="Search">
-		  <button class="btn btn-outline-success" type="submit"> Buscar</button>
-		</form>		
-		
-	  </div>
-	</nav>*@
-	<br />
+            </a>
+        <form class="d-flex">
+          <input type="text" asp-for="SearchString" class="form-control me-2" type="search" placeholder="Buscar clínica" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit"> Buscar</button>
+        </form>
+
+      </div>
+    </nav>*@
+<br />
 <form>
-	<nav class="navbar navbar-light bg-light">
-    <p>
-		<label asp-for="ServicioMedicoSeleccionado" class="control-label">Categorias: </label>
-		<select class="selectpicker" multiple data-live-search="true" asp-for="ServicioMedicoSeleccionado" asp-items="Model.ServiciosMedicos" >
-			<option selected="selected" value="">Todas</option>			 
-		</select>
-		<input type="text" align="right" asp-for="SearchString" class="form-control me-2" type="search" placeholder="Buscar nombre" aria-label="Search">
-		<button class="btn btn-outline-success" type="submit">Buscar</button>       
-		
+    <nav class="navbar navbar-light bg-light">
+        <p>
+            <label asp-for="ServicioMedicoSeleccionado" class="control-label">Categorias: </label>
+            <select class="selectpicker" multiple data-live-search="true" asp-for="ServicioMedicoSeleccionado" asp-items="Model.ServiciosMedicos">
+                <option selected="selected" value="">Todas</option>
+            </select>
+            <input type="text" align="right" asp-for="SearchString" class="form-control me-2" type="search" placeholder="Buscar nombre" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
 
-        
-    </p>
-	</nav>
+
+
+        </p>
+    </nav>
 </form>
 
 @foreach (var item in Model.Clinicas)
-	{
-	<div class="card mb-3">
-				
-		<img src="~/clinica1.jpg" class="card-img-top" alt="...">
-		<div class="card-body">
-			<p class="card-text">@Html.DisplayFor(modelItem => item.Categoria)</p>
-			<h4 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h4>
-			Contacto:
-			<ul>
-				<li> Tel:  @Html.DisplayFor(modelItem => item.Telefono)</li>
-				<li> Correo: @Html.DisplayFor(modelItem => item.Email) </li>
-			</ul>
-			Dirección:
-			<ul>
-				<li> <p class="card-text">@Html.DisplayFor(modelItem => item.Direccion)</p></li>	
-			</ul>
-			
+{
+    <div class="card mb-3">
+
+        <img src="~/clinica1.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <p class="card-text">@Html.DisplayFor(modelItem => item.Categoria)</p>
+            <h4 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h4>
+            Contacto:
+            <ul>
+                <li> Tel:  @Html.DisplayFor(modelItem => item.Telefono)</li>
+                <li> Correo: @Html.DisplayFor(modelItem => item.Email) </li>
+            </ul>
+            Dirección:
+            <ul>
+                <li> <p class="card-text">@Html.DisplayFor(modelItem => item.Direccion)</p></li>
+            </ul>
+
             <div>
                 @if ((await AuthorizationService.AuthorizeAsync(
-               User, item,
-               ContactOperations.Update)).Succeeded)
+             User, item,
+             ContactOperations.Update)).Succeeded)
                 {
                     <a class="btn btn-info" asp-page="./Edit" asp-route-id="@item.IdClinica">Modificar</a>
                 }
                 <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdClinica">Seleccionar Clínica</a>
                 @if ((await AuthorizationService.AuthorizeAsync(
-                   User, item,
-                   ContactOperations.Delete)).Succeeded)
+                 User, item,
+                 ContactOperations.Delete)).Succeeded)
                 {
                     <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.IdClinica">Eliminar</a>
                 }
                 @if ((await AuthorizationService.AuthorizeAsync(
-				   User, item,
-				   ClinicaOperations.Update)).Succeeded)
+                 User, item,
+                 ClinicaOperations.Update)).Succeeded)
                 {
-                    <a class="btn btn-info"asp-page="/Citas/Index" >Citas Agendadas</a>
+                    <a class="btn btn-info" asp-page="/Citas/Index">Citas Agendadas</a>
                 }
                 <a class="btn btn-info" asp-area="" asp-route-id="@item.IdClinica" asp-page="/Calificaciones/Index">Calificaciones</a>
-            </div>		
-						
-
-		</div>
-		<div class="card-footer">
-			<small class="text-muted">Calificación: 5 estrellas</small>
-		</div>
-
-	</div>
-		<br />
-		<br />
-	}
+            </div>
 
 
-	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-center">
-			<li class="page-item disabled">
-				<a class="page-link">Anterior</a>
-			</li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item">
-				<a class="page-link" href="#">Siguiente</a>
-			</li>
-		</ul>
-	</nav>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Calificación: 5 estrellas</small>
+        </div>
+
+    </div>
+    <br />
+    <br />
+}
+
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+            <a class="page-link">Anterior</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Siguiente</a>
+        </li>
+    </ul>
+</nav>
 
 
 

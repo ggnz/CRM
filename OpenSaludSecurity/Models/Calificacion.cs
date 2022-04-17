@@ -4,11 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OpenSaludSecurity.Models
 {
-    public class Calificacion{
-        
+    public class Calificacion {
+
 
         [Key]
-        
         public int IdCalificacion { get; set; }
 
         [Required(ErrorMessage = "Por favor describa brevemente su comentario")]
@@ -16,22 +15,21 @@ namespace OpenSaludSecurity.Models
         [MaxLength(600)]
         public string Comentario { get; set; }
 
-
         //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/mm/yyyy}")]
         //public string FecCalificacion { get; set; }
 
-        public static DateTime FecCalificacion { get; }
+        public static DateTime FecCalificacion { get; set; }
 
         [Required(ErrorMessage = "Por favor puntúa el servicio")]
         [Display(Name = "Calificación")]
         public RequestEstrellas Estrellas { get; set; }
 
-        
         public Clinica Clinica { get; set; }
 
         public Usuario Usuario { get; set; }
     }
 
+    [Flags]
     public enum RequestEstrellas
     {
         Una,

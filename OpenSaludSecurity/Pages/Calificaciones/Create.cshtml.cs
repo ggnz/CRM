@@ -23,6 +23,9 @@ namespace OpenSaludSecurity.Pages.Calificaciones
         }
 
         public string UserId { get; set; }
+
+        public Clinica Clinica { get; set; }
+
         public IActionResult OnGet()
         {
             return Page();
