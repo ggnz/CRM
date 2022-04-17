@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OpenSaludSecurity.Models
@@ -37,24 +38,28 @@ namespace OpenSaludSecurity.Models
 
     }
 
+    [Flags]
     public enum EspecialidadMedica
     {
-        Pediatria,
-        Odontología,
-        Psiquiatría,
-        Dermatología,
-        Oftalmología,
-        Ginecología,
-        Cardiología,
-        Endicronología,
-        Psicología,
-        Otorrinolaringología,
-        Urología,
-        Vascular_Periferíco,
-        Geriartría
+        NoDisponible = 0,
+        Pediatria = 1,
+        Farmacia = 2,
+        Odontología = 4,
+        Psiquiatría = 8,
+        Dermatología = 16,
+        Oftalmología = 32,
+        Ginecología = 64,
+        Cardiología = 128,
+        Endicronología = 256,
+        Psicología = 512,
+        Otorrinolaringología = 1024,
+        Urología = 2048,
+        Vascular_Periferíco = 4096,
+        Geriartría = 8192
+
     }
-    
-   
+
+
 
 }
 

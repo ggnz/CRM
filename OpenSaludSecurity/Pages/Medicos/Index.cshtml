@@ -58,20 +58,44 @@
     <br />
     <div class="row" style="display: flex">
         <h3 style="flex:auto">Catálogo de Médicos Afiliados</h3>
-        @if ((await AuthorizationService.AuthorizeAsync(
-User, Model.Clinica, ClinicaOperations.Update)).Succeeded)
+        @if ((await AuthorizationService.AuthorizeAsync(User, Model.Clinica, ClinicaOperations.Update)).Succeeded)
         {
             <a align="right" style="margin-left: 3rem" class="btn btn-xs btn-success" asp-page="/Medicos/Create">
                 Agregar Medico</a>
-           }
+        }
 
 
     </div>
 
     <hr />
     <br />
+@*    <form>
+	<nav class="navbar navbar-light bg-light">
+    <p>
+		<label asp-for="EspecialidadMedicaSeleccionada" class="control-label">Especialidades: </label>
+		<select class="selectpicker" multiple data-live-search="true" asp-for="EspecialidadMedicaSeleccionada" asp-items="Model.EspecialidadesMedicas" >
+			<option selected="selected" value="">Todas</option>			 
+		</select>
+		<input type="text" align="right" asp-for="SearchString" class="form-control me-2" type="search" placeholder="Buscar nombre" aria-label="Search">
+		<button class="btn btn-outline-success" type="submit">Buscar</button>       
+		
 
+        
+    </p>
+	</nav>
+</form>*@
 
+    <form asp-page="./Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Buscar por nombre:
+                <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+                <input type="submit" value="Buscar" class="btn btn-primary" /> |
+                <a asp-page="./Index">Limpiar Filtros</a>
+            </p>
+        </div>
+    </form>
+    <br />
 
     <div class="container-fluid padding">
         <div class="card-columns">
@@ -112,18 +136,24 @@ User, Model.Clinica, ClinicaOperations.Update)).Succeeded)
     </div>
 
 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link">Anterior</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Siguiente</a>
-            </li>
-        </ul>
-    </nav>
+ @{
+    var prevDisabled = !Model.MedicosList.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.MedicosList.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.MedicosList.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.MedicosList.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>
 </body>
 </html>
