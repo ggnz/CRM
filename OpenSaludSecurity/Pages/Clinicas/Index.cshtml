@@ -73,22 +73,28 @@
 				<li> <p class="card-text">@Html.DisplayFor(modelItem => item.Direccion)</p></li>	
 			</ul>
 			
-			<div>
-				@if ((await AuthorizationService.AuthorizeAsync(
-				User, item,
-				ContactOperations.Update)).Succeeded)
-				{
-					<a class="btn btn-info" asp-page="./Edit" asp-route-id="@item.IdClinica">Modificar</a>
-				} 
-				<a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdClinica">Seleccionar Clínica</a>
-				@if ((await AuthorizationService.AuthorizeAsync(
-					User, item,
-					ContactOperations.Delete)).Succeeded)
-				{
-					<a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.IdClinica">Eliminar</a>
-				}
-				<a class="btn btn-info" asp-area="" asp-route-id="@item.IdClinica" asp-page="/Calificaciones/Index">Calificaciones</a>
-			</div>		
+            <div>
+                @if ((await AuthorizationService.AuthorizeAsync(
+               User, item,
+               ContactOperations.Update)).Succeeded)
+                {
+                    <a class="btn btn-info" asp-page="./Edit" asp-route-id="@item.IdClinica">Modificar</a>
+                }
+                <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdClinica">Seleccionar Clínica</a>
+                @if ((await AuthorizationService.AuthorizeAsync(
+                   User, item,
+                   ContactOperations.Delete)).Succeeded)
+                {
+                    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.IdClinica">Eliminar</a>
+                }
+                @if ((await AuthorizationService.AuthorizeAsync(
+				   User, item,
+				   ClinicaOperations.Update)).Succeeded)
+                {
+                    <a class="btn btn-info"asp-page="/Citas/Index" >Citas Agendadas</a>
+                }
+                <a class="btn btn-info" asp-area="" asp-route-id="@item.IdClinica" asp-page="/Calificaciones/Index">Calificaciones</a>
+            </div>		
 						
 
 		</div>
