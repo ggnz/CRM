@@ -36,6 +36,8 @@ namespace OpenSaludSecurity.Pages.Calificaciones
 
             // Popular datos de clinica para cada item de Calificaciones
             await PopularDatosDeClinica(Calificaciones);
+            // Popular datos de usuario para cada item de Calificaciones
+            await PopularDatosDeUsuario(Calificaciones);
         }
 
         private async Task PopularDatosDeClinica(IList<Calificacion> calificaciones)
@@ -60,6 +62,32 @@ namespace OpenSaludSecurity.Pages.Calificaciones
                 }
 
                 c.Clinica = new Clinica { Nombre = Clinica.Nombre, Categoria = Clinica.Categoria };
+            }
+
+        }
+
+        private async Task PopularDatosDeUsuario(IList<Calificacion> calificaciones)
+        {
+            foreach (Calificacion c in calificaciones)
+            {
+                if (c.IdUsuario == null)
+                {
+                    continue;
+                }
+                // Traer datos del usuarioId que existe en la cita
+                var usuarios = from u in Context.Users
+                               where u.Id == c.IdUsuario
+                               select u;
+
+                List<IdentityUser> Usuarios = await usuarios.ToListAsync();
+                IdentityUser Usuario = Usuarios[0];
+
+                if (Usuario == null)
+                {
+                    continue;
+                }
+
+                c.Usuario = new Usuario { CorreoUsuario = Usuario.UserName };
             }
 
         }

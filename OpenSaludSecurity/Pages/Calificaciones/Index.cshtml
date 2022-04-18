@@ -24,6 +24,9 @@
         <thead>
             <tr>
                 <th>
+                    @Html.DisplayNameFor(model => model.Calificaciones[0].Usuario.NombreUsuario)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Calificaciones[0].Comentario)
                 </th>
                 <th>
@@ -32,12 +35,16 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Calificaciones[0].Clinica)
                 </th>
+
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.Calificaciones)
             {
             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.CorreoUsuario)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Comentario)
                 </td>
@@ -132,9 +139,19 @@
                     @Html.DisplayFor(modelItem => item.Clinica.Nombre)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.IdCalificacion">Modificar</a> |
-                    <a asp-page="./Details" asp-route-id="@item.IdCalificacion">Ver más</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.IdCalificacion">Eliminar</a>
+                    @if ((await AuthorizationService.AuthorizeAsync(
+          User, item,
+          CalificacionOperations.Update)).Succeeded)
+                    {
+                        <a class="btn btn-info" asp-page="./Edit" asp-route-id="@item.IdCalificacion">Modificar</a>
+                    }
+
+                    @if ((await AuthorizationService.AuthorizeAsync(
+          User, item,
+          CalificacionOperations.Delete)).Succeeded)
+                    {
+                        <a asp-page="./Delete" asp-route-id="@item.IdCalificacion">Eliminar</a>
+                    }
                 </td>
             </tr>
             }

@@ -30,8 +30,11 @@ namespace OpenSaludSecurity.Pages.Calificaciones
         public List<SelectListItem> IdClinicasDisponibles { get; set; }
         public IList<Clinica> Clinicas { get; set; }
 
+
         public async Task OnGet()
         {
+            UserId = UserManager.GetUserId(User);
+
             var clinicas = from c in Context.Clinica
                            select c;
 
