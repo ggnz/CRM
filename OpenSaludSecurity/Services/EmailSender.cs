@@ -37,7 +37,7 @@ namespace OpenSaludSecurity.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("nathy27ho@hotmail.com", "Recuperación de contraseña"),
+                From = new EmailAddress("nathy27ho@hotmail.com", "Costa Rica Medical Trip"),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message

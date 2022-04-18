@@ -28,127 +28,127 @@
 
     <div class="row">
         <div class="col-md-4">
-            <form method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="mb-3">
-                    <label asp-for="Cita.DescripcionCita" class="control-label"></label>
-                    <textarea asp-for="Cita.DescripcionCita" class="form-control" rows="3" id="exampleFormControlTextarea1"></textarea>
-                    <span asp-validation-for="Cita.DescripcionCita" class="text-danger"></span>
-                </div>
-                <!--<div class="form-group">
-        <label asp-for="Cita.FechaCita" class="control-label"></label>
-        <input asp-for="Cita.FechaCita" class="form-control" />
-        <span asp-validation-for="Cita.FechaCita" class="text-danger"></span>
-    </div> -->
+			<form method="post">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<div class="mb-3">
+					<label asp-for="Cita.DescripcionCita" class="control-label"></label>
+					<textarea asp-for="Cita.DescripcionCita" class="form-control" rows="3" id="exampleFormControlTextarea1"></textarea>
+					<span asp-validation-for="Cita.DescripcionCita" class="text-danger"></span>
+				</div>
+				<!--<div class="form-group">
+		<label asp-for="Cita.FechaCita" class="control-label"></label>
+		<input asp-for="Cita.FechaCita" class="form-control" />
+		<span asp-validation-for="Cita.FechaCita" class="text-danger"></span>
+	</div> -->
 
-                <div class='input-group date'>
-                    <label asp-for="Cita.FechaCita" class="control-label"></label><br />
-                    <input type='text' class="form-control" id='datetimepicker1' asp-for="Cita.FechaCita" />
-                    <span asp-validation-for="Cita.FechaCita" class="text-danger"></span>
+				<div class='input-group date'>
+					<label asp-for="Cita.FechaCita" class="control-label"></label><br />
+					<input type='text' class="form-control" id='datetimepicker1' asp-for="Cita.FechaCita" />
+					<span asp-validation-for="Cita.FechaCita" class="text-danger"></span>
 
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-                <script type="text/javascript">
-                    $(function () {
-                        $('#datetimepicker1').datetimepicker({
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+				<script type="text/javascript">
+					$(function () {
+						$('#datetimepicker1').datetimepicker({
 
-                        });
-                    });
-                </script>
-                <br />
-                <br />
-                <div class="form-group">
-                    <label asp-for="IdClinicaSeleccion" class="control-label"> Clínica</label>
-                    <select asp-for="IdClinicaSeleccion" asp-items="@Model.ClinicasDisponibles" class="form-control" id="clinicaSelect" required>
-                        <option selected="selected" value="">Seleccionar...</option>
-                    </select>
-                </div>
+						});
+					});
+				</script>
+				<br />
+				<br />
+				<div class="form-group">
+					<label asp-for="IdClinicaSeleccion" class="control-label"> Clínica</label>
+					<select asp-for="IdClinicaSeleccion" asp-items="@Model.ClinicasDisponibles" class="form-control" id="clinicaSelect" required>
+						<option selected="selected" value="">Seleccionar...</option>
+					</select>
+				</div>
 
-                <div class="form-group">
-                    <label asp-for="IdMedicoSeleccion" class="control-label"> Médico</label>
-                    <select asp-for="IdMedicoSeleccion" asp-items="@Model.MedicosDisponibles" class="form-control" id="medicoSelect" required>
-                        <option selected="selected" value="">Seleccionar...</option>
-                    </select>
-                </div>
-                @*<div class="form-group">
-            <label asp-for="Cita.FechaCita" class="control-label"></label>
-            <input asp-for="Cita.FechaCita" class="form-control" value="@DateTime.Now.ToString("dd-MM-yyyy HH:mm")" />
-            <span asp-validation-for="Cita.FechaCita" class="text-danger"></span>
-        </div>*@
+				<div class="form-group">
+					<label asp-for="IdMedicoSeleccion" class="control-label"> Médico</label>
+					<select asp-for="IdMedicoSeleccion" asp-items="@Model.MedicosDisponibles" class="form-control" id="medicoSelect" required>
+						<option selected="selected" value="">Seleccionar...</option>
+					</select>
+				</div>
+				@*<div class="form-group">
+			<label asp-for="Cita.FechaCita" class="control-label"></label>
+			<input asp-for="Cita.FechaCita" class="form-control" value="@DateTime.Now.ToString("dd-MM-yyyy HH:mm")" />
+			<span asp-validation-for="Cita.FechaCita" class="text-danger"></span>
+		</div>*@
 
-                <div class="form-group">
-                    <label asp-for="Cita.Estado" class="control-label"></label>
-                    <select asp-for="Cita.Estado" asp-items="Html.GetEnumSelectList<RequestEstado>()" class="form-control">
-                        <option selected="selected" value="">Seleccionar...</option>
-                    </select>
-                    <span asp-validation-for="Cita.Estado" class="text-danger"></span>
-                </div>
+				@*<div class="form-group">
+							<label asp-for="Cita.Estado" class="control-label"></label>
+							<select asp-for="Cita.Estado" asp-items="Html.GetEnumSelectList<RequestEstado>()" class="form-control">
+								<option selected="selected" value="">Seleccionar...</option>
+							</select>
+							<span asp-validation-for="Cita.Estado" class="text-danger"></span>
+						</div>*@
 
-                <div class="form-group">
-                    <input type="submit" value="Agendar" class="btn btn-primary" />
-                </div>
-            </form>
-        </div>
-    </div>
+						<div class="form-group">
+							<input type="submit" value="Agendar" class="btn btn-primary" />
+						</div>
+					</form>
+				</div>
+			</div>
 
-    <div>
-        <a asp-page="Index">Volver</a>
-    </div>
+			<div>
+				<a asp-page="Index">Volver</a>
+			</div>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+			@section Scripts {
+				@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    }
+			}
 
-<script type="text/javascript">
+		<script type="text/javascript">
 
-        let clinicaSelected = 0;
+				let clinicaSelected = 0;
 
-        $('select[id="clinicaSelect"]').change(function () {
-            var val = $(this).val();
-            clinicaSelected = val;
-            console.log(clinicaSelected);
-            selectedChange(clinicaSelected);
-        });
+				$('select[id="clinicaSelect"]').change(function () {
+					var val = $(this).val();
+					clinicaSelected = val;
+					console.log(clinicaSelected);
+					selectedChange(clinicaSelected);
+				});
 
-        function selectedChange(id) {
-            var x = document.getElementById("medicoSelect");
+				function selectedChange(id) {
+					var x = document.getElementById("medicoSelect");
 
-            var medicos = x.options;
-            let optionNames = [...medicos].map(m => m.text);
-            console.log(optionNames);
-            var medicosJson = JSON.parse('@Html.Raw(Json.Serialize(ViewData["Medicos"]))');
+					var medicos = x.options;
+					let optionNames = [...medicos].map(m => m.text);
+					console.log(optionNames);
+					var medicosJson = JSON.parse('@Html.Raw(Json.Serialize(ViewData["Medicos"]))');
 
-            console.log(medicosJson);
+					console.log(medicosJson);
 
-            //while (x.options.length > 0) {
-            //    x.remove(x.options.length - 1);
-            //}
+					//while (x.options.length > 0) {
+					//    x.remove(x.options.length - 1);
+					//}
 
-            var validMedicosId = [];
-            for (var i = 0; i < medicosJson.length; i++) {
-                var object = medicosJson[i];
-                console.log(object.idMedico, object.clinicaRefId, id)
-                if (object.clinicaRefId == id) {
-                    validMedicosId.push(object.idMedico);
-                    //var opt = document.createElement("option");
-                    //opt.text = object.nombre;
-                    //opt.value = object.idMedico;
-                    //console.log("Adding new opt: ", opt)
-                    //x.add(opt, null);
-                    console.log(x.options[i]);
-                } else {
-                    x.options[i].hidden = true;
-                    console.log(x.options[i]);
-                }
-            }
-            console.log(validMedicosId);
-            console.log(x.options);
+					var validMedicosId = [];
+					for (var i = 0; i < medicosJson.length; i++) {
+						var object = medicosJson[i];
+						console.log(object.idMedico, object.clinicaRefId, id)
+						if (object.clinicaRefId == id) {
+							validMedicosId.push(object.idMedico);
+							//var opt = document.createElement("option");
+							//opt.text = object.nombre;
+							//opt.value = object.idMedico;
+							//console.log("Adding new opt: ", opt)
+							//x.add(opt, null);
+							console.log(x.options[i]);
+						} else {
+							x.options[i].hidden = true;
+							console.log(x.options[i]);
+						}
+					}
+					console.log(validMedicosId);
+					console.log(x.options);
 
-        }
+				}
 
-</script>
-</body>
-</html>
+		</script>
+		</body>
+		</html>
