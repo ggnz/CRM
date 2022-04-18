@@ -65,9 +65,21 @@
                     @Html.DisplayFor(modelItem => item.Estado)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.IdCita">Modificar</a> |
-                    <a asp-page="./Details" asp-route-id="@item.IdCita">Ver más</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.IdCita">Eliminar</a>
+                    <div>
+                        @if ((await AuthorizationService.AuthorizeAsync(
+                    User, item,
+                    CitaOperations.Update)).Succeeded)
+                        {
+                            <a class="btn btn-info" asp-page="./Edit" asp-route-id="@item.IdCita">Modificar</a>
+                        }
+                        <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdCita">Detalles</a>
+                        @if ((await AuthorizationService.AuthorizeAsync(
+                        User, item,
+                        CitaOperations.Delete)).Succeeded)
+                        {
+                            <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.IdCita">Eliminar</a>
+                        }
+                    </div>
                 </td>
             </tr>
 
