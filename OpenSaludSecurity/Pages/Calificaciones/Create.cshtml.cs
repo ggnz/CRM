@@ -10,25 +10,40 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OpenSaludSecurity.Data;
 using OpenSaludSecurity.Models;
+using OpenSaludSecurity.Pages.Shared;
 
 namespace OpenSaludSecurity.Pages.Calificaciones
 {
-    public class CreateModel : PageModel
+    public class CreateModel : _BasePageModel
     {
-        private readonly OpenSaludSecurity.Data.ApplicationDbContext _context;
-
-        public CreateModel(OpenSaludSecurity.Data.ApplicationDbContext context)
+        public CreateModel(ApplicationDbContext context,
+            IAuthorizationService authorizationService,
+            UserManager<IdentityUser> userManager)
+            : base(context, authorizationService, userManager)
         {
-            _context = context;
         }
 
         public string UserId { get; set; }
 
         public Clinica Clinica { get; set; }
 
-        public IActionResult OnGet()
+        public List<SelectListItem> IdClinicasDisponibles { get; set; }
+        public IList<Clinica> Clinicas { get; set; }
+
+        public async Task OnGet()
         {
-            return Page();
+            var clinicas = from c in Context.Clinica
+                           select c;
+
+            Clinicas = await clinicas.ToListAsync();
+
+            UserId = UserManager.GetUserId(User);
+
+            IdClinicasDisponibles = new List<SelectListItem>();
+            foreach (Clinica c in Clinicas)
+            {
+                IdClinicasDisponibles.Add(new SelectListItem { Value = c.IdClinica.ToString(), Text = c.Nombre });
+            }
         }
 
         [BindProperty]
@@ -42,8 +57,8 @@ namespace OpenSaludSecurity.Pages.Calificaciones
                 return Page();
             }
 
-            _context.Calificaciones.Add(Calificacion);
-            await _context.SaveChangesAsync();
+            Context.Calificaciones.Add(Calificacion);
+            await Context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }

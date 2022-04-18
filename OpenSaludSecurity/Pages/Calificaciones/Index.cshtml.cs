@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -11,44 +13,55 @@ using OpenSaludSecurity.Pages.Shared;
 
 namespace OpenSaludSecurity.Pages.Calificaciones
 {
-    public class IndexModel : PageModel
+    public class IndexModel : _BasePageModel
     {
-        private readonly OpenSaludSecurity.Data.ApplicationDbContext _context;
 
-        public IndexModel(OpenSaludSecurity.Data.ApplicationDbContext context)
+        public IndexModel(ApplicationDbContext context,
+            IAuthorizationService authorizationService,
+            UserManager<IdentityUser> userManager)
+            : base(context, authorizationService, userManager)
         {
-            _context = context;
         }
 
-        public IList<Calificacion> Calificacion { get;set; }
+        public IList<Calificacion> Calificaciones { get;set; }
 
         public Clinica Clinica { get; set; }
 
         public async Task OnGetAsync(int? idClinica)
         {
 
-            //IQueryable<Calificacion> calificacionIQ = from c in _context.Calificaciones select c;
+            
 
-            //Calificacion = await calificacionIQ.AsNoTracking().ToListAsync();
+            Calificaciones = await Context.Calificaciones.ToListAsync();
 
-            //if (idClinica != null)
-            //{
-            //    Calificacion = Calificacion.Where(m => m.Clinica == idClinica).ToList();
-            //}
+            // Popular datos de clinica para cada item de Calificaciones
+            await PopularDatosDeClinica(Calificaciones);
+        }
 
-            //if (Calificacion.Any())
-            //{
-            //    foreach (Calificacion m in Calificacion)
-            //    {
-            //        m.Clinica = await _context.Clinica.FirstOrDefaultAsync(c => c.IdClinica == m.Clinica);
-            //        if (Clinica == null && idClinica != null)
-            //        {
-            //            Clinica = m.Clinica;
-            //        }
-            //    }
-            //}
+        private async Task PopularDatosDeClinica(IList<Calificacion> calificaciones)
+        {
+            foreach (Calificacion c in calificaciones)
+            {
+                if (c.ClinicaRefId == 0)
+                {
+                    continue;
+                }
+                // Traer datos del clinicaRefId que existe en la calificacion
+                var clinicas = from clinica in Context.Clinica
+                               where clinica.IdClinica == c.ClinicaRefId
+                               select clinica;
 
-            Calificacion = await _context.Calificaciones.ToListAsync();
+                List<Clinica> Clinicas = await clinicas.ToListAsync();
+                Clinica Clinica = Clinicas[0];
+
+                if (Clinica == null)
+                {
+                    continue;
+                }
+
+                c.Clinica = new Clinica { Nombre = Clinica.Nombre, Categoria = Clinica.Categoria };
+            }
+
         }
     }
 }
