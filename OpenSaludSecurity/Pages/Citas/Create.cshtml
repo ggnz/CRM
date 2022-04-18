@@ -36,10 +36,10 @@
                     <span asp-validation-for="Cita.DescripcionCita" class="text-danger"></span>
                 </div>
                 <!--<div class="form-group">
-                    <label asp-for="Cita.FechaCita" class="control-label"></label>
-                    <input asp-for="Cita.FechaCita" class="form-control" />
-                    <span asp-validation-for="Cita.FechaCita" class="text-danger"></span>
-                </div> -->
+        <label asp-for="Cita.FechaCita" class="control-label"></label>
+        <input asp-for="Cita.FechaCita" class="form-control" />
+        <span asp-validation-for="Cita.FechaCita" class="text-danger"></span>
+    </div> -->
 
                 <div class='input-group date'>
                     <label asp-for="Cita.FechaCita" class="control-label"></label><br />
@@ -58,24 +58,25 @@
                     });
                 </script>
                 <br />
+                <br />
                 <div class="form-group">
                     <label asp-for="IdClinicaSeleccion" class="control-label"> Clínica</label>
-                    <select asp-for="IdClinicaSeleccion" asp-items="@Model.ClinicasDisponibles" class="form-control" id="clinicaSelect">
+                    <select asp-for="IdClinicaSeleccion" asp-items="@Model.ClinicasDisponibles" class="form-control" id="clinicaSelect" required>
                         <option selected="selected" value="">Seleccionar...</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="IdMedicoSeleccion" class="control-label"> Médico</label>
-                    <select asp-for="IdMedicoSeleccion" asp-items="@Model.MedicosDisponibles" class="form-control" id="medicoSelect">
+                    <select asp-for="IdMedicoSeleccion" asp-items="@Model.MedicosDisponibles" class="form-control" id="medicoSelect" required>
                         <option selected="selected" value="">Seleccionar...</option>
                     </select>
                 </div>
                 @*<div class="form-group">
-                        <label asp-for="Cita.FechaCita" class="control-label"></label>
-                        <input asp-for="Cita.FechaCita" class="form-control" value="@DateTime.Now.ToString("dd-MM-yyyy HH:mm")" />
-                        <span asp-validation-for="Cita.FechaCita" class="text-danger"></span>
-                    </div>*@
+            <label asp-for="Cita.FechaCita" class="control-label"></label>
+            <input asp-for="Cita.FechaCita" class="form-control" value="@DateTime.Now.ToString("dd-MM-yyyy HH:mm")" />
+            <span asp-validation-for="Cita.FechaCita" class="text-danger"></span>
+        </div>*@
 
                 <div class="form-group">
                     <label asp-for="Cita.Estado" class="control-label"></label>

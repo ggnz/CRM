@@ -45,18 +45,18 @@ namespace OpenSaludSecurity.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Por favor digite su correo electrónico")]
             [EmailAddress]
             [Display(Name = "Correo")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Por favor digite una contraseña")]
             [StringLength(100, ErrorMessage = "La {0} debe tener al menos {2} y un máximo de {1} caracteres de longitud.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Contraseña")]
             public string Password { get; set; }
 
-            [DataType(DataType.Password)]
+            [Required(ErrorMessage = "Por favor digite nuevamente su contraseña")]
             [Display(Name = "Confirmar Contraseña")]
             [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
             public string ConfirmPassword { get; set; }
