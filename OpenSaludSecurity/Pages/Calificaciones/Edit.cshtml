@@ -26,14 +26,27 @@
                     <label asp-for="Calificacion.Comentario" class="control-label"></label>
                     <input asp-for="Calificacion.Comentario" class="form-control" />
                     <span asp-validation-for="Calificacion.Comentario" class="text-danger"></span>
-                </div>                
-                <div class="form-group">
-                    <label asp-for="Calificacion.Estrellas" class="control-label"></label>
+                </div>
+                @*<div class="form-group">
+            <label asp-for="Calificacion.Estrellas" class="control-label"></label>
 
-                    <select asp-for="Calificacion.Estrellas" asp-items="Html.GetEnumSelectList<RequestEstrellas>()" class="form-control">
-                        <option selected="selected" value="">Seleccionar...</option>
-                    </select>
-                    <span asp-validation-for="Calificacion.Estrellas" class="text-danger"></span>
+            <select asp-for="Calificacion.Estrellas" asp-items="Html.GetEnumSelectList<RequestEstrellas>()" class="form-control">
+                <option selected="selected" value="">Seleccionar...</option>
+            </select>
+            <span asp-validation-for="Calificacion.Estrellas" class="text-danger"></span>
+        </div>*@
+                <div class="rating form-group">
+                    @Html.RadioButtonFor(m => m.Calificacion.Estrellas, "5", new { id = "star5", @class = "radio-btn hide" })
+                    <label for="star5">☆</label>
+                    @Html.RadioButtonFor(m => m.Calificacion.Estrellas, "4", new { id = "star4", @class = "radio-btn hide" })
+                    <label for="star4">☆</label>
+                    @Html.RadioButtonFor(m => m.Calificacion.Estrellas, "3", new { id = "star3", @class = "radio-btn hide" })
+                    <label for="star3">☆</label>
+                    @Html.RadioButtonFor(m => m.Calificacion.Estrellas, "2", new { id = "star1", @class = "radio-btn hide" })
+                    <label for="star2">☆</label>
+                    @Html.RadioButtonFor(m => m.Calificacion.Estrellas, "1", new { id = "star1", @class = "radio-btn hide" })
+                    <label for="star1">☆</label>
+                    <div class="clear"></div>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Guardar" class="btn btn-primary" />

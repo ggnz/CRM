@@ -22,20 +22,16 @@ namespace OpenSaludSecurity.Models
 
         [Required(ErrorMessage = "Por favor puntúa el servicio")]
         [Display(Name = "Calificación")]
-        public RequestEstrellas Estrellas { get; set; }
+        public int Estrellas { get; set; }
 
+        [Display(Name = "Clínica")]
+        [Required(ErrorMessage = "Debe seleccionar una clínica para su calificacion")]
+        [ForeignKey("Clinica")]
+        public int ClinicaRefId { get; set; }
         public Clinica Clinica { get; set; }
 
+        public string IdUsuario { get; set; }
         public Usuario Usuario { get; set; }
     }
 
-    [Flags]
-    public enum RequestEstrellas
-    {
-        Una,
-        Dos,
-        Tres,
-        Cuatro,
-        Cinco
-    }
 }

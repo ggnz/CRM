@@ -24,30 +24,119 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Calificacion[0].Comentario)
+                    @Html.DisplayNameFor(model => model.Calificaciones[0].Comentario)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Calificacion[0].Estrellas)
+                    @Html.DisplayNameFor(model => model.Calificaciones[0].Estrellas)
                 </th>
-                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Calificaciones[0].Clinica)
+                </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Calificacion)
+            @foreach (var item in Model.Calificaciones)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Comentario)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Estrellas)
-                    </td>
-                    <td>
-                        <a asp-page="./Edit" asp-route-id="@item.IdCalificacion">Modificar</a> |
-                        <a asp-page="./Details" asp-route-id="@item.IdCalificacion">Ver más</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.IdCalificacion">Eliminar</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comentario)
+                </td>
+                <td>
+                    @if (item.Estrellas == 1)
+                    {
+                        <div class="rating">
+                            @Html.RadioButton($"star5-{item.IdCalificacion}", 5, false, new { @class = "radio-btn hide" })
+
+                            <label for="star5">☆</label>
+                            @Html.RadioButton($"star4-{item.IdCalificacion}", 4, false, new { @class = "radio-btn hide" })
+                            <label for="star4">☆</label>
+                            @Html.RadioButton($"star3-{item.IdCalificacion}", 3, false, new { @class = "radio-btn hide" })
+                            <label for="star3">☆</label>
+                            @Html.RadioButton($"star2-{item.IdCalificacion}", 2, false, new { @class = "radio-btn hide" })
+                            <label for="star2">☆</label>
+                            @Html.RadioButton($"star1-{item.IdCalificacion}", 1, true, new { @class = "radio-btn hide" })
+                            <label for="star1">☆</label>
+                            <div class="clear"></div>
+                        </div>
+                    }
+                    @if (item.Estrellas == 2)
+                    {
+                        <div class="rating">
+                            @Html.RadioButton($"star5-{item.IdCalificacion}", 5, false, new { @class = "radio-btn hide" })
+
+                            <label for="star5">☆</label>
+                            @Html.RadioButton($"star4-{item.IdCalificacion}", 4, false, new { @class = "radio-btn hide" })
+                            <label for="star4">☆</label>
+                            @Html.RadioButton($"star3-{item.IdCalificacion}", 3, false, new { @class = "radio-btn hide" })
+                            <label for="star3">☆</label>
+                            @Html.RadioButton($"star2-{item.IdCalificacion}", 2, true, new { @class = "radio-btn hide" })
+                            <label for="star2">☆</label>
+                            @Html.RadioButton($"star1-{item.IdCalificacion}", 1, false, new { @class = "radio-btn hide" })
+                            <label for="star1">☆</label>
+                            <div class="clear"></div>
+                        </div>
+                    }
+                    @if (item.Estrellas == 3)
+                    {
+                        <div class="rating">
+                            @Html.RadioButton($"star5-{item.IdCalificacion}", 5, false, new { @class = "radio-btn hide" })
+
+                            <label for="star5">☆</label>
+                            @Html.RadioButton($"star4-{item.IdCalificacion}", 4, false, new { @class = "radio-btn hide" })
+                            <label for="star4">☆</label>
+                            @Html.RadioButton($"star3-{item.IdCalificacion}", 3, true, new { @class = "radio-btn hide" })
+                            <label for="star3">☆</label>
+                            @Html.RadioButton($"star2-{item.IdCalificacion}", 2, false, new { @class = "radio-btn hide" })
+                            <label for="star2">☆</label>
+                            @Html.RadioButton($"star1-{item.IdCalificacion}", 1, false, new { @class = "radio-btn hide" })
+                            <label for="star1">☆</label>
+                            <div class="clear"></div>
+                        </div>
+                    }
+                    @if (item.Estrellas == 4)
+                    {
+                        <div class="rating">
+                            @Html.RadioButton($"star5-{item.IdCalificacion}", 5, false, new { @class = "radio-btn hide" })
+
+                            <label for="star5">☆</label>
+                            @Html.RadioButton($"star4-{item.IdCalificacion}", 4, true, new { @class = "radio-btn hide" })
+                            <label for="star4">☆</label>
+                            @Html.RadioButton($"star3-{item.IdCalificacion}", 3, false, new { @class = "radio-btn hide" })
+                            <label for="star3">☆</label>
+                            @Html.RadioButton($"star2-{item.IdCalificacion}", 2, false, new { @class = "radio-btn hide" })
+                            <label for="star2">☆</label>
+                            @Html.RadioButton($"star1-{item.IdCalificacion}", 1, false, new { @class = "radio-btn hide" })
+                            <label for="star1">☆</label>
+                            <div class="clear"></div>
+                        </div>
+                    }
+                    @if (item.Estrellas == 5)
+                    {
+                        <div class="rating">
+                            @Html.RadioButton($"star5-{item.IdCalificacion}", 5, true, new { @class = "radio-btn hide" })
+
+                            <label for="star5">☆</label>
+                            @Html.RadioButton($"star4-{item.IdCalificacion}", 4, false, new { @class = "radio-btn hide" })
+                            <label for="star4">☆</label>
+                            @Html.RadioButton($"star3-{item.IdCalificacion}", 3, false, new { @class = "radio-btn hide" })
+                            <label for="star3">☆</label>
+                            @Html.RadioButton($"star2-{item.IdCalificacion}", 2, false, new { @class = "radio-btn hide" })
+                            <label for="star2">☆</label>
+                            @Html.RadioButton($"star1-{item.IdCalificacion}", 1, false, new { @class = "radio-btn hide" })
+                            <label for="star1">☆</label>
+                            <div class="clear"></div>
+                        </div>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clinica.Nombre)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.IdCalificacion">Modificar</a> |
+                    <a asp-page="./Details" asp-route-id="@item.IdCalificacion">Ver más</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.IdCalificacion">Eliminar</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
