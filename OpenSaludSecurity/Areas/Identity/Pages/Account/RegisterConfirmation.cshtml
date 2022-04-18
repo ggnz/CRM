@@ -1,7 +1,12 @@
-@page
+﻿@page
 @model RegisterConfirmationModel
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+		<meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
+	</head>
 @{
-    ViewData["Title"] = "Confirmacion de registro";
+    ViewData["Title"] = "Confirmación de registro";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -9,13 +14,13 @@
     if (@Model.DisplayConfirmAccountLink)
     {
 <p>
-     <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click aqui para confirmar su cuenta</a>
+     <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click aquí para confirmar su cuenta</a>
 </p>
     }
     else
     {
 <p>
-    Por favor revise su correo electr&oacute;nico para confirmar su cuenta.
+    Por favor revise su correo electrónico para confirmar su cuenta.
 </p>
     }
 }
