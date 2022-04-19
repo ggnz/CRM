@@ -30,7 +30,7 @@ namespace OpenSaludSecurity.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Por favor digite su correo electrónico")]
             [EmailAddress]
             public string Email { get; set; }
         }
