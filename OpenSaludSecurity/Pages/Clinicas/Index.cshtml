@@ -76,25 +76,25 @@
 
             <div>
                 @if ((await AuthorizationService.AuthorizeAsync(
-             User, item,
-             ContactOperations.Update)).Succeeded)
+            User, item,
+            ContactOperations.Update)).Succeeded)
                 {
                     <a class="btn btn-info" asp-page="./Edit" asp-route-id="@item.IdClinica">Modificar</a>
                 }
                 <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdClinica">Seleccionar Clínica</a>
                 @if ((await AuthorizationService.AuthorizeAsync(
-                 User, item,
-                 ContactOperations.Delete)).Succeeded)
+                User, item,
+                ContactOperations.Delete)).Succeeded)
                 {
                     <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.IdClinica">Eliminar</a>
                 }
                 @if ((await AuthorizationService.AuthorizeAsync(
-                 User, item,
-                 ClinicaOperations.Update)).Succeeded)
+                User, item,
+                ClinicaOperations.Update)).Succeeded)
                 {
                     <a class="btn btn-info" asp-page="/Citas/Index">Citas Agendadas</a>
                 }
-                <a class="btn btn-info" asp-area="" asp-route-id="@item.IdClinica" asp-page="/Calificaciones/Index">Calificaciones</a>
+                <a class="btn btn-info" asp-area="" asp-route-idClinica="@item.IdClinica" asp-page="/Calificaciones/Index">Calificaciones</a>
             </div>
 
 
@@ -109,19 +109,21 @@
 }
 
 
-<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-            <a class="page-link">Anterior</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#">Siguiente</a>
-        </li>
-    </ul>
-</nav>
+@{
+    var prevDisabled = !Model.Clinicas.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Clinicas.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.Clinicas.PageIndex - 1)"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.Clinicas.PageIndex + 1)"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>
 
 
 

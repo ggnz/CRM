@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
 using OpenSaludSecurity.Data;
 
 namespace OpenSaludSecurity.Pages.Shared
@@ -15,6 +16,8 @@ namespace OpenSaludSecurity.Pages.Shared
         protected ApplicationDbContext Context { get; }
         protected IAuthorizationService AuthorizationService { get; }
         protected UserManager<IdentityUser> UserManager { get; }
+
+        private readonly IConfiguration Configuration;
 
         public _BasePageModel(
             ApplicationDbContext context,

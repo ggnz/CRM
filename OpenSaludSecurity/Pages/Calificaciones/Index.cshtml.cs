@@ -30,9 +30,15 @@ namespace OpenSaludSecurity.Pages.Calificaciones
         public async Task OnGetAsync(int? idClinica)
         {
 
+            var calificaciones = from c in Context.Calificaciones
+                          select c;
             
+            if (idClinica > 0)
+            {
+                calificaciones = calificaciones.Where(c => c.ClinicaRefId == idClinica);
+            }
 
-            Calificaciones = await Context.Calificaciones.ToListAsync();
+            Calificaciones = await calificaciones.ToListAsync();
 
             // Popular datos de clinica para cada item de Calificaciones
             await PopularDatosDeClinica(Calificaciones);

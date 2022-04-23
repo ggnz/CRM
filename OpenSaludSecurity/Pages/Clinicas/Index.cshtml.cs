@@ -11,19 +11,22 @@ using Microsoft.EntityFrameworkCore;
 using OpenSaludSecurity.Data;
 using OpenSaludSecurity.Models;
 using OpenSaludSecurity.Pages.Shared;
+using Microsoft.Extensions.Configuration;
 
 namespace OpenSaludSecurity.Pages.Clinicas
 {
     [AllowAnonymous]
     public class IndexModel : _BasePageModel
     {
+        private readonly IConfiguration Configuration;
 
         public IndexModel(
               ApplicationDbContext context,
               IAuthorizationService authorizationService,
-              UserManager<IdentityUser> userManager)
+              UserManager<IdentityUser> userManager, IConfiguration configuration)
               : base(context, authorizationService, userManager)
         {
+            Configuration = configuration;
             List<SelectListItem> enumList = new List<SelectListItem>();
 
             foreach (ServicioMedico s in Enum.GetValues(typeof(ServicioMedico)))
@@ -36,6 +39,8 @@ namespace OpenSaludSecurity.Pages.Clinicas
             ServiciosMedicos = new SelectList(enumList, "Value", "Text");
         }
 
+        public PaginatedList<Clinica> Clinicas { get; set; }
+
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
 
@@ -44,11 +49,24 @@ namespace OpenSaludSecurity.Pages.Clinicas
         [BindProperty(SupportsGet = true)]
         public List<string> ServicioMedicoSeleccionado { get; set; }
 
-        public List<Clinica> Clinicas { get;set; }
+        //public List<Clinica> Clinicas { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sortOrder,
+                                    string currentFilter,
+                                    string searchString,
+                                    int? pageIndex)
         {
-            var clinicas = from c in Context.Clinica
+
+            if (searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            IQueryable<Clinica> clinicas = from c in Context.Clinica
                            select c;
 
             if (!string.IsNullOrEmpty(SearchString))
@@ -59,7 +77,7 @@ namespace OpenSaludSecurity.Pages.Clinicas
             List<ServicioMedico> selecciones = new List<ServicioMedico>();
             if (ServicioMedicoSeleccionado.Any())
             {
-                
+
                 foreach (string item in ServicioMedicoSeleccionado)
                 {
                     Enum.TryParse(item, out ServicioMedico s);
@@ -70,6 +88,13 @@ namespace OpenSaludSecurity.Pages.Clinicas
                 }
 
             }
+
+            if (selecciones.Any())
+            {
+                clinicas = clinicas.Where(c => selecciones.Contains(c.Categoria));
+            }
+
+
             var isAuthorized = User.IsInRole(Constants.RequestManagersRole) ||
                                User.IsInRole(Constants.RequestAdministratorsRole);
 
@@ -83,12 +108,9 @@ namespace OpenSaludSecurity.Pages.Clinicas
                                             || c.IdRepresentante == currentUserId);
             }
 
-            Clinicas = await clinicas.ToListAsync();
+            var pageSize = Configuration.GetValue("PageSize", 4);
+            Clinicas = await PaginatedList<Clinica>.CreateAsync(clinicas.AsNoTracking(), pageIndex ?? 1, pageSize);
 
-            if (selecciones.Any())
-            {
-                Clinicas = Clinicas.Where(c => selecciones.Contains(c.Categoria)).ToList();
-            }
         }
     }
 }
