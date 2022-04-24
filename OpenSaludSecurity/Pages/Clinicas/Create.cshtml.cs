@@ -26,7 +26,7 @@ namespace OpenSaludSecurity.Pages.Clinicas
             {
                 if (s != ServicioMedico.NoDisponible)
                 {
-                    ServiciosMedicos.Add(new SelectListItem { Value = s.ToString(), Text = s.ToString() });
+                    ServiciosMedicos.Add(new SelectListItem { Value = ((int)s).ToString(), Text = s.ToString() });
                 }
             }
         }
@@ -44,6 +44,10 @@ namespace OpenSaludSecurity.Pages.Clinicas
 
         public List<SelectListItem> ServiciosMedicos { get; set; }
 
+        [BindProperty]
+        public List<int> SelectedIds { get; set; }
+
+
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
@@ -53,6 +57,9 @@ namespace OpenSaludSecurity.Pages.Clinicas
             }
 
             Clinica.IdRepresentante = UserManager.GetUserId(User);
+
+            //Crear categoria string de la lista de Ids seleccionados
+            Clinica.Categoria = GetEspecialidadMedicaDeListaDeInts(SelectedIds);
 
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
                                             User, Clinica,
@@ -66,6 +73,13 @@ namespace OpenSaludSecurity.Pages.Clinicas
             await Context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
+        }
+
+
+        private ServicioMedico GetEspecialidadMedicaDeListaDeInts(List<int> listaDeIds)
+        {
+            ServicioMedico valor = (ServicioMedico) listaDeIds.Sum();
+            return valor;
         }
     }
 }

@@ -8,78 +8,85 @@
 
 <html>
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
-	<meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - Afiliación nueva</title>
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="~/css/site.css" />
+    <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Afiliación nueva</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+    <h4>Clinica</h4>
+    <hr />
 
-	<h4>Clinica</h4>
-	<hr />
-	<div class="row">
-		<div class="col-md-4">
-			<form method="post">
-				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-				<div class="form-group">
-					<label asp-for="Clinica.Nombre" class="control-label"></label>
-					<input asp-for="Clinica.Nombre" class="form-control" />
-					<span asp-validation-for="Clinica.Nombre" class="text-danger"></span>
-				</div>
-				<div class="form-group">
-					<label asp-for="Clinica.Descripcion" class="control-label"></label>
-					<input asp-for="Clinica.Descripcion" class="form-control" />
-					<span asp-validation-for="Clinica.Descripcion" class="text-danger"></span>
-				</div>
-				<div class="form-group" hidden>
-					<label asp-for="Clinica.IdRepresentante" class="control-label" hidden></label>
-					<input asp-for="Clinica.IdRepresentante" type="hidden" value="@Model.IdRepresentante" class="form-control" readonly/>
-					<span asp-validation-for="Clinica.IdRepresentante" class="text-danger"></span>
-				</div>
-				<div class="form-group">
-					<label asp-for="Clinica.Direccion" class="control-label"></label>
-					<input asp-for="Clinica.Direccion" class="form-control" />
-					<span asp-validation-for="Clinica.Direccion" class="text-danger"></span>
-				</div>
-				<div class="form-group">
-					<label asp-for="Clinica.Categoria" class="control-label"></label>
-					<select asp-for="Clinica.Categoria" asp-items="@Model.ServiciosMedicos" class="form-control">
-						<option selected="selected" value="">Seleccionar...</option>
-					</select>
-					<span asp-validation-for="Clinica.Categoria" class="text-danger"></span>
-				</div>
-				<div class="form-group">
-					<label asp-for="Clinica.Ciudad" class="control-label"></label>
-					<input asp-for="Clinica.Ciudad" class="form-control" />
-					<span asp-validation-for="Clinica.Ciudad" class="text-danger"></span>
-				</div>
-				<div class="form-group">
-					<label asp-for="Clinica.Telefono" class="control-label"></label>
-					<input asp-for="Clinica.Telefono" class="form-control" />
-					<span asp-validation-for="Clinica.Telefono" class="text-danger"></span>
-				</div>
-				<div class="form-group">
-					<label asp-for="Clinica.Email" class="control-label"></label>
-					<input asp-for="Clinica.Email" class="form-control" />
-					<span asp-validation-for="Clinica.Email" class="text-danger"></span>
-				</div>
-				<div class="form-group">
-					<input type="submit" value="Agregar" class="btn btn-primary" />
-				</div>
-			</form>
-		</div>
-	</div>
 
-	<div>
-		<a asp-page="Index">Volver</a>
-	</div>
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Clinica.Nombre" class="control-label"></label>
+                    <input asp-for="Clinica.Nombre" class="form-control" />
+                    <span asp-validation-for="Clinica.Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Clinica.Descripcion" class="control-label"></label>
+                    <input asp-for="Clinica.Descripcion" class="form-control" />
+                    <span asp-validation-for="Clinica.Descripcion" class="text-danger"></span>
+                </div>
+                <div class="form-group" hidden>
+                    <label asp-for="Clinica.IdRepresentante" class="control-label" hidden></label>
+                    <input asp-for="Clinica.IdRepresentante" type="hidden" value="@Model.IdRepresentante" class="form-control" readonly />
+                    <span asp-validation-for="Clinica.IdRepresentante" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Clinica.Direccion" class="control-label"></label>
+                    <input asp-for="Clinica.Direccion" class="form-control" />
+                    <span asp-validation-for="Clinica.Direccion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Clinica.Categoria" class="control-label"></label>
+                    <select asp-for="@Model.SelectedIds" title="Seleccionar una o varias..." asp-items="@Model.ServiciosMedicos" class="selectpicker form-control">
+                    </select>
+                    <span asp-validation-for="Clinica.Categoria" class="text-danger"></span>
+                </div>
+                @*<div class="form-group">
+                    <label asp-for="ServiciosSeleccionados" class="control-label"></label>
+                    <select asp-for="ServiciosSeleccionados" id="dropDownList-example" name="SelectedIds"
+                            asp-items="@Model.ServiciosMedicos" multiple class="form-control"></select>
+                </div>*@
 
-	@section Scripts {
-		@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-	}
+                <div class="form-group">
+                    <label asp-for="Clinica.Ciudad" class="control-label"></label>
+                    <input asp-for="Clinica.Ciudad" class="form-control" />
+                    <span asp-validation-for="Clinica.Ciudad" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Clinica.Telefono" class="control-label"></label>
+                    <input asp-for="Clinica.Telefono" class="form-control" />
+                    <span asp-validation-for="Clinica.Telefono" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Clinica.Email" class="control-label"></label>
+                    <input asp-for="Clinica.Email" class="form-control" />
+                    <span asp-validation-for="Clinica.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Agregar" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-page="Index">Volver</a>
+    </div>
+
+
 </body>
 </html>
