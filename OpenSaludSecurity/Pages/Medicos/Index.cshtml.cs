@@ -46,7 +46,6 @@ namespace OpenSaludSecurity.Pages.Medicos
         public string DateSort { get; set; }
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
-        public PaginatedList<Medico> MedicosList { get; set; }
 
 
         [BindProperty(SupportsGet = true)]
@@ -58,21 +57,19 @@ namespace OpenSaludSecurity.Pages.Medicos
         public List<string> EspecialidadMedicaSeleccionada { get; set; }
 
 
-        public List<Medico> Medicos { get; set; }
+        public PaginatedList<Medico> Medicos { get; set; }
 
         public Clinica Clinica { get; set; }
+
+        [BindProperty]
+        public int? idClinicaRoute{ get; set; }
 
 
         public async Task OnGetAsync(int? idClinica, string sortOrder,
             string currentFilter, string searchString, int? pageIndex)
-        {
-            var medicos = from c in Context.Medico
-                          select c;
-
-                        
-            IQueryable<Medico> medicosIQ = from c in Context.Medico select c;
+        {                        
+            IQueryable<Medico> medicos= from c in Context.Medico select c;
             
-            Medicos = await medicosIQ.AsNoTracking().ToListAsync();
 
             //SearchBar
             if (!string.IsNullOrEmpty(SearchString))
@@ -92,12 +89,6 @@ namespace OpenSaludSecurity.Pages.Medicos
                 searchString = currentFilter;
             }
 
-            var pageSize = Configuration.GetValue("PageSize", 3);
-            MedicosList = await PaginatedList<Medico>.CreateAsync(
-                medicosIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
-
-
-
             //Filtros
             List<EspecialidadMedica> selecciones = new List<EspecialidadMedica>();
             if (EspecialidadMedicaSeleccionada.Any())
@@ -113,22 +104,21 @@ namespace OpenSaludSecurity.Pages.Medicos
 
             }                    
 
-            
-            Medicos = await medicos.ToListAsync();
-
             if (selecciones.Any())
             {
-                Medicos = Medicos.Where(m => selecciones.Contains(m.Especialidad)).ToList();
+                medicos = medicos.Where(m => selecciones.Contains(m.Especialidad));
             }
-
-
-
 
             if (idClinica != null)
             {
-                Medicos = Medicos.Where(m => m.ClinicaRefId == idClinica).ToList();
+                idClinicaRoute = idClinica;
+                medicos = medicos.Where(m => m.ClinicaRefId == idClinica);
             }
 
+            var pageSize = Configuration.GetValue("PageSize", 3);
+            Medicos = await PaginatedList<Medico>.CreateAsync(
+                medicos.AsNoTracking(), pageIndex ?? 1, pageSize);
+            
             if (Medicos.Any())
             {
                 foreach (Medico m in Medicos)
@@ -140,6 +130,10 @@ namespace OpenSaludSecurity.Pages.Medicos
                     }
                 }
             }
+
+
+
+            
 
         }
     }

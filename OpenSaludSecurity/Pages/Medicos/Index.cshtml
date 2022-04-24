@@ -144,21 +144,23 @@
 
 
  @{
-    var prevDisabled = !Model.MedicosList.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.MedicosList.HasNextPage ? "disabled" : "";
+    var prevDisabled = !Model.Medicos.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Medicos.HasNextPage ? "disabled" : "";
 }
 
 <a asp-page="./Index"
    asp-route-sortOrder="@Model.CurrentSort"
-   asp-route-pageIndex="@(Model.MedicosList.PageIndex - 1)"
+   asp-route-pageIndex="@(Model.Medicos.PageIndex - 1)"
    asp-route-currentFilter="@Model.CurrentFilter"
+   asp-route-idClinica="@Model.idClinicaRoute"
    class="btn btn-primary @prevDisabled">
     Previous
 </a>
 <a asp-page="./Index"
    asp-route-sortOrder="@Model.CurrentSort"
-   asp-route-pageIndex="@(Model.MedicosList.PageIndex + 1)"
+   asp-route-pageIndex="@(Model.Medicos.PageIndex + 1)"
    asp-route-currentFilter="@Model.CurrentFilter"
+   asp-route-idClinica="@Model.idClinicaRoute"
    class="btn btn-primary @nextDisabled">
     Next
 </a>
