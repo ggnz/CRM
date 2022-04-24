@@ -14,15 +14,15 @@
 </head>
 <br />
 <div class="text-center">
-    <img src="~/LogoGB2.png" class="img-fluid" alt="...">
+    <img src="~/LogoGB2.png" class="img-fluid" alt="..." width="750" height="650"> 
     <br />
     <br />
-    <br />
-    <h3 align="right">Catálogo de Clínicas Afiliadas</h3>
+    <font face="Averta">Your text here.</font>
+    <h2 align="right">Catálogo de Clínicas Afiliadas</h2>
 </div>
 
 <hr />
-<br />
+
 @*	<nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
             <a class="navbar-brand">
@@ -39,70 +39,133 @@
 
       </div>
     </nav>*@
-<br />
+
 <form>
     <nav class="navbar navbar-light bg-light">
-        <p>
-            <label asp-for="ServicioMedicoSeleccionado" class="control-label">Categorias: </label>
-            <select class="selectpicker" multiple data-live-search="true" asp-for="ServicioMedicoSeleccionado" asp-items="Model.ServiciosMedicos">
+       
+        <div class="container">
+          <div class="row">
+              <div class="col">
+            <input type="text" align="right" asp-for="SearchString" class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">              
+            </div>
+            </div>
+            <div class="col">
+              <button class="btn btn-outline-success" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg></button>
+            </div>
+            <div class="col">
+               <label asp-for="ServicioMedicoSeleccionado" class="control-label">Categorias: </label>
+                <select class="selectpicker" multiple data-live-search="true" asp-for="ServicioMedicoSeleccionado" asp-items="Model.ServiciosMedicos">
                 <option selected="selected" value="">Todas</option>
-            </select>
-            <input type="text" align="right" asp-for="SearchString" class="form-control me-2" type="search" placeholder="Buscar nombre" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
-
-
-
-        </p>
+                </select>
+            </div>
+        </div>
     </nav>
+    <br />
 </form>
 
 @foreach (var item in Model.Clinicas)
 {
-    <div class="card mb-3">
 
-        <img src="~/clinica1.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-            <p class="card-text">@Html.DisplayFor(modelItem => item.Categoria)</p>
-            <h4 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h4>
-            Contacto:
-            <ul>
-                <li> Tel:  @Html.DisplayFor(modelItem => item.Telefono)</li>
-                <li> Correo: @Html.DisplayFor(modelItem => item.Email) </li>
-            </ul>
-            Dirección:
-            <ul>
-                <li> <p class="card-text">@Html.DisplayFor(modelItem => item.Direccion)</p></li>
-            </ul>
+    <div class="col">
+        <div class="card mb-3">
 
-            <div>
-                @if ((await AuthorizationService.AuthorizeAsync(
-            User, item,
-            ContactOperations.Update)).Succeeded)
-                {
-                    <a class="btn btn-info" asp-page="./Edit" asp-route-id="@item.IdClinica">Modificar</a>
-                }
-                <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdClinica">Seleccionar Clínica</a>
-                @if ((await AuthorizationService.AuthorizeAsync(
-                User, item,
-                ContactOperations.Delete)).Succeeded)
-                {
-                    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.IdClinica">Eliminar</a>
-                }
-                @if ((await AuthorizationService.AuthorizeAsync(
-                User, item,
-                ClinicaOperations.Update)).Succeeded)
-                {
-                    <a class="btn btn-info" asp-page="/Citas/Index">Citas Agendadas</a>
-                }
-                <a class="btn btn-info" asp-area="" asp-route-idClinica="@item.IdClinica" asp-page="/Calificaciones/Index">Calificaciones</a>
+            <img src="~/clinica1.jpg" class="card-img-top" alt="...">
+            <div class="card-body"> 
+                
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="card">
+                      <div class="card-body">
+                        <h1 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h1>
+                    <h4>Contacto:</h4>
+                    <ul>
+                        <li> <h5> Tel:  @Html.DisplayFor(modelItem => item.Telefono)</h5></li>
+                        <li> <h5> Correo: @Html.DisplayFor(modelItem => item.Email) </h5></li>
+                    </ul>
+                   <h4> Dirección:</h4>
+                    <ul>
+                         <li> <h5 class="card-text">@Html.DisplayFor(modelItem => item.Ciudad)</h5></li>
+                          <li> <h5 class="card-text">@Html.DisplayFor(modelItem => item.Direccion)</h5></li>
+                    </ul>
+
+                    <div>                        
+                         
+                        <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdClinica">Seleccionar Clínica</a>
+                       
+                        @if ((await AuthorizationService.AuthorizeAsync(
+                        User, item,
+                        ClinicaOperations.Update)).Succeeded)
+                        {
+                            <a class="btn btn-info" asp-page="/Citas/Index">Citas Agendadas</a>
+                        }
+                         
+                    
+                    </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="col-sm-4">
+                    <div class="card text-center">
+                      <div class="card-body">
+                        <h5 class="card-title">Categorias</h5>
+                          <div class="card" style="width: 18rem;">
+                      <ul class="list-group list-group-flush">                         
+
+                        <li class="list-group-item"><p class="card-text">@Html.DisplayFor(modelItem => item.Categoria)</p></li>               
+                      </ul>
+                    </div>  
+                      </div>
+                    </div>
+                    <hr/>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <a class="btn btn-info" asp-area="" asp-route-idClinica="@item.IdClinica" asp-page="/Calificaciones/Index"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                            <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                        </svg> Calificaciones </a>
+                    </div>
+                    <br/>
+                     <br/>
+                      <br/>
+                      <br/>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                   
+                      @if ((await AuthorizationService.AuthorizeAsync(
+                    User, item,
+                    ContactOperations.Update)).Succeeded)
+                        {
+                            <a class="btn btn-info " asp-page="./Edit" asp-route-id="@item.IdClinica"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                              <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                            </svg></a>
+                        }
+                        
+                        @if ((await AuthorizationService.AuthorizeAsync(
+                        User, item,
+                        ContactOperations.Delete)).Succeeded)
+                        {
+                            <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.IdClinica"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                          <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                        </svg></a>
+                        }
+                    </div>
+                  </div>
+                    
+                  
+                </div>
+                
+                    
+                                    
+                              
+
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Calificación: 5 estrellas</small>
             </div>
 
-
         </div>
-        <div class="card-footer">
-            <small class="text-muted">Calificación: 5 estrellas</small>
-        </div>
-
     </div>
     <br />
     <br />
@@ -116,14 +179,19 @@
 
 <a asp-page="./Index"
    asp-route-pageIndex="@(Model.Clinicas.PageIndex - 1)"
-   class="btn btn-primary @prevDisabled">
-    Previous
+   class="btn btn-primary @prevDisabled"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+  <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+</svg>
 </a>
 <a asp-page="./Index"
    asp-route-pageIndex="@(Model.Clinicas.PageIndex + 1)"
    class="btn btn-primary @nextDisabled">
-    Next
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+</svg>
 </a>
+
+
 
 
 
