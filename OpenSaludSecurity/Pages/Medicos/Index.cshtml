@@ -101,34 +101,41 @@
         <div class="card-columns">
             @foreach (var item in Model.Medicos)
             {
-                <div class="card">
+            <div class="card">
+                @if (item.MedicoImagen != null)
+                {
+                    <img class="card-img-top" src="~/images/@item.MedicoImagen">
+                }
+                else
+                {
                     <img class="card-img-top" src="~/Medico.jpg">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            @Html.DisplayFor(modelItem => item.Nombre)
-                            @Html.DisplayFor(modelItem => item.Apellido1)
-                        </h5>
-                        <p class="card-text">@Html.DisplayFor(modelItem => item.Especialidad)</p>
-                        <div>
-                            @if ((await AuthorizationService.AuthorizeAsync(
-                          User, item,
-                          MedicoOperations.Update)).Succeeded)
-                            {
-                                <a class="btn btn-info" asp-page="./Edit" asp-route-id="@item.IdMedico">Modificar</a>
-                            }
-                            <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdMedico">Seleccionar Médico</a>
-                            @if ((await AuthorizationService.AuthorizeAsync(
-                      User, item,
-                      MedicoOperations.Delete)).Succeeded)
-                            {
-                                <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.IdMedico">Eliminar</a>
-                            }
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Calificación: 5 estrellas</small>
+                }
+                <div class="card-body">
+                    <h5 class="card-title">
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                        @Html.DisplayFor(modelItem => item.Apellido1)
+                    </h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Especialidad)</p>
+                    <div>
+                        @if ((await AuthorizationService.AuthorizeAsync(
+                    User, item,
+                    MedicoOperations.Update)).Succeeded)
+                        {
+                            <a class="btn btn-info" asp-page="./Edit" asp-route-id="@item.IdMedico">Modificar</a>
+                        }
+                        <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.IdMedico">Seleccionar Médico</a>
+                        @if ((await AuthorizationService.AuthorizeAsync(
+                User, item,
+                MedicoOperations.Delete)).Succeeded)
+                        {
+                            <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.IdMedico">Eliminar</a>
+                        }
                     </div>
                 </div>
+                <div class="card-footer">
+                    <small class="text-muted">Calificación: 5 estrellas</small>
+                </div>
+            </div>
                 <br />
                 <br />
             }

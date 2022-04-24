@@ -36,27 +36,27 @@ namespace OpenSaludSecurity.Models
 
         public Clinica Clinica { get; set; }
 
+        [Display(Name = "Foto de Perfil")]
+        public string MedicoImagen { get; set; }
+
     }
 
-    [Flags]
     public enum EspecialidadMedica
     {
-        NoDisponible = 0,
-        Pediatria = 1,
-        Farmacia = 2,
-        Odontología = 4,
-        Psiquiatría = 8,
-        Dermatología = 16,
-        Oftalmología = 32,
-        Ginecología = 64,
-        Cardiología = 128,
-        Endicronología = 256,
-        Psicología = 512,
-        Otorrinolaringología = 1024,
-        Urología = 2048,
-        Vascular_Periferíco = 4096,
-        Geriartría = 8192
-
+        NoDisponible,
+        Pediatria,
+        Odontología,
+        Psiquiatría,
+        Dermatología,
+        Oftalmología,
+        Ginecología,
+        Cardiología,
+        Endicronología,
+        Psicología,
+        Otorrinolaringología,
+        Urología,
+        Vascular_Periferíco,
+        Geriartría
     }
 
 

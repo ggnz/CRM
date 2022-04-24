@@ -5,6 +5,7 @@
 	ViewData["Title"] = "Medicos";
 }
 
+
 <!DOCTYPE html>
 
 <html>
@@ -17,15 +18,12 @@
 </head>
 <body>
 
-	<h4>Medico</h4>
-	<hr />
-	<div class="row">
-		<div class="col-md-4">
-            <form method="post">
-                <div>
-                  <label for="formFileLg" class="form-label">Foto de Perfil</label>
-                  <input class="form-control form-control-lg" id="formFileLg" type="file">
-                </div>
+
+    <h4>Medico</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Medico.Nombre" class="control-label"></label>
@@ -56,20 +54,36 @@
                     </select>
                     <span asp-validation-for="Medico.ClinicaRefId" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <label asp-for="Medico.MedicoImagen" class="control-label"></label>
+                    <div class="custom-file">
+                        <input asp-for="ImagenPerfil" type="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Seleccione un archivo</label>
+                    </div>
+                    <span asp-validation-for="Medico.MedicoImagen" class="text-danger"></span>
+                </div>
+
 
                 <div class="form-group">
                     <input type="submit" value="Agregar" class="btn btn-primary" />
                 </div>
             </form>
-		</div>
-	</div>
+        </div>
+    </div>
 
-	<div>
-		<a asp-page="Index">Volver</a>
-	</div>
+    <div>
+        <a asp-page="Index">Volver</a>
+    </div>
 
-	@section Scripts {
-		@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-	}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script type="text/javascript">
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+        </script>
+    }
+
 </body>
 </html>
