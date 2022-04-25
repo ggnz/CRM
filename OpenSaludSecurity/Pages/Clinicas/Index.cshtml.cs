@@ -51,6 +51,12 @@ namespace OpenSaludSecurity.Pages.Clinicas
 
         //public List<Clinica> Clinicas { get;set; }
 
+        /// <summary>
+        /// Se buscan todas las citas existentes en la base de datos, y se les cargan los datos de usuario, clinica y medico correspondientes para mostrar mas detalles.
+        /// Ademas se aplican la logica correspondiente para la paginacion
+        /// </summary>
+        /// <param name="idClinica"></param>
+        /// <returns></returns>
         public async Task OnGetAsync(string sortOrder,
                                     string currentFilter,
                                     string searchString,

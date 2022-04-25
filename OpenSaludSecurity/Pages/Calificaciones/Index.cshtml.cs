@@ -27,6 +27,11 @@ namespace OpenSaludSecurity.Pages.Calificaciones
 
         public Clinica Clinica { get; set; }
 
+        /// <summary>
+        /// Como parametro opcional, idClinica se usa para filtrar calificaciones que pertenezcan a dicha clinica, luego de que se hayan recolectado los datos de la base de datos.
+        /// </summary>
+        /// <param name="idClinica"></param>
+        /// <returns></returns>
         public async Task OnGetAsync(int? idClinica)
         {
 
@@ -46,6 +51,11 @@ namespace OpenSaludSecurity.Pages.Calificaciones
             await PopularDatosDeUsuario(Calificaciones);
         }
 
+        /// <summary>
+        /// Se buscan los datos de clinica correspondiente de cada calificacion en la lista del parametro para popular el objecto y mostrar detalles en la pagina.
+        /// </summary>
+        /// <param name="calificaciones"></param>
+        /// <returns></returns>
         private async Task PopularDatosDeClinica(IList<Calificacion> calificaciones)
         {
             foreach (Calificacion c in calificaciones)
@@ -72,6 +82,11 @@ namespace OpenSaludSecurity.Pages.Calificaciones
 
         }
 
+        /// <summary>
+        /// Se buscan los datos de usuario correspondiente de cada calificacion en la lista del parametro para popular el objecto y mostrar detalles en la pagina.
+        /// </summary>
+        /// <param name="calificaciones"></param>
+        /// <returns></returns>
         private async Task PopularDatosDeUsuario(IList<Calificacion> calificaciones)
         {
             foreach (Calificacion c in calificaciones)

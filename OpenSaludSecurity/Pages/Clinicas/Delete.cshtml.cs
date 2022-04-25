@@ -26,6 +26,11 @@ namespace OpenSaludSecurity.Pages.Clinicas
         [BindProperty]
         public Clinica Clinica { get; set; }
 
+        /// <summary>
+        /// Utilizando el id recibido como parametro de ruta, se busca la clinica en la base de datos para mostrar los datos y el mensaje de confirmacion.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -54,6 +59,11 @@ namespace OpenSaludSecurity.Pages.Clinicas
             return Page();
         }
 
+        /// <summary>
+        /// Se ejecuta el comando de remover el objecto de clinica de la base de datos basado en el parametro de ruta id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (id == null)

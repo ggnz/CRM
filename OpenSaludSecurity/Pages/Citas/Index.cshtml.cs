@@ -26,6 +26,10 @@ namespace OpenSaludSecurity.Pages.Citas
 
         public IList<Cita> Citas { get;set; }
 
+        /// <summary>
+        /// Se buscan todas las citas existentes en la base de datos, y se les cargan los datos de usuario, clinica y medico correspondientes para mostrar mas detalles.
+        /// </summary>
+        /// <returns></returns>
         public async Task OnGetAsync()
         {
             Citas = await Context.Citas.ToListAsync();
@@ -39,6 +43,11 @@ namespace OpenSaludSecurity.Pages.Citas
 
         }
 
+        /// <summary>
+        /// Se buscan los datos de usuario correspondiente de cada cita en la lista del parametro para popular el objecto y mostrar detalles en la pagina.
+        /// </summary>
+        /// <param name="cita"></param>
+        /// <returns></returns>
         private async Task PopularDatosDeUsuario(IList<Cita> citas)
         {
             foreach (Cita c in citas)
@@ -64,6 +73,11 @@ namespace OpenSaludSecurity.Pages.Citas
             
         }
 
+        /// <summary>
+        /// Se buscan los datos de clinica correspondiente de cada cita en la lista del parametro para popular el objecto y mostrar detalles en la pagina.
+        /// </summary>
+        /// <param name="cita"></param>
+        /// <returns></returns>
         private async Task PopularDatosDeClinica(IList<Cita> citas)
         {
             foreach (Cita c in citas)
@@ -90,6 +104,11 @@ namespace OpenSaludSecurity.Pages.Citas
 
         }
 
+        /// <summary>
+        /// Se buscan los datos de medico correspondiente de cada cita en la lista del parametro para popular el objecto y mostrar detalles en la pagina.
+        /// </summary>
+        /// <param name="cita"></param>
+        /// <returns></returns>
         private async Task PopularDatosDeMedico(IList<Cita> citas)
         {
             foreach (Cita c in citas)

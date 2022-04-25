@@ -31,6 +31,10 @@ namespace OpenSaludSecurity.Pages.Calificaciones
         public IList<Clinica> Clinicas { get; set; }
 
 
+        /// <summary>
+        /// Se cargan los elementos necesarios para display la pagina de CREATE. Se buscan las clinicas que existen en la base de datos para popular el dropdown del formulario. 
+        /// </summary>
+        /// <returns></returns>
         public async Task OnGet()
         {
             UserId = UserManager.GetUserId(User);
@@ -53,6 +57,10 @@ namespace OpenSaludSecurity.Pages.Calificaciones
         public Calificacion Calificacion { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+        /// <summary>
+        /// Salva el objecto de Calificacion con los datos del formulario.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

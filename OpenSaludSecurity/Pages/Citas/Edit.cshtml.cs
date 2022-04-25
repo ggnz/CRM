@@ -27,6 +27,11 @@ namespace OpenSaludSecurity.Pages.Citas
         [BindProperty]
         public Cita Cita { get; set; }
 
+        /// <summary>
+        /// Basado en un parametro de ruta id, busca el elemento de la base de datos correspondiente para mostrar los detalles de la cita
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -52,6 +57,10 @@ namespace OpenSaludSecurity.Pages.Citas
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
+        /// <summary>
+        /// Salva el objecto de Cita con los datos del formulario.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -85,6 +94,11 @@ namespace OpenSaludSecurity.Pages.Citas
             return Context.Citas.Any(e => e.IdCita == id);
         }
 
+        /// <summary>
+        /// Se buscan los datos de usuario correspondiente de cada cita en la lista del parametro para popular el objecto y mostrar detalles en la pagina.
+        /// </summary>
+        /// <param name="cita"></param>
+        /// <returns></returns>
         private async Task PopularDatosDeUsuario(Cita cita)
         {
             if (cita.IdUsuario == null)
@@ -103,6 +117,11 @@ namespace OpenSaludSecurity.Pages.Citas
 
         }
 
+        /// <summary>
+        /// Se buscan los datos de Clinica correspondiente de cada cita en la lista del parametro para popular el objecto y mostrar detalles en la pagina.
+        /// </summary>
+        /// <param name="cita"></param>
+        /// <returns></returns>
         private async Task PopularDatosDeClinica(Cita cita)
         {
             if (cita.ClinicaRefId == 0)
@@ -121,6 +140,11 @@ namespace OpenSaludSecurity.Pages.Citas
 
         }
 
+        /// <summary>
+        /// Se buscan los datos de Medico correspondiente de cada cita en la lista del parametro para popular el objecto y mostrar detalles en la pagina.
+        /// </summary>
+        /// <param name="cita"></param>
+        /// <returns></returns>
         private async Task PopularDatosDeMedico(Cita cita)
         {
             if (cita.MedicoRefId == 0)

@@ -30,6 +30,11 @@ namespace OpenSaludSecurity.Pages.Clinicas
                 }
             }
         }
+
+        /// <summary>
+        /// Se cargan los elementos necesarios para display la pagina de CREATE. Se extrae el id de usuario que esta logeado para definir el IdRepresentante de la nueva clinica. 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult OnGet()
         {
             IdRepresentante = UserManager.GetUserId(User);
@@ -49,6 +54,9 @@ namespace OpenSaludSecurity.Pages.Clinicas
 
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+        /// Salva el objecto de Clinica con los datos del formulario, antes verificando que el usuario tenga el acceso necesario para crear clinicas.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

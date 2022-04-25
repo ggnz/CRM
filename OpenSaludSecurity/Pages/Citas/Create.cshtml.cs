@@ -25,6 +25,10 @@ namespace OpenSaludSecurity.Pages.Citas
             
         }
 
+        /// <summary>
+        /// Se cargan los elementos necesarios para display la pagina de CREATE. Se buscan las clinicas y los medicos que existen en la base de datos para popular el dropdown del formulario. 
+        /// </summary>
+        /// <returns></returns>
         public async Task OnGetAsync()
         {
             var clinicas = from c in Context.Clinica
@@ -76,6 +80,10 @@ namespace OpenSaludSecurity.Pages.Citas
         public List<Medico> Medicos { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+        /// <summary>
+        /// Salva el objecto de Cita con los datos del formulario.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

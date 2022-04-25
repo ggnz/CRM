@@ -35,6 +35,11 @@ namespace OpenSaludSecurity.Pages.Clinicas
 
         public Clinica Clinica { get; set; }
 
+        /// <summary>
+        /// Basado en un parametro de ruta id, busca el elemento de la base de datos correspondiente para mostrar los detalles de la clinica
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -63,6 +68,12 @@ namespace OpenSaludSecurity.Pages.Clinicas
             return Page();
         }
 
+        /// <summary>
+        /// Basado en un parametro de ruta id, se busca el elemento al que se le dio aprobar, para actualizar la base de datos, validando que el usuario que ejecuta la accion
+        /// tenga el acceso necesario.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync(int id, Constants.RequestStatus status)
         {
             var clinica = await Context.Clinica.FirstOrDefaultAsync(

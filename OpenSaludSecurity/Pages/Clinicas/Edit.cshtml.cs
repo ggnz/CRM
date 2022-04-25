@@ -26,6 +26,11 @@ namespace OpenSaludSecurity.Pages.Clinicas
         [BindProperty]
         public Clinica Clinica { get; set; }
 
+        /// <summary>
+        /// Basado en un parametro de ruta id, busca el elemento de la base de datos correspondiente para mostrar los detalles de la clinica
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -55,6 +60,9 @@ namespace OpenSaludSecurity.Pages.Clinicas
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
+        /// Salva el objecto de Cita con los datos del formulario.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync(int id)
         {
             if (!ModelState.IsValid)

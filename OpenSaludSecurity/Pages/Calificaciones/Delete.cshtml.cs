@@ -22,6 +22,11 @@ namespace OpenSaludSecurity.Pages.Calificaciones
         [BindProperty]
         public Calificacion Calificacion { get; set; }
 
+        /// <summary>
+        /// Utilizando el id recibido como parametro de ruta, se busca la calificacion en la base de datos para mostrar los datos y el mensaje de confirmacion.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -38,6 +43,11 @@ namespace OpenSaludSecurity.Pages.Calificaciones
             return Page();
         }
 
+        /// <summary>
+        /// Se ejecuta el comando de remover el objecto de calificacion de la base de datos basado en el parametro de ruta id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (id == null)
