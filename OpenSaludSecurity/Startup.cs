@@ -116,7 +116,7 @@ namespace OpenSaludSecurity
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // make sure wwwroot/images exists
-            string uploadsFolder = Path.Combine(env.WebRootPath, "images");
+           string uploadsFolder = Path.Combine(env.WebRootPath, "images");
 
             // If directory does not exist, create it
             if (!Directory.Exists(uploadsFolder))
