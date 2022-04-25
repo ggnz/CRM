@@ -24,7 +24,7 @@
 </head>
 <body>
 	   <p>
-        <a class="btn btn-info btn-lg" asp-page="Index" > <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+        <a class="btn btn-info btn-lg" asp-page="/Clinicas/Index" > <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5z"/>
         </svg> Volver </a>
     </p>
@@ -33,11 +33,12 @@
     <hr />
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
+
+			<h5>1. Describa brevemente de su cita</h5>
 			<form method="post">
 				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-				<div class="mb-3">
-					<label asp-for="Cita.DescripcionCita" class="control-label"></label>
+				<div class="mb-3">					
 					<textarea asp-for="Cita.DescripcionCita" class="form-control" rows="3" id="exampleFormControlTextarea1"></textarea>
 					<span asp-validation-for="Cita.DescripcionCita" class="text-danger"></span>
 				</div>
@@ -46,9 +47,11 @@
 		<input asp-for="Cita.FechaCita" class="form-control" />
 		<span asp-validation-for="Cita.FechaCita" class="text-danger"></span>
 	</div> -->
-
-				<div class='input-group date'>
-					<label asp-for="Cita.FechaCita" class="control-label"></label><br />
+				<hr />
+				<br />
+				<h5>2. Seleccione la fecha de su cita</h5>
+				
+				<div class='input-group date'>					
 					<input type='text' class="form-control" id='datetimepicker1' asp-for="Cita.FechaCita" />
 					<span asp-validation-for="Cita.FechaCita" class="text-danger"></span>
 
@@ -65,15 +68,20 @@
 				</script>
 				<br />
 				<br />
+				<hr />
+				<h5>3. Seleccione su clínica</h5>
+
 				<div class="form-group">
-					<label asp-for="IdClinicaSeleccion" class="control-label"> Clínica</label>
+					
 					<select asp-for="IdClinicaSeleccion" asp-items="@Model.ClinicasDisponibles" class="form-control" id="clinicaSelect" required>
 						<option selected="selected" value="">Seleccionar...</option>
 					</select>
 				</div>
-
+				<br />
+				<hr />
+				<h5>4. Seleccione su médico</h5>
 				<div class="form-group">
-					<label asp-for="IdMedicoSeleccion" class="control-label"> Médico</label>
+					
 					<select asp-for="IdMedicoSeleccion" asp-items="@Model.MedicosDisponibles" class="form-control" id="medicoSelect" required>
 						<option selected="selected" value="">Seleccionar...</option>
 					</select>
@@ -93,15 +101,26 @@
 						</div>*@
 
 						<div class="form-group">
-							<input type="submit" value="Agendar" class="btn btn-primary" />
+							<input type="submit" value="Agendar" class="btn btn-primary"  /> 
+							<a class="btn btn-danger" asp-page="/Clinicas/Index">
+							Cancelar</a>
 						</div>
 					</form>
-				</div>
+				</div>	
+					<div class="col-md-2">
+					
+					</div>
+					<div class="col-md-2">
+						<br />
+						<br />
+					<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" fill="currentColor" class="bi bi-calendar-check" viewBox="0 0 16 16">
+						  <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+						  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+						</svg>
+					</div>
 			</div>
 
-			<div>
-				<a asp-page="Index">Volver</a>
-			</div>
+		
 
 			@section Scripts {
 				@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

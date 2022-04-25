@@ -21,16 +21,17 @@
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     }
-    <h4>Clinica</h4>
+    <h3>Afiliación de Clínica</h3>
     <hr />
 
 
+
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <form method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Clinica.Nombre" class="control-label"></label>
+                    <label asp-for="Clinica.Nombre" class="control-label">Nombre de la Clinica</label>
                     <input asp-for="Clinica.Nombre" class="form-control" />
                     <span asp-validation-for="Clinica.Nombre" class="text-danger"></span>
                 </div>
@@ -44,11 +45,7 @@
                     <input asp-for="Clinica.IdRepresentante" type="hidden" value="@Model.IdRepresentante" class="form-control" readonly />
                     <span asp-validation-for="Clinica.IdRepresentante" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Clinica.Direccion" class="control-label"></label>
-                    <input asp-for="Clinica.Direccion" class="form-control" />
-                    <span asp-validation-for="Clinica.Direccion" class="text-danger"></span>
-                </div>
+                
                 <div class="form-group">
                     <label asp-for="Clinica.Categoria" class="control-label"></label>
                     <select asp-for="@Model.SelectedIds" title="Seleccionar una o varias..." asp-items="@Model.ServiciosMedicos" class="selectpicker form-control">
@@ -60,12 +57,22 @@
                     <select asp-for="ServiciosSeleccionados" id="dropDownList-example" name="SelectedIds"
                             asp-items="@Model.ServiciosMedicos" multiple class="form-control"></select>
                 </div>*@
-
+                <br />
+                 <hr />
+				<h5>Dirección de la Clínica</h5>
                 <div class="form-group">
                     <label asp-for="Clinica.Ciudad" class="control-label"></label>
                     <input asp-for="Clinica.Ciudad" class="form-control" />
                     <span asp-validation-for="Clinica.Ciudad" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <label asp-for="Clinica.Direccion" class="control-label"></label>
+                    <input asp-for="Clinica.Direccion" class="form-control" />
+                    <span asp-validation-for="Clinica.Direccion" class="text-danger"></span>
+                </div>
+                <br />
+                <hr />
+				<h5>Información de Contacto</h5>
                 <div class="form-group">
                     <label asp-for="Clinica.Telefono" class="control-label"></label>
                     <input asp-for="Clinica.Telefono" class="form-control" />
@@ -77,14 +84,32 @@
                     <span asp-validation-for="Clinica.Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Agregar" class="btn btn-primary" />
+                    
+                    <div class="alert alert-success" role="alert">
+                      <h4 class="alert-heading">Solicitud de Afiliación</h4>
+                      <p>Las solicitudes de afiliacion estan sujetas a un proceso de aprobación por parte de Costa Rica Medical Trip</p>
+                      <hr>
+                      <p class="mb-0">Recibirá una notificación al correo electrónico con el resultado de su solicitud</p>
+                    </div>
+
+                    <input type="submit" value="Enviar" class="btn btn-primary"/>
+                    <a class="btn btn-danger" asp-page="/Clinicas/Index">
+							Cancelar</a>
                 </div>
             </form>
         </div>
-    </div>
-
-    <div>
-        <a asp-page="Index">Volver</a>
+        <div class="col-md-2">
+					
+					</div>
+					<div class="col-md-2">
+						<br />
+						<br />
+					    <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" fill="currentColor" class="bi bi-clipboard-plus" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z"/>
+                          <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                          <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                        </svg>
+					</div>
     </div>
 
 

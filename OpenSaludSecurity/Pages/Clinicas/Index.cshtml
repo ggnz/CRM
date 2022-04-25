@@ -17,7 +17,6 @@
     <img src="~/LogoGB2.png" class="img-fluid" alt="..." width="750" height="650"> 
     <br />
     <br />
-    <font face="Averta">Your text here.</font>
     <h2 align="right">Catálogo de Clínicas Afiliadas</h2>
 </div>
 
@@ -79,15 +78,15 @@
                     <div class="card">
                       <div class="card-body">
                         <h1 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h1>
-                    <h4>Contacto:</h4>
+                    <h5>Contacto:</h5>
                     <ul>
-                        <li> <h5> Tel:  @Html.DisplayFor(modelItem => item.Telefono)</h5></li>
-                        <li> <h5> Correo: @Html.DisplayFor(modelItem => item.Email) </h5></li>
+                        <li> <h6> Tel:  @Html.DisplayFor(modelItem => item.Telefono)</h6></li>
+                        <li> <h6> Correo: @Html.DisplayFor(modelItem => item.Email) </h6></li>
                     </ul>
-                   <h4> Dirección:</h4>
+                   <h5> Dirección:</h5>
                     <ul>
-                         <li> <h5 class="card-text">@Html.DisplayFor(modelItem => item.Ciudad)</h5></li>
-                          <li> <h5 class="card-text">@Html.DisplayFor(modelItem => item.Direccion)</h5></li>
+                         <li> <h6 class="card-text">@Html.DisplayFor(modelItem => item.Ciudad)</h6></li>
+                          <li> <h6 class="card-text">@Html.DisplayFor(modelItem => item.Direccion)</h6></li>
                     </ul>
 
                     <div>                        
