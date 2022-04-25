@@ -13,6 +13,7 @@ using OpenSaludSecurity.Authorization;
 using OpenSaludSecurity.Data;
 using OpenSaludSecurity.Services;
 using System;
+using System.IO;
 
 namespace OpenSaludSecurity
 {
@@ -114,6 +115,15 @@ namespace OpenSaludSecurity
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // make sure wwwroot/images exists
+            string uploadsFolder = Path.Combine(env.WebRootPath, "images");
+
+            // If directory does not exist, create it
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var services = scope.ServiceProvider;
