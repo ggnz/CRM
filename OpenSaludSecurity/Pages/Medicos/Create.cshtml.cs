@@ -30,6 +30,11 @@ namespace OpenSaludSecurity.Pages.Medicos
             webHostEnvironment = hostEnvironment;
         }
 
+        /// <summary>
+        /// Se cargan los elementos necesarios para display la pagina de CREATE. Se extrae el id de usuario que esta logeado para comparar con las clinicas existentes
+        /// y verificar que el usuario sea representante de la clinica. Solo se mostrara como disponible crear medicos en las clinicas de las que el usuario sea representante.
+        /// </summary>
+        /// <returns></returns>
         public async Task OnGetAsync()
         {
             // Calcular el ClinicaRefId al que pertenece el representante que abrio la pagina de create
@@ -64,7 +69,11 @@ namespace OpenSaludSecurity.Pages.Medicos
         [BindProperty]
         public IFormFile ImagenPerfil { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+
+        /// <summary>
+        /// Salva el objecto de Medico con los datos del formulario
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -81,6 +90,10 @@ namespace OpenSaludSecurity.Pages.Medicos
             return RedirectToPage("./Index");
         }
 
+        /// <summary>
+        /// Se salva el archivo subido por el ususario en el formulario en el directorio respectivo.
+        /// </summary>
+        /// <returns></returns>
         private string UploadedFile()
         {
             string uniqueFileName = null;

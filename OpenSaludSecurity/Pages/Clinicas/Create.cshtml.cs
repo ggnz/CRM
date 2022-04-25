@@ -54,6 +54,8 @@ namespace OpenSaludSecurity.Pages.Clinicas
 
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+
+        /// <summary>
         /// Salva el objecto de Clinica con los datos del formulario, antes verificando que el usuario tenga el acceso necesario para crear clinicas.
         /// </summary>
         /// <returns></returns>

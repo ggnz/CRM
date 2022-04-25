@@ -25,6 +25,11 @@ namespace OpenSaludSecurity.Pages.Medicos
 
         public Clinica Clinica { get; set; }
 
+        /// <summary>
+        /// Basado en un parametro de ruta id, busca el elemento de la base de datos correspondiente para mostrar los detalles del medico
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)

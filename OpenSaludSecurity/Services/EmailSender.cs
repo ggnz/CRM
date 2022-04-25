@@ -23,6 +23,14 @@ namespace OpenSaludSecurity.Services
 
         public AuthMessageSenderOptions Options { get; } //Set with Secret Manager.
 
+        /// <summary>
+        /// Utilizando el API key de SendGrid de la variable de ambiente (variable de app para Azure App Service), hace el llamado al API para enviar un correo con los detalles
+        /// parametrizados.
+        /// </summary>
+        /// <param name="toEmail"></param>
+        /// <param name="subject"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public async Task SendEmailAsync(string toEmail, string subject, string message)
         {
             if (string.IsNullOrEmpty(Options.SendGridKey))
@@ -32,6 +40,14 @@ namespace OpenSaludSecurity.Services
             await Execute(Options.SendGridKey, subject, message, toEmail);
         }
 
+        /// <summary>
+        /// Ejecuta de manera asincrona el llamado al API de send grid para enviar el correo con los datos especificados.
+        /// </summary>
+        /// <param name="apiKey"></param>
+        /// <param name="subject"></param>
+        /// <param name="message"></param>
+        /// <param name="toEmail"></param>
+        /// <returns></returns>
         public async Task Execute(string apiKey, string subject, string message, string toEmail)
         {
             var client = new SendGridClient(apiKey);

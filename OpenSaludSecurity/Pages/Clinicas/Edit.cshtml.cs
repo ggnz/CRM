@@ -58,10 +58,10 @@ namespace OpenSaludSecurity.Pages.Clinicas
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        /// Salva el objecto de Cita con los datos del formulario.
+        /// <summary>
+        /// Salva el objecto de clinica con los detalles del formulario validando antes que el usuario ejecutor tenga el acceso necesario
         /// </summary>
+        /// <param name="id"></param>
         /// <returns></returns>
         public async Task<IActionResult> OnPostAsync(int id)
         {

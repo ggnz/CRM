@@ -64,7 +64,16 @@ namespace OpenSaludSecurity.Pages.Medicos
         [BindProperty]
         public int? idClinicaRoute{ get; set; }
 
-
+        /// <summary>
+        /// Se buscan todas los medicos existentes en la base de datos para mostrar sus detalles.
+        /// Ademas se aplican la logica correspondiente para la paginacion
+        /// </summary>
+        /// <param name="idClinica"></param>
+        /// <param name="sortOrder"></param>
+        /// <param name="currentFilter"></param>
+        /// <param name="searchString"></param>
+        /// <param name="pageIndex"></param>
+        /// <returns></returns>
         public async Task OnGetAsync(int? idClinica, string sortOrder,
             string currentFilter, string searchString, int? pageIndex)
         {                        
