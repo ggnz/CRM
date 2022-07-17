@@ -99,7 +99,7 @@ namespace OpenSaludSecurity.Pages.Citas
                     continue;
                 }
 
-                c.Clinica = new Clinica { Nombre = Clinica.Nombre, Categoria = Clinica.Categoria };
+                c.Clinica = new Clinica { Nombre = Clinica.Nombre, Categoria = Clinica.Categoria, IdRepresentante = Clinica.IdRepresentante };
             }
 
         }
