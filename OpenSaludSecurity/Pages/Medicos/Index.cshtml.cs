@@ -122,6 +122,8 @@ namespace OpenSaludSecurity.Pages.Medicos
             {
                 idClinicaRoute = idClinica;
                 medicos = medicos.Where(m => m.ClinicaRefId == idClinica);
+                Clinica = await Context.Clinica.FirstOrDefaultAsync(c => c.IdClinica == idClinica);
+          
             }
 
             var pageSize = Configuration.GetValue("PageSize", 3);

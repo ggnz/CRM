@@ -78,6 +78,9 @@ namespace OpenSaludSecurity
             services.AddScoped<IAuthorizationHandler,
                       CitaIsOwnerAuthorizationHandler>();
 
+            services.AddScoped<IAuthorizationHandler,
+                      CitaManagerAuthorizationHandler>();
+
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
 

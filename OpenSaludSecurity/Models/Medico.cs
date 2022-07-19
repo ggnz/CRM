@@ -15,13 +15,13 @@ namespace OpenSaludSecurity.Models
         [MaxLength(60)]
         public string Nombre { get; set; }
 
-        [Required(ErrorMessage = "Por favor digite el apellido paterno del médico")]
-        [Display(Name = "Apelido Paterno")]
+        [Required(ErrorMessage = "Por favor digite el primer apellido del médico")]
+        [Display(Name = "Primer Apellido")]
         [MaxLength(60)]
         public string Apellido1 { get; set; }
 
-        [Required(ErrorMessage = "Por favor digite el apellido materno del médico")]
-        [Display(Name = "Apellido materno")]
+        [Required(ErrorMessage = "Por favor digite el segundo apellido del médico")]
+        [Display(Name = "Segundo Apellido ")]
         [MaxLength(60)]
         public string Apellido2 { get; set; }
 

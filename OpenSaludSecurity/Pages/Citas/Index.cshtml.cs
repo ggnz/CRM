@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using OpenSaludSecurity.Data;
 using OpenSaludSecurity.Models;
 using OpenSaludSecurity.Pages.Shared;
@@ -15,24 +16,43 @@ namespace OpenSaludSecurity.Pages.Citas
 {
     public class IndexModel : _BasePageModel
     {
+        private readonly IConfiguration Configuration;
 
         public IndexModel(
               ApplicationDbContext context,
               IAuthorizationService authorizationService,
-              UserManager<IdentityUser> userManager)
+              UserManager<IdentityUser> userManager, IConfiguration configuration)
               : base(context, authorizationService, userManager)
         {
+            Configuration = configuration;
         }
 
-        public IList<Cita> Citas { get;set; }
+        //public IList<Cita> Citas { get;set; }
+        public PaginatedList<Cita> Citas { get; set; }
 
         /// <summary>
         /// Se buscan todas las citas existentes en la base de datos, y se les cargan los datos de usuario, clinica y medico correspondientes para mostrar mas detalles.
         /// </summary>
         /// <returns></returns>
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? pageIndex)
         {
-            Citas = await Context.Citas.ToListAsync();
+            IQueryable<Cita> citas = from c in Context.Citas
+                                           select c;
+
+            var isAuthorized = User.IsInRole(Constants.ClinicasManagersRole) ||
+                   User.IsInRole(Constants.RequestAdministratorsRole);
+
+            var currentUserId = UserManager.GetUserId(User);
+
+            // Only approved clinicas are shown UNLESS you're authorized to see them
+            // or you are the owner.
+            if (!isAuthorized)
+            {
+                citas = citas.Where(c => c.IdUsuario == currentUserId);
+            }
+
+            var pageSize = Configuration.GetValue("PageSize", 4);
+            Citas = await PaginatedList<Cita>.CreateAsync(citas.AsNoTracking(), pageIndex ?? 1, pageSize);
 
             // Popular datos de usuario para cada item de Cita
             await PopularDatosDeUsuario(Citas);

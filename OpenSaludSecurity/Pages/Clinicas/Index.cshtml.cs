@@ -84,6 +84,7 @@ namespace OpenSaludSecurity.Pages.Clinicas
             }
 
             List<ServicioMedico> selecciones = new List<ServicioMedico>();
+            ServicioMedico serviciosMedicosSeleccionados = ServicioMedico.NoDisponible;
             if (ServicioMedicoSeleccionado.Any())
             {
 
@@ -93,16 +94,11 @@ namespace OpenSaludSecurity.Pages.Clinicas
                     if (!s.Equals(ServicioMedico.NoDisponible))
                     {
                         selecciones.Add(s);
+                        serviciosMedicosSeleccionados |= s;
                     }
                 }
 
             }
-
-            if (selecciones.Any())
-            {
-                clinicas = clinicas.Where(c => selecciones.Contains(c.Categoria));
-            }
-
 
             var isAuthorized = User.IsInRole(Constants.RequestManagersRole) ||
                                User.IsInRole(Constants.RequestAdministratorsRole);
@@ -120,6 +116,31 @@ namespace OpenSaludSecurity.Pages.Clinicas
             var pageSize = Configuration.GetValue("PageSize", 4);
             Clinicas = await PaginatedList<Clinica>.CreateAsync(clinicas.AsNoTracking(), pageIndex ?? 1, pageSize);
 
+            if (selecciones.Any())
+            {
+                var c = await clinicas.ToListAsync();
+                Clinicas = ClinicasConCategoriaParteDeSeleccion(c, selecciones, pageIndex, pageSize);
+            }
+        }
+        
+        private PaginatedList<Clinica> ClinicasConCategoriaParteDeSeleccion(List<Clinica> clinicas, List<ServicioMedico> selecciones, int? pageIndex, int? pageSize)
+        {
+           
+            clinicas = clinicas.Where(c => CategoriaEsParteDeSeleccion(c.Categoria, selecciones)).ToList();
+
+            return new PaginatedList<Clinica>(clinicas, clinicas.Count, pageIndex ?? 1, pageSize ?? 1);
+        }
+
+        private bool CategoriaEsParteDeSeleccion(ServicioMedico categoria, List<ServicioMedico> selecciones)
+        {
+            foreach (ServicioMedico seleccion in selecciones)
+            {
+                if (categoria.HasFlag(seleccion))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace OpenSaludSecurity.Authorization
 {
-    public class CitaIsOwnerAuthorizationHandler
+    public class CitaManagerAuthorizationHandler
                         : AuthorizationHandler<OperationAuthorizationRequirement, Cita>
     {
         UserManager<IdentityUser> _userManager;
 
-        public CitaIsOwnerAuthorizationHandler(UserManager<IdentityUser>
+        public CitaManagerAuthorizationHandler(UserManager<IdentityUser>
     userManager)
         {
             _userManager = userManager;
@@ -40,7 +40,7 @@ namespace OpenSaludSecurity.Authorization
                 return Task.CompletedTask;
             }
 
-            if (resource.IdUsuario != null && resource.IdUsuario == _userManager.GetUserId(context.User))
+            if (resource.Clinica?.IdRepresentante != null && resource.Clinica.IdRepresentante == _userManager.GetUserId(context.User))
             {
                 context.Succeed(requirement);
             }
