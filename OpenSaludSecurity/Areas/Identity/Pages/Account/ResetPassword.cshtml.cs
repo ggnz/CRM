@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Options;
 
 namespace OpenSaludSecurity.Areas.Identity.Pages.Account
 {
@@ -68,12 +69,19 @@ namespace OpenSaludSecurity.Areas.Identity.Pages.Account
             {
                 return Page();
             }
-
+            
             var user = await _userManager.FindByEmailAsync(Input.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
                 return RedirectToPage("./ResetPasswordConfirmation");
+            }
+
+            var verifyResult = await _userManager.VerifyUserTokenAsync(user, "Default", "ResetPassword", Input.Code);
+            if (!verifyResult)
+            {
+                ModelState.AddModelError(string.Empty, "El token no es valido para el cambio de contraseña");
+                return Page();
             }
 
             var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);

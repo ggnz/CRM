@@ -89,7 +89,7 @@ namespace OpenSaludSecurity.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "confirme su email",
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirme su email",
                         $"Por favor confirme su cuenta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>haciendo clic aquí</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)

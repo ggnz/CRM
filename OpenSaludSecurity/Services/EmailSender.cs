@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using SendGrid;
-using SendGrid.Helpers.Mail;
+
+using sib_api_v3_sdk.Api;
+using sib_api_v3_sdk.Client;
+using sib_api_v3_sdk.Model;
+using Task = System.Threading.Tasks.Task;
 
 namespace OpenSaludSecurity.Services
 {
@@ -48,25 +52,26 @@ namespace OpenSaludSecurity.Services
         /// <param name="message"></param>
         /// <param name="toEmail"></param>
         /// <returns></returns>
-        public async Task Execute(string apiKey, string subject, string message, string toEmail)
+        public Task Execute(string apiKey, string subject, string message, string toEmail)
         {
-            var client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage()
+            Configuration.Default.ApiKey.TryAdd("api-key", apiKey);
+            var apiInstance = new TransactionalEmailsApi();
+            var from = new SendSmtpEmailSender("Open Salud", "nathy27ho@hotmail.com");
+            var to = new List<SendSmtpEmailTo>() { new SendSmtpEmailTo(toEmail) };
+            var sendSmtpEmail = new SendSmtpEmail(from, to, null, null, message, message, subject); // SendSmtpEmail | Values to send a transactional email
+            try
             {
-                From = new EmailAddress("nathy27ho@hotmail.com", "Costa Rica Medical Trip"),
-                Subject = subject,
-                PlainTextContent = message,
-                HtmlContent = message
-            };
-            msg.AddTo(new EmailAddress(toEmail));
+                // Send a transactional email
+                CreateSmtpEmail result = apiInstance.SendTransacEmail(sendSmtpEmail);
+                _logger.LogInformation($"Email to {toEmail} queued successfully!");
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation($"Failure Email to {toEmail}");
+                Debug.Print("Exception when calling AccountApi.GetAccount: " + e.Message);
+            }
 
-            // Disable click tracking.
-            // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
-            msg.SetClickTracking(false, false);
-            var response = await client.SendEmailAsync(msg);
-            _logger.LogInformation(response.IsSuccessStatusCode
-                                   ? $"Email to {toEmail} queued successfully!"
-                                   : $"Failure Email to {toEmail}");
+            return System.Threading.Tasks.Task.CompletedTask;
         }
     }
 }

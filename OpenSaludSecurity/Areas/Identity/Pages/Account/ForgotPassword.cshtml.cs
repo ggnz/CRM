@@ -58,7 +58,7 @@ namespace OpenSaludSecurity.Areas.Identity.Pages.Account
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,
-                    "Reset Password",
+                    "Restablezca su contraseña",
                     $"Por favor restablezca su contraseña <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>haciendo clic aquí</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
